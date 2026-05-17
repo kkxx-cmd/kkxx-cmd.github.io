@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KKXX · 导航</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 50px;
+    }
+
+    .sections {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #555;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
+    a.card {
+      display: block;
+      background: #12121a;
+      border: 1px solid #1e1e2e;
+      border-radius: 12px;
+      padding: 16px;
+      text-decoration: none;
+      color: #e0e0e0;
+      transition: all 0.2s;
+    }
+
+    a.card:hover {
+      background: #1a1a2e;
+      border-color: #667eea;
+      transform: translateY(-2px);
+    }
+
+    a.card .name {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    a.card .desc {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .card-icon {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      margin-top: 60px;
+      color: #333;
+      font-size: 12px;
+    }
+
+    footer a { color: #555; text-decoration: none; }
+    footer a:hover { color: #667eea; }
+  </style>
+</head>
+<body>
+
+  <div class="avatar">👊</div>
+  <h1>KKXX</h1>
+  <p class="tagline">效率工具 · 灵感存档 · 数字花园</p>
+
+  <div class="sections">
+
+    <!-- AI / 工具 -->
+    <div>
+      <div class="section-title">AI & 工具</div>
+      <div class="grid">
+        <a class="card" href="https://chat.openai.com" target="_blank">
+          <div class="card-icon">🤖</div>
+          <div class="name">ChatGPT</div>
+          <div class="desc">OpenAI 对话</div>
+        </a>
+        <a class="card" href="https://claude.ai" target="_blank">
+          <div class="card-icon">🧠</div>
+          <div class="name">Claude</div>
+          <div class="desc">Anthropic AI</div>
+        </a>
+        <a class="card" href="https://github.com" target="_blank">
+          <div class="card-icon">🐙</div>
+          <div class="name">GitHub</div>
+          <div class="desc">代码托管</div>
+        </a>
+        <a class="card" href="https://gptstudio.cloud" target="_blank">
+          <div class="card-icon">☁️</div>
+          <div class="name">GPT Studio</div>
+          <div class="desc">AI 开发平台</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 资讯 -->
+    <div>
+      <div class="section-title">资讯 & 社区</div>
+      <div class="grid">
+        <a class="card" href="https://news.ycombinator.com" target="_blank">
+          <div class="card-icon">🔥</div>
+          <div class="name">Hacker News</div>
+          <div class="desc">科技资讯</div>
+        </a>
+        <a class="card" href="https://weibo.com" target="_blank">
+          <div class="card-icon">📡</div>
+          <div class="name">微博</div>
+          <div class="desc">热搜实时</div>
+        </a>
+        <a class="card" href="https://www.v2ex.com" target="_blank">
+          <div class="card-icon">🧱</div>
+          <div class="name">V2EX</div>
+          <div class="desc">程序员社区</div>
+        </a>
+        <a class="card" href="https://huggingface.co" target="_blank">
+          <div class="card-icon">🤗</div>
+          <div class="name">Hugging Face</div>
+          <div class="desc">AI 模型库</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 效率 -->
+    <div>
+      <div class="section-title">效率 & 生活</div>
+      <div class="grid">
+        <a class="card" href="https://mail.google.com" target="_blank">
+          <div class="card-icon">📧</div>
+          <div class="name">Gmail</div>
+          <div class="desc">谷歌邮箱</div>
+        </a>
+        <a class="card" href="https://drive.google.com" target="_blank">
+          <div class="card-icon">📁</div>
+          <div class="name">Google Drive</div>
+          <div class="desc">云盘</div>
+        </a>
+        <a class="card" href="https://translate.google.com" target="_blank">
+          <div class="card-icon">🌐</div>
+          <div class="name">Google 翻译</div>
+          <div class="desc">全文翻译</div>
+        </a>
+        <a class="card" href="https://www.notion.so" target="_blank">
+          <div class="card-icon">📓</div>
+          <div class="name">Notion</div>
+          <div class="desc">笔记与知识库</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <a href="https://github.com/kkxx-cmd">View on GitHub</a>
+  </footer>
+
+</body>
+</html>
