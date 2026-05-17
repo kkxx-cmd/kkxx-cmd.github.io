@@ -205,22 +205,22 @@
     <div>
       <div class="section-title">个人分享</div>
       <div class="grid">
-        <a class="card" href="#blog">
+        <a class="card" href="https://kkxx-cmd.github.io" target="_blank">
           <div class="card-icon">📝</div>
           <div class="name">博客文章</div>
-          <div class="desc">经验记录与踩坑总结</div>
+          <div class="desc">待添加</div>
         </a>
-        <a class="card" href="#books">
+        <a class="card" href="https://kkxx-cmd.github.io" target="_blank">
           <div class="card-icon">📚</div>
           <div class="name">书单影单</div>
           <div class="desc">待添加</div>
         </a>
-        <a class="card" href="#projects">
+        <a class="card" href="https://kkxx-cmd.github.io" target="_blank">
           <div class="card-icon">💡</div>
           <div class="name">项目展示</div>
           <div class="desc">待添加</div>
         </a>
-        <a class="card" href="#garden">
+        <a class="card" href="https://kkxx-cmd.github.io" target="_blank">
           <div class="card-icon">🌿</div>
           <div class="name">数字花园</div>
           <div class="desc">待添加</div>
@@ -228,32 +228,6 @@
       </div>
     </div>
 
-  </div>
-
-  <!-- 博客文章 -->
-  <div class="sections" id="blog" style="margin-top: 60px;">
-    <div class="section-title">📝 博客文章</div>
-
-    <div style="background:#12121a;border:1px solid #1e1e2e;border-radius:12px;padding:20px;margin-bottom:16px;">
-      <div style="font-size:16px;font-weight:500;margin-bottom:8px;">OpenClaw 配置避坑：tools profile 不能只设 coding</div>
-      <div style="font-size:12px;color:#666;margin-bottom:10px;">2026-05-17 · 2 分钟阅读</div>
-      <div style="font-size:13px;color:#aaa;line-height:1.6;">
-        <strong>问题：</strong>Telegram 机器人发消息失败，提示「message tool unavailable」<br>
-        <strong>原因：</strong>openclaw.json 里 tools profile 设为 <code style="background:#1e1e2e;padding:2px 6px;border-radius:4px;">coding</code>，但 coding profile 不包含 <code style="background:#1e1e2e;padding:2px 6px;border-radius:4px;">group:messaging</code><br>
-        <strong>解决：</strong>改成 <code style="background:#1e1e2e;padding:2px 6px;border-radius:4px;">full</code>，或者显式加上 messaging 工具<br>
-        <strong>教训：</strong>新版本默认 coding profile，但 Telegram 路由需要 messaging 工具，记得按需调整
-      </div>
-    </div>
-
-    <div style="background:#12121a;border:1px solid #1e1e2e;border-radius:12px;padding:20px;margin-bottom:16px;">
-      <div style="font-size:16px;font-weight:500;margin-bottom:8px;">删除闲置模型，轻装上阵</div>
-      <div style="font-size:12px;color:#666;margin-bottom:10px;">2026-05-17 · 1 分钟阅读</div>
-      <div style="font-size:13px;color:#aaa;line-height:1.6;">
-        <strong>操作：</strong>删除了 <code style="background:#1e1e2e;padding:2px 6px;border-radius:4px;">google/gemma-3n-e2b-it</code> 模型及其所属 provider<br>
-        <strong>位置：</strong><code style="background:#1e1e2e;padding:2px 6px;border-radius:4px;">~/.openclaw/agents/main/agent/models.json</code><br>
-        <strong>效果：</strong>只保留 MiniMax-M2.7，配置更清晰，切换模型时少干扰
-      </div>
-    </div>
   </div>
 
   <footer>
