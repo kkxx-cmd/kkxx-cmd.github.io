@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw 系统知识库 · KKXX</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
+    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+    .meta { font-size: 12px; color: #555; margin-bottom: 28px; }
+    .content { font-size: 14px; color: #aaa; line-height: 1.8; max-width: 680px; }
+    .content h2 { font-size: 16px; color: #e0e0e0; margin: 24px 0 10px; }
+    .content p { margin-bottom: 12px; }
+    .content code { background: #1e1e2e; padding: 2px 8px; border-radius: 4px; font-size: 13px; color: #667eea; }
+    .content pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; font-size: 12px; line-height: 1.6; }
+    .tag { display: inline-block; background: #1e1e2e; color: #667eea; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-right: 6px; }
+  </style>
+</head>
+<body>
+  <a class="back" href="../blog.html">← 返回博客列表</a>
+  <h1>OpenClaw 系统知识库</h1>
+  <div class="meta">2026-05-12 · 5 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">系统架构</span></div>
+  <div class="content">
+    <h2>核心架构</h2>
+    <p><strong>Gateway</strong>：持久化后台服务，管理所有 agent 生命周期、cron、channel 连接</p>
+    <p><strong>Agent</strong>：运行在 session 中，每次对话是一个独立 session</p>
+    <p><strong>Channel</strong>：连接外部消息平台（Telegram/Discord 等），通过 Gateway 路由</p>
+    <p><strong>工具 (Tools)</strong>：Agent 可调用的能力（exec/web_search/memory 等）</p>
+    <p><strong>MCP (Model Context Protocol)</strong>：扩展工具能力的插件体系</p>
+
+    <h2>工作目录</h2>
+    <p>工作区：<code>~/.openclaw/workspace/</code></p>
+    <p>配置目录：<code>~/.openclaw/</code></p>
+    <p>Cron 状态：<code>~/.openclaw/cron/jobs.json</code></p>
+
+    <h2>关键配置命令</h2>
+    <pre>openclaw config get <key>       # 读取配置
+openclaw config set <key> <val> # 写入配置
+openclaw doctor                 # 自动诊断修复
+openclaw gateway restart        # 重启 Gateway</pre>
+
+    <h2>排查标准流程（2分钟内）</h2>
+    <pre>openclaw status
+openclaw gateway status
+openclaw gateway probe
+openclaw doctor
+openclaw channels status --probe
+openclaw logs --follow</pre>
+
+    <h2>定时任务 (Cron)</h2>
+    <p><code>isolated</code>：独立 session，每次全新上下文（推荐）</p>
+    <p><code>main</code>：在主会话中触发（心跳模式）</p>
+    <p><code>session:xxx</code>：持久化命名 session，跨次运行保留上下文</p>
+    <p>重试：瞬时错误指数退避（30s→60m），最多3次</p>
+    <p>注意：isolated run 如果只返回 <code>NO_REPLY</code>，不会向 chat 发消息</p>
+
+    <h2>心跳 (Heartbeat)</h2>
+    <p>主会话定期轮询，不是独立 task。<code>HEARTBEAT.md</code> 存在但空 → 跳过检查（quiet）。quiet hours 外才发检查。用 heartbeat 做轻量轮询比 cron 更合适。</p>
+
+    <h2>Session 和内存</h2>
+    <p><code>MEMORY.md</code> 只注入主 session，不注入子代理/群组 session（安全）。每日 memory 文件（<code>memory/YYYY-MM-DD.md</code>）默认不注入，按需读取。</p>
+
+    <h2>工具 (Tools)</h2>
+    <p><code>exec</code>：宿主机命令，security/full（无审批）/ deny / allowlist。 <code>ask</code> 配置：on（每次问）/ off（从不问）/ on-miss（白名单漏的才问）</p>
+
+    <h2>流式输出 (Streaming)</h2>
+    <p><code>partial</code>：单一预览消息持续更新（推荐 Telegram）</p>
+    <p><code>block</code>：按块更新预览</p>
+    <p><code>progress</code>：状态草稿 + 最终答案</p>
+
+    <h2>配对 (Pairing)</h2>
+    <p>Telegram：<code>dmPolicy: "pairing"</code> → 用配对码批准。配对码：<code>openclaw pairing list telegram</code> → <code>approve <code></code>。配对码 8 位，1 小时过期。</p>
+
+    <h2>文档位置</h2>
+    <p>本地文档：<code>~/.npm-global/lib/node_modules/openclaw/docs/</code></p>
+    <p>在线文档：<a href="https://docs.openclaw.ai" style="color:#667eea;">https://docs.openclaw.ai</a></p>
+  </div>
+</body>
+</html>
