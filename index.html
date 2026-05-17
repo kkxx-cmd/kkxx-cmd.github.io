@@ -208,7 +208,7 @@
         <a class="card" href="blog.html">
           <div class="card-icon">📝</div>
           <div class="name">博客文章</div>
-          <div class="desc">经验记录与踩坑总结 ▾</div>
+          <div class="desc">经验记录与踩坑总结</div>
         </a>
         <a class="card" href="#books">
           <div class="card-icon">📚</div>
@@ -231,27 +231,6 @@
   </div>
       <div style="display:flex;flex-direction:column;gap:10px;">
 
-        <div style="background:#12121a;border:1px solid #1e1e2e;border-radius:10px;padding:14px 16px;">
-          <div style="font-size:14px;font-weight:500;margin-bottom:4px;">OpenClaw 配置避坑：tools profile 不能只设 coding</div>
-          <div style="font-size:11px;color:#555;margin-bottom:8px;">2026-05-17 · 2 分钟阅读</div>
-          <div style="font-size:12px;color:#888;line-height:1.5;">
-            问题：Telegram 发消息失败「message tool unavailable」<br>
-            原因：tools profile 设为 coding 不含 messaging<br>
-            解决：改成 full，或显式加上 messaging 工具
-          </div>
-        </div>
-
-        <div style="background:#12121a;border:1px solid #1e1e2e;border-radius:10px;padding:14px 16px;">
-          <div style="font-size:14px;font-weight:500;margin-bottom:4px;">删除闲置模型，轻装上阵</div>
-          <div style="font-size:11px;color:#555;margin-bottom:8px;">2026-05-17 · 1 分钟阅读</div>
-          <div style="font-size:12px;color:#888;line-height:1.5;">
-            操作：删除 google/gemma-3n-e2b-it 及 provider<br>
-            位置：~/.openclaw/agents/main/agent/models.json<br>
-            效果：只保留 MiniMax-M2.7，配置更清晰
-          </div>
-        </div>
-
-      </div>
     </div>
   </div>
 

@@ -31,7 +31,15 @@
       border: 1px solid #1e1e2e;
       border-radius: 12px;
       padding: 20px 24px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+      text-decoration: none;
+      color: #e0e0e0;
+      display: block;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .post:hover {
+      border-color: #667eea;
+      transform: translateY(-2px);
     }
     .post h3 {
       font-size: 16px;
@@ -41,19 +49,12 @@
     .post .meta {
       font-size: 12px;
       color: #555;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
-    .post .content {
+    .post .summary {
       font-size: 13px;
-      color: #888;
-      line-height: 1.7;
-    }
-    .post .content strong { color: #aaa; }
-    code {
-      background: #1e1e2e;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 12px;
+      color: #777;
+      line-height: 1.6;
     }
   </style>
 </head>
@@ -61,25 +62,16 @@
   <a class="back" href="index.html">← 返回导航</a>
   <h2>📝 博客文章</h2>
 
-  <div class="post">
+  <a class="post" href="blog/tools-profile-fix.html">
     <h3>OpenClaw 配置避坑：tools profile 不能只设 coding</h3>
     <div class="meta">2026-05-17 · 2 分钟阅读</div>
-    <div class="content">
-      <strong>问题：</strong>Telegram 机器人发消息失败，提示「message tool unavailable」<br>
-      <strong>原因：</strong>openclaw.json 里 tools profile 设为 <code>coding</code>，但 coding profile 不包含 <code>group:messaging</code><br>
-      <strong>解决：</strong>改成 <code>full</code>，或者显式加上 messaging 工具<br>
-      <strong>教训：</strong>新版本默认 coding profile，但 Telegram 路由需要 messaging 工具，记得按需调整
-    </div>
-  </div>
+    <div class="summary">问题：Telegram 发消息失败 · 原因：tools profile 设为 coding 不含 messaging · 解决：改成 full</div>
+  </a>
 
-  <div class="post">
+  <a class="post" href="blog/delete-gemma-model.html">
     <h3>删除闲置模型，轻装上阵</h3>
     <div class="meta">2026-05-17 · 1 分钟阅读</div>
-    <div class="content">
-      <strong>操作：</strong>删除了 <code>google/gemma-3n-e2b-it</code> 模型及其所属 provider<br>
-      <strong>位置：</strong><code>~/.openclaw/agents/main/agent/models.json</code><br>
-      <strong>效果：</strong>只保留 MiniMax-M2.7，配置更清晰，切换模型时少干扰
-    </div>
-  </div>
+    <div class="summary">操作：删除 google/gemma-3n-e2b-it 及 provider · 位置：~/.openclaw/agents/main/agent/models.json</div>
+  </a>
 </body>
 </html>
