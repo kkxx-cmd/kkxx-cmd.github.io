@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw 上下文超限问题修复 · KKXX</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
+    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+    .meta { font-size: 12px; color: #555; margin-bottom: 28px; }
+    .content { font-size: 14px; color: #aaa; line-height: 1.8; max-width: 680px; }
+    .content h2 { font-size: 16px; color: #e0e0e0; margin: 28px 0 12px; border-bottom: 1px solid #1e1e2e; padding-bottom: 6px; }
+    .content p { margin-bottom: 12px; }
+    .content code { background: #1e1e2e; padding: 2px 8px; border-radius: 4px; font-size: 13px; color: #667eea; }
+    .content pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; font-size: 12px; line-height: 1.6; }
+    .content pre code { background: none; padding: 0; color: #c0c0c0; }
+    .content ul { padding-left: 20px; margin-bottom: 12px; }
+    .content li { margin-bottom: 6px; }
+    .content strong { color: #e0e0e0; }
+    .tag { display: inline-block; background: #1e1e2e; color: #667eea; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-right: 6px; }
+    .summary { background: #12121a; border-left: 3px solid #667eea; padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+    th { text-align: left; color: #e0e0e0; padding: 8px 12px; background: #1e1e2e; border-bottom: 1px solid #2a2a3e; }
+    td { padding: 8px 12px; border-bottom: 1px solid #1e1e2e; }
+    .before { color: #ff6b6b; }
+    .after { color: #51cf66; }
+  </style>
+</head>
+<body>
+  <a class="back" href="../blog.html">← 返回博客列表</a>
+  <h1>OpenClaw 上下文超限问题修复：两个参数拯救长对话</h1>
+  <div class="meta">2026-04-10 · 5 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">配置优化</span><span class="tag">问题排查</span></div>
+  <div class="content">
+
+<h2>问题现象</h2>
+<p>对话进行到一半突然报错：</p>
+<pre><code>Context limit exceeded. I've reset our conversation to start fresh...
+To prevent this, increase your compaction buffer by setting
+agents.defaults.compaction.reserveTokensFloor to 20000 or higher.</code></pre>
+
+<p>表面看是上下文超限，实际是配置逻辑错误导致的连锁反应。</p>
+
+<h2>问题根因</h2>
+<p>OpenClaw 的上下文压缩机制需要两个参数协同工作：</p>
+<table>
+  <tr><th>参数</th><th>作用</th><th>错误配置</th><th>正确配置</th></tr>
+  <tr><td>contextWindow</td><td>模型支持的最大上下文长度</td><td class="before">16000（默认值）</td><td class="after">128000（实际值）</td></tr>
+  <tr><td>reserveTokensFloor</td><td>压缩时预留的新内容空间</td><td class="before">20000</td><td class="after">40000~90000</td></tr>
+</table>
+
+<h3>错误链条</h3>
+<pre><code>错误的 contextWindow (16000)
+     ↓
+reserveTokensFloor (20000) > contextWindow (16000)
+     ↓
+压缩功能无法触发（预留空间超过总容量）
+     ↓
+对话内容无限累积
+     ↓
+触发硬性上限 → 会话重置</code></pre>
+
+<p><strong>关键发现</strong>：当 <code>reserveTokensFloor ≥ contextWindow</code> 时，压缩机制会失效。</p>
+
+<h2>修复步骤</h2>
+
+<h3>步骤 1：定位配置文件</h3>
+<pre><code>~/.openclaw/openclaw.json</code></pre>
+
+<h3>步骤 2：修正模型上下文配置</h3>
+<p>在 <code>models.providers[].models[]</code> 数组中，找到自定义模型，将 <code>contextWindow</code> 改为实际值：</p>
+<pre><code>{
+  "models": {
+    "providers": {
+      "custom-integrate-api-nvidia-com": {
+        "models": [
+          {
+            "id": "minimaxai/minimax-m2.7",
+            "contextWindow": 128000,  // ✅ 修正：16000 → 128000
+            "maxTokens": 4096
+          }
+        ]
+      }
+    }
+  }
+}</code></pre>
+
+<h3>步骤 3：调整压缩缓冲配置</h3>
+<p>在 <code>agents.defaults.compaction</code> 中，增加 <code>reserveTokensFloor</code>：</p>
+<pre><code>{
+  "agents": {
+    "defaults": {
+      "compaction": {
+        "mode": "safeguard",
+        "timeoutSeconds": 900,
+        "reserveTokensFloor": 90000  // ✅ 建议值：40K~90K
+      }
+    }
+  }
+}</code></pre>
+
+<h3>步骤 4：验证配置关系</h3>
+<pre><code>reserveTokensFloor (90000) < contextWindow (128000)
+✅ 90000 < 128000，压缩功能正常触发</code></pre>
+
+<h3>步骤 5：重启生效</h3>
+<pre><code>openclaw gateway restart</code></pre>
+
+<h2>配置原则</h2>
+<ul>
+  <li><strong>contextWindow 必须填写真实值</strong>，不要使用默认值 16000</li>
+  <li>查阅模型官方文档确认实际支持的上下文长度</li>
+  <li>主流大模型通常支持 128000 token</li>
+  <li><strong>reserveTokensFloor 必须小于 contextWindow</strong>
+    <ul>
+      <li>太小：压缩频繁，影响性能</li>
+      <li>太大：压缩无法触发，导致超限</li>
+    </ul>
+  </li>
+  <li>更换模型时同步更新配置</li>
+</ul>
+
+<h2>排查思路</h2>
+<ol>
+  <li>查看报错信息中的参数建议</li>
+  <li>检查 contextWindow 是否为模型真实值</li>
+  <li>验证 reserveTokensFloor < contextWindow</li>
+  <li>确认压缩模式是否为 <code>"safeguard"</code></li>
+  <li>重启服务使配置生效</li>
+</ol>
+
+<h2>配置模板（NVIDIA API 用户）</h2>
+<pre><code>{
+  "agents": {
+    "defaults": {
+      "compaction": {
+        "mode": "safeguard",
+        "timeoutSeconds": 900,
+        "reserveTokensFloor": 90000
+      }
+    }
+  },
+  "models": {
+    "providers": {
+      "custom-integrate-api-nvidia-com": {
+        "baseUrl": "https://integrate.api.nvidia.com/v1",
+        "models": [
+          {
+            "id": "minimaxai/minimax-m2.7",
+            "contextWindow": 128000,
+            "maxTokens": 4096
+          }
+        ]
+      }
+    }
+  }
+}</code></pre>
+
+<div class="summary">
+  <strong>问题本质：</strong>配置参数之间的逻辑关系不满足系统要求<br>
+  <strong>解决方法：</strong>修正 contextWindow 为真实值，确保 reserveTokensFloor < contextWindow<br>
+  <strong>修复成本：</strong>5 分钟修改配置 + 重启
+</div>
+
+<p>建议立即检查你的 openclaw.json 配置，确保这两个参数匹配！</p>
+
+  </div>
+</body>
+</html>
