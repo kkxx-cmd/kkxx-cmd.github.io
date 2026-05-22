@@ -11,72 +11,187 @@
     .back:hover { text-decoration: underline; }
     h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
     .meta { font-size: 12px; color: #555; margin-bottom: 28px; }
-    .content { font-size: 14px; color: #aaa; line-height: 1.8; max-width: 680px; }
-    .content h2 { font-size: 16px; color: #e0e0e0; margin: 24px 0 10px; }
-    .content p { margin-bottom: 12px; }
+    .content { font-size: 14px; color: #aaa; line-height: 1.8; max-width: 720px; }
+    .content h2 { font-size: 16px; color: #e0e0e0; margin: 28px 0 12px; border-bottom: 1px solid #1e1e2e; padding-bottom: 6px; }
+    .content h3 { font-size: 14px; color: #c0c0c0; margin: 20px 0 8px; }
+    .content p { margin-bottom: 10px; }
     .content code { background: #1e1e2e; padding: 2px 8px; border-radius: 4px; font-size: 13px; color: #667eea; }
-    .content pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; font-size: 12px; line-height: 1.6; }
+    .content pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 10px 0; overflow-x: auto; font-size: 12px; line-height: 1.6; }
+    .content pre code { background: none; padding: 0; color: #c0c0c0; }
+    .content ul { padding-left: 20px; margin-bottom: 10px; }
+    .content li { margin-bottom: 4px; }
+    .content strong { color: #e0e0e0; }
+    .content a { color: #667eea; text-decoration: none; }
+    .content a:hover { text-decoration: underline; }
     .tag { display: inline-block; background: #1e1e2e; color: #667eea; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-right: 6px; }
+    .summary { background: #12121a; border-left: 3px solid #667eea; padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; font-size: 13px; }
   </style>
 </head>
 <body>
   <a class="back" href="../blog.html">← 返回博客列表</a>
   <h1>OpenClaw 系统知识库</h1>
-  <div class="meta">2026-05-12 · 5 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">系统架构</span></div>
+  <div class="meta">2026-05-12 · 更新于 2026-05-23 · <span class="tag">OpenClaw</span><span class="tag">系统架构</span><span class="tag">CLI</span></div>
   <div class="content">
-    <h2>核心架构</h2>
-    <p><strong>Gateway</strong>：持久化后台服务，管理所有 agent 生命周期、cron、channel 连接</p>
-    <p><strong>Agent</strong>：运行在 session 中，每次对话是一个独立 session</p>
-    <p><strong>Channel</strong>：连接外部消息平台（Telegram/Discord 等），通过 Gateway 路由</p>
-    <p><strong>工具 (Tools)</strong>：Agent 可调用的能力（exec/web_search/memory 等）</p>
-    <p><strong>MCP (Model Context Protocol)</strong>：扩展工具能力的插件体系</p>
 
-    <h2>工作目录</h2>
-    <p>工作区：<code>~/.openclaw/workspace/</code></p>
-    <p>配置目录：<code>~/.openclaw/</code></p>
-    <p>Cron 状态：<code>~/.openclaw/cron/jobs.json</code></p>
+<h2>核心架构</h2>
+<p><strong>Gateway</strong>：持久化后台服务，管理所有 agent 生命周期、cron、channel 连接</p>
+<p><strong>Agent</strong>：运行在 session 中，每次对话是一个独立 session</p>
+<p><strong>Channel</strong>：连接外部消息平台（Telegram/Discord 等），通过 Gateway 路由</p>
+<p><strong>工具 (Tools)</strong>：Agent 可调用的能力（exec/web_search/memory 等）</p>
+<p><strong>MCP (Model Context Protocol)</strong>：扩展工具能力的插件体系</p>
 
-    <h2>关键配置命令</h2>
-    <pre>openclaw config get <key>       # 读取配置
+<h2>工作目录</h2>
+<p>工作区：<code>~/.openclaw/workspace/</code></p>
+<p>配置目录：<code>~/.openclaw/</code></p>
+<p>Cron 状态：<code>~/.openclaw/cron/jobs.json</code> + <code>jobs-state.json</code></p>
+
+<h2>关键配置命令</h2>
+<pre><code>openclaw config get <key>       # 读取配置
 openclaw config set <key> <val> # 写入配置
 openclaw doctor                 # 自动诊断修复
-openclaw gateway restart        # 重启 Gateway</pre>
+openclaw gateway restart        # 重启 Gateway</code></pre>
 
-    <h2>排查标准流程（2分钟内）</h2>
-    <pre>openclaw status
+<h2>排查标准流程（2分钟内）</h2>
+<pre><code>openclaw status
 openclaw gateway status
 openclaw gateway probe
 openclaw doctor
 openclaw channels status --probe
-openclaw logs --follow</pre>
+openclaw logs --follow</code></pre>
 
-    <h2>定时任务 (Cron)</h2>
-    <p><code>isolated</code>：独立 session，每次全新上下文（推荐）</p>
-    <p><code>main</code>：在主会话中触发（心跳模式）</p>
-    <p><code>session:xxx</code>：持久化命名 session，跨次运行保留上下文</p>
-    <p>重试：瞬时错误指数退避（30s→60m），最多3次</p>
-    <p>注意：isolated run 如果只返回 <code>NO_REPLY</code>，不会向 chat 发消息</p>
+<h2>定时任务 (Cron)</h2>
+<p><code>isolated</code>：独立 session，每次全新上下文（推荐）</p>
+<p><code>main</code>：在主会话中触发（心跳模式）</p>
+<p><code>session:xxx</code>：持久化命名 session，跨次运行保留上下文</p>
+<p>重试：瞬时错误指数退避（30s→60m），最多3次</p>
+<p><strong>重要</strong>：isolated run 如果只返回 <code>NO_REPLY</code>，不会向 chat 发消息</p>
 
-    <h2>心跳 (Heartbeat)</h2>
-    <p>主会话定期轮询，不是独立 task。<code>HEARTBEAT.md</code> 存在但空 → 跳过检查（quiet）。quiet hours 外才发检查。用 heartbeat 做轻量轮询比 cron 更合适。</p>
+<h2>心跳 (Heartbeat)</h2>
+<p>主会话定期轮询，不是独立 task。<code>HEARTBEAT.md</code> 存在但空 → 跳过检查（quiet）。quiet hours 外才发检查。用 heartbeat 做轻量轮询比 cron 更合适。</p>
 
-    <h2>Session 和内存</h2>
-    <p><code>MEMORY.md</code> 只注入主 session，不注入子代理/群组 session（安全）。每日 memory 文件（<code>memory/YYYY-MM-DD.md</code>）默认不注入，按需读取。</p>
+<h2>Session 和内存</h2>
+<p><code>MEMORY.md</code> 只注入主 session，不注入子代理/群组 session（安全）。每日 memory 文件（<code>memory/YYYY-MM-DD.md</code>）默认不注入，按需读取。上下文窗口紧张时用 <code>memory_search</code> / <code>memory_get</code> 按需加载。</p>
+<p><strong>Session Pruning</strong>：超长 session 自动压缩，保留关键系统上下文。</p>
 
-    <h2>工具 (Tools)</h2>
-    <p><code>exec</code>：宿主机命令，security/full（无审批）/ deny / allowlist。 <code>ask</code> 配置：on（每次问）/ off（从不问）/ on-miss（白名单漏的才问）</p>
+<h2>工具 (Tools)</h2>
+<p><code>exec</code>：宿主机命令，security/full（无审批）/ deny / allowlist。<code>ask</code> 配置：on（每次问）/ off（从不问）/ on-miss（白名单漏的才问）。突然要审批 → 检查 <code>tools.exec.host</code> / <code>security</code> / <code>ask</code> 是否变了。</p>
 
-    <h2>流式输出 (Streaming)</h2>
-    <p><code>partial</code>：单一预览消息持续更新（推荐 Telegram）</p>
-    <p><code>block</code>：按块更新预览</p>
-    <p><code>progress</code>：状态草稿 + 最终答案</p>
+<h2>流式输出 (Streaming)</h2>
+<p><code>partial</code>：单一预览消息持续更新（推荐 Telegram）</p>
+<p><code>block</code>：按块更新预览</p>
+<p><code>progress</code>：状态草稿 + 最终答案（工具运行时显示 Thinking... 等）</p>
 
-    <h2>配对 (Pairing)</h2>
-    <p>Telegram：<code>dmPolicy: "pairing"</code> → 用配对码批准。配对码：<code>openclaw pairing list telegram</code> → <code>approve <code></code>。配对码 8 位，1 小时过期。</p>
+<h2>配对 (Pairing)</h2>
+<p>Telegram：<code>dmPolicy: "pairing"</code> → 用配对码批准。<code>openclaw pairing list telegram</code> → <code>approve <code></code>。配对码 8 位，1 小时过期。</p>
 
-    <h2>文档位置</h2>
-    <p>本地文档：<code>~/.npm-global/lib/node_modules/openclaw/docs/</code></p>
-    <p>在线文档：<a href="https://docs.openclaw.ai" style="color:#667eea;">https://docs.openclaw.ai</a></p>
+<h2>子代理 (Subagent)</h2>
+<p><code>sessions_spawn(mode=run)</code>：一次性后台任务。<code>context:"fork"</code>：继承当前 transcript；<code>context:"isolated"</code>（默认）：干净 session。编排多步骤任务用 <code>sessions_spawn</code> + <code>sessions_yield</code> 等待结果。</p>
+
+<h2>承诺追踪 (Commitments)</h2>
+<p>opt-in 功能，对话中推断出的后续跟进承诺。通过 heartbeat 送达，不打扰立即发送。不是 reminders，是"自然对话创造的检查机会"。</p>
+
+<h2>文档位置</h2>
+<p>本地文档：<code>~/.npm-global/lib/node_modules/openclaw/docs/</code></p>
+<p>在线文档：<a href="https://docs.openclaw.ai">https://docs.openclaw.ai</a></p>
+
+<h2>CLI 命令参考</h2>
+
+<h3>openclaw setup / onboard / configure</h3>
+<pre><code>openclaw setup                      # 初始化配置 + 工作区（不跑引导）
+openclaw onboard                    # 完整引导流程（gateway/模型/渠道/skill/健康检查）
+openclaw onboard --non-interactive  # 非交互式
+openclaw configure                  # 交互式配置
+openclaw configure --section model  # 只配置某个部分</code></pre>
+
+<h3>openclaw doctor</h3>
+<pre><code>openclaw doctor                     # 检查 + 引导修复
+openclaw doctor --fix               # 自动修复
+openclaw doctor --lint              # 只读检查（CI用）
+openclaw doctor --lint --json       # JSON 格式输出
+openclaw doctor --deep              # 深度扫描（检查额外 gateway 安装）
+openclaw doctor --generate-gateway-token  # 生成 gateway token
+openclaw doctor --only <name>       # 只检查指定项
+openclaw doctor --skip <name>       # 跳过指定项</code></pre>
+
+<p class="summary">Doctor 检查项包括：gateway.mode 设置、skill 环境依赖、gateway 服务状态、Telegram/Discord 凭证 env 回退、过时 cron 格式迁移（v1→v2）、<code>openai-codex</code>→<code>openai</code> 模型引用修复等。</p>
+
+<h3>openclaw plugins</h3>
+<pre><code>openclaw plugins list               # 列出已安装插件
+openclaw plugins search <query>     # 搜索 ClawHub
+openclaw plugins install <pkg>      # 安装（npm 默认）
+openclaw plugins install clawhub:<pkg>  # 从 ClawHub 安装
+openclaw plugins install git:github.com/<owner>/<repo>  # 从 git 安装
+openclaw plugins inspect <id>       # 查看插件详情
+openclaw plugins enable <id>        # 启用
+openclaw plugins disable <id>       # 禁用
+openclaw plugins uninstall <id>      # 卸载
+openclaw plugins update <id>        # 更新
+openclaw plugins doctor             # 插件健康检查</code></pre>
+
+<p><strong>安装来源格式</strong>：<code>npm:<package></code> / <code>clawhub:<package></code> / <code>git:<repo></code> / <code><path></code> / <code><plugin>@<marketplace></code></p>
+<p><strong>注意</strong>：旧插件格式（无 <code>openclaw.extensions</code> 字段）会安装失败。</p>
+
+<h3>openclaw skills</h3>
+<pre><code>openclaw skills search <query>      # 搜索 ClawHub skills
+openclaw skills install <slug>      # 安装到 workspace
+openclaw skills install <slug> --global  # 安装到全局共享目录
+openclaw skills list                 # 列出本地 skills
+openclaw skills info <name>         # 查看 skill 详情
+openclaw skills check               # 检查 skill 就绪状态
+openclaw skills check --agent <id>  # 检查特定 agent 的 skills</code></pre>
+
+<h3>openclaw cron</h3>
+<pre><code>openclaw cron list                  # 列出所有定时任务
+openclaw cron get <job-id>          # 查看任务详情（JSON）
+openclaw cron show <job-id>         # 查看任务详情（人类可读）
+openclaw cron add ...               # 创建任务
+openclaw cron edit <job-id> ...     # 编辑任务
+openclaw cron rm <job-id>           # 删除任务
+openclaw cron run <job-id>          # 手动触发
+openclaw cron run <job-id> --wait   # 等待执行完成
+openclaw cron runs --id <job-id>    # 查看运行历史</code></pre>
+
+<h3>openclaw tasks</h3>
+<pre><code>openclaw tasks list                 # 列出后台任务
+openclaw tasks show <id>            # 查看任务详情
+openclaw tasks cancel <id>         # 取消任务
+openclaw tasks audit               # 审计异常任务
+openclaw tasks maintenance          # 清理/修复任务状态
+openclaw tasks flow list            # Task Flow 列表</code></pre>
+
+<h3>openclaw gateway</h3>
+<pre><code>openclaw gateway run                # 前台运行
+openclaw gateway start             # 启动服务
+openclaw gateway stop              # 停止服务
+openclaw gateway restart            # 重启
+openclaw gateway restart --safe     # 安全重启（等活跃任务结束后）
+openclaw gateway status            # 服务状态
+openclaw gateway probe              # 探测连通性
+openclaw gateway health            # 健康检查
+openclaw gateway install           # 安装为系统服务
+openclaw gateway uninstall         # 卸载服务</code></pre>
+
+<p><strong>SIGUSR1</strong> 触发热重启（需 <code>commands.restart: true</code>，默认开启）</p>
+<p>健康检查端点：<code>/healthz</code>（存活探针）、<code>/readyz</code>（就绪探针，更严格）</p>
+
+<h3>openclaw update</h3>
+<pre><code>openclaw update                     # 更新到最新版
+openclaw update --channel beta     # 切换到 beta 频道
+openclaw update --channel stable    # 切换到 stable 频道
+openclaw update status             # 查看更新状态
+openclaw update --dry-run           # 预览（不实际更新）</code></pre>
+
+<p><strong>包管理器安装</strong>：<code>npm update -g openclaw</code> / <code>pnpm update -g openclaw</code></p>
+<p><strong>源码安装流程</strong>：验证 clean worktree → 切换 channel → preflight build（dev）→ 依赖安装 → 构建 Control UI → 运行 doctor → 同步 plugins</p>
+<p><strong>注意</strong>：降级需要确认；Nix 模式下禁止 <code>openclaw update</code>；<code>--no-restart</code> 跳过服务重启</p>
+
+<h3>全局参数</h3>
+<pre><code>--dev              # 使用 ~/.openclaw-dev 目录
+--profile <name>   # 使用 ~/.openclaw-<name> 目录
+--json             # 输出 JSON 格式
+--no-color         # 禁用 ANSI 颜色
+-V/--version       # 显示版本</code></pre>
+
   </div>
 </body>
 </html>
