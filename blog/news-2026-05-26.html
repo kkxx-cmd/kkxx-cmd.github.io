@@ -3,87 +3,259 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>每日新闻 2026年05月26日 · KKXX</title>
+  <title>每日新闻 · 2026年05月26日 · KKXX</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0a0a0f;
-      color: #e0e0e0;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-    .back {
-      display: inline-block;
-      color: #667eea;
-      text-decoration: none;
-      font-size: 13px;
-      margin-bottom: 30px;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
+    a { color: inherit; text-decoration: none; }
+    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
     .back:hover { text-decoration: underline; }
-    .date {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 8px;
-    }
-    h1 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .stats {
-      font-size: 12px;
-      color: #555;
-      margin-bottom: 30px;
-    }
-    .news-item {
-      background: #12121a;
-      border: 1px solid #1e1e2e;
-      border-radius: 12px;
-      padding: 18px 24px;
-      margin-bottom: 14px;
-    }
-    .news-header {
-      margin-bottom: 6px;
-    }
-    .news-title {
-      font-size: 15px;
-      font-weight: 500;
-      color: #e0e0e0;
-      text-decoration: none;
-    }
-    .news-title:hover {
-      color: #667eea;
-    }
-    .news-meta {
-      font-size: 11px;
-      color: #555;
-      margin-bottom: 8px;
-    }
-    .news-summary {
-      font-size: 13px;
-      color: #aaa;
-      line-height: 1.6;
-      margin-bottom: 8px;
-    }
-    .deep {
-      font-size: 12px;
-      color: #888;
-      line-height: 1.6;
-      border-left: 3px solid #667eea;
-      padding-left: 12px;
-      margin-top: 8px;
-    }
-  </style>
+    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+    .stats { font-size: 12px; color: #555; margin-bottom: 30px; }
+    .news-card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; transition: border-color 0.2s, transform 0.2s; }
+    .news-card:hover { border-color: #667eea; transform: translateY(-2px); }
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .card-title { font-size: 15px; font-weight: 500; color: #e0e0e0; line-height: 1.6; flex: 1; }
+    .card-tag { font-size: 11px; color: #fff; background: #667eea; border-radius: 6px; padding: 2px 8px; white-space: nowrap; flex-shrink: 0; }
+    .card-tag.intl { background: #e67e22; }
+    .card-tag.economy { background: #27ae60; }
+    .card-tag.tech { background: #9b59b6; }
+    .card-tag.cctv { background: #c0392b; }
+    .card-summary { font-size: 13px; color: #aaa; line-height: 1.7; margin-bottom: 10px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #555; }
+    .card-link { color: #667eea; font-size: 11px; }
+    .card-link:hover { text-decoration: underline; }
+    .news-footer { font-size: 11px; color: #555; margin-top: 40px; text-align: center; }
+</style>
 </head>
 <body>
   <a class="back" href="news.html">← 返回新闻列表</a>
   <div class="date">2026年05月26日</div>
   <h1>📰 每日新闻</h1>
-  <div class="stats">共 0 条新闻</div>
-
+  <div class="stats">共 20 条新闻 · 含 5 个原文链接</div>
   <div class="news-list">
-
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">1. 📌 中南大学原校长张尧学被开除党籍公职，撤销院士称号</div>
+        
+      </div>
+      <div class="card-summary">中南大学原校长张尧学因严重违纪违法被开除党籍公职，中国工程院同步撤销其院士称号。其在任期间曾主导国内...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥95)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">2. 📌 煤矿“暗面”：假整改、假密闭、假数据、假图纸、假报告</div>
+        
+      </div>
+      <div class="card-summary">山西留神峪煤矿瓦斯爆炸事故调查曝光，涉事矿企长期存在**假整改、假密闭、假数据、假图纸、假报告**等...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥94)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">3. 🇯🇵 日本政府25日宣布将编制补充预算，以应对中东局势导致的能源价格上涨。不过，这一计划引发了关于财政压力的担忧。</div>
+        <span class="card-tag intl">央视</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：央视</span>
+        <a class="card-link" href="https://news.cctv.com/2026/05/26/ARTISU4ZvX7Fy11AZpoDybRq260526.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">4. 🇨🇳 [视频]习近平为塞尔维亚总统举行“友谊勋章”颁授仪式</div>
+        <span class="card-tag cctv">CCTV</span>
+      </div>
+      <div class="card-summary">央视网消息（新闻联播）：5月25日晚，国家主席习近平在北京人民大会堂为塞尔维亚总统武契奇举行“友谊勋章”颁授仪式。中塞两国国旗整齐排列，背景板上金色的“友谊勋章”图案熠熠生辉。中国人民解放军仪仗队礼兵在授勋台两侧肃立。仪式开始，雄浑的礼乐声</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：CCTV</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">5. 📌 疲劳驾驶新规6月1日起全国执行，三维认定更精准</div>
+        
+      </div>
+      <div class="card-summary">公安部《机动车驾驶人疲劳驾驶认定规则》6月1日起实施，告别单一“时长判定”，采用驾驶行为+生理状态+...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥93)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">6. 🤖 人民日报肯定豆包付费合理性：AI行业商业化是必然趋势</div>
+        
+      </div>
+      <div class="card-summary">人民日报评论指出，豆包分级付费是AI行业商业化必然趋势，算力成本高企致免费难持续；但收费必须匹配用户...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥93)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">7. 🇯🇵 日本计划编制3万亿日元补充预算应对能源涨价冲击</div>
+        <span class="card-tag intl">央视</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：央视</span>
+        <a class="card-link" href="https://news.cctv.com/2026/05/26/ARTISU4ZvX7Fy11AZpoDybRq260526.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">8. 🇨🇳 [视频]第21届联合国卫塞节在中国无锡开幕 王沪宁致信祝贺</div>
+        <span class="card-tag cctv">CCTV</span>
+      </div>
+      <div class="card-summary">央视网消息（新闻联播）：第21届联合国卫塞节5月26日在中国江苏无锡开幕。中共中央政治局常委、全国政协主席王沪宁发来贺信，向联合国卫塞节庆祝活动表示祝贺，向出席庆祝活动的嘉宾致以问候。王沪宁表示，卫塞节是世界佛教徒纪念佛陀诞生、成道、涅槃的</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：CCTV</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">9. 📌 重庆永川突发极端特大暴雨已致9死11失联</div>
+        
+      </div>
+      <div class="card-summary">5月23日夜至24日凌晨，重庆永川遭遇特大暴雨，引发山洪泥石流；截至25日15时30分，灾害已致9人...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥93)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">10. 📌 武契奇获颁“友谊勋章”，动情表示“眼泪在眼眶中打转”</div>
+        
+      </div>
+      <div class="card-summary">5月25日，习近平主席向塞尔维亚总统武契奇颁授“友谊勋章”。武契奇在致辞中动情表示“眼泪在眼眶中打转...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥92)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">11. 🇺🇸 伊朗最高领袖称美国在中东将不再拥有“避风港”</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-05-26/doc-inhzffss1499104.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">12. 📌 [视频]韩正同巴基斯坦总理共同出席庆祝中巴建交75周年招待会</div>
+        <span class="card-tag cctv">CCTV</span>
+      </div>
+      <div class="card-summary">央视网消息（新闻联播）：5月25日，国家副主席韩正在北京同巴基斯坦总理夏巴兹共同出席庆祝中巴建交75周年招待会并发表致辞。韩正表示，2015年4月，习近平主席对巴基斯坦进行历史性国事访问，将中巴关系提升为全天候战略合作伙伴关系，为两国关系发</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：CCTV</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">13. 🇨🇳 全球人形机器人约90%来自中国，主导量产市场</div>
+        
+      </div>
+      <div class="card-summary">2025年全球人形机器人出货超1.3万台，中国占比85%-90%，宇树、智元、优必选位居全球前三，成...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥92)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">14. 📌 留德华人名校团伙迷奸案陆续宣判：1人自杀5人被起诉</div>
+        
+      </div>
+      <div class="card-summary">2026年5月，德国法院陆续宣判“德国高级驾校”性侵案，8人团伙多为名校留学生，主犯获刑14年，1人...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥92)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">15. 🇺🇸 伊朗外交部：美国公然违反停火协议</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-05-26/doc-inhzfshk8978257.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">16. 🇨🇳 [视频]【“十五五”开好局起好步】推动新时代辽宁全面振兴取得新突破 奋力谱写中国式现代化青海篇章</div>
+        <span class="card-tag cctv">CCTV</span>
+      </div>
+      <div class="card-summary">央视网消息（新闻联播）：近日，辽宁、青海分别举行“开局起步‘十五五’”专题新闻发布会，围绕当地“十五五”规划纲要，全面介绍高质量发展的主要目标和重点举措等。推动新时代辽宁全面振兴取得新突破“十五五”时期，辽宁将围绕建设以先进制造业为骨干的现</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：CCTV</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">17. 📌 好学生为何成休学主力军</div>
+        
+      </div>
+      <div class="card-summary">数据显示重点校重点班学生占休学群体约2/3，完美主义、高压内耗、意义感缺失叠加家庭与社交压力，致优等...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥92)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">18. 📌 双预警齐发！南方多地将迎暴雨强对流</div>
+        
+      </div>
+      <div class="card-summary">5月26日6时，中央气象台发布暴雨黄警与强对流蓝警，重庆东部、湖北西南部、贵州中东部等将现大到暴雨，...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥91)</span>
+        <span></span>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">19. 📌 伊朗处决一名为以色列工作的间谍</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-05-26/doc-inhzfmyn9059681.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">20. 📌 [视频]我国加力提升未落户常住人口基本公共服务水平</div>
+        <span class="card-tag cctv">CCTV</span>
+      </div>
+      <div class="card-summary">央视网消息（新闻联播）：今天（5月26日），国务院新闻办举行国务院政策例行吹风会，国家发展改革委、教育部、民政部、人力资源社会保障部、住房城乡建设部、国家医保局有关负责人介绍《关于推行常住地提供基本公共服务的实施意见》相关情况。据介绍，《实</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：CCTV</span>
+        <span></span>
+      </div>
+    </div>
   </div>
+  <div class="news-footer">⏰ 简报于 2026-05-26 生成 | by KKXX</div>
 </body>
 </html>
