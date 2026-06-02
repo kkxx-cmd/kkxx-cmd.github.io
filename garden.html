@@ -13,6 +13,30 @@
       min-height: 100vh;
       padding: 40px 20px;
     }
+    body.light {
+      background: #f5f5f7;
+      color: #1d1d1f;
+    }
+    .toggle-btn {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      background: #12121a;
+      border: 1px solid #2a2a3e;
+      border-radius: 8px;
+      padding: 6px 14px;
+      color: #667eea;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    body.light .toggle-btn { background: #fff; border-color: #d0d0d0; color: #764ba2; }
+    body.light a.back { color: #764ba2; }
+    body.light a.day-card { background: #fff; border-color: #e0e0e0; color: #1d1d1f; }
+    body.light a.day-card:hover { border-color: #667eea; }
+    body.light a.day-card .date { color: #667eea; }
+    body.light a.day-card .preview { color: #666; }
+    body.light footer { color: #aaa; }
+    body.light footer a { color: #888; }
     .back {
       color: #667eea;
       text-decoration: none;
@@ -29,6 +53,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    body.light h1 { -webkit-text-fill-color: #1d1d1f; }
     .subtitle {
       color: #666;
       font-size: 14px;
@@ -81,13 +106,20 @@
 </head>
 <body>
 
+  <button class="toggle-btn" id="themeToggle">🌙 夜间</button>
   <a class="back" href="index.html">← 返回导航</a>
 
   <h1>🌿 数字花园</h1>
   <p class="subtitle">城市观察 · 每日更新的合肥生活情报</p>
 
-  <div class="day-list" id="list">
-    <!-- 由 JS 动态加载 -->
+  <div class="day-list">
+    <!-- INSERT_MARKER -->
+
+        <a class="day-card" href="garden/2026-06-02.html">
+          <div class="date">📰 2026年06月02日</div>
+          <div class="preview">地铁7号线消防验收通过 · G60科创走廊联席会议在合肥举行 · 高考安保10条举措出台</div>
+        </a>
+
   </div>
 
   <footer>
@@ -95,22 +127,17 @@
   </footer>
 
   <script>
-    async function loadList() {
-      const container = document.getElementById('list');
-      // 扫描 garden/ 目录下所有 .html 文件
-      const days = [
-        { date: '2026-06-02', label: '2026年06月02日', preview: '地铁7号线消防验收通过 · G60科创走廊联席会议在合肥举行 · 高考安保10条举措出台' }
-      ];
-      let html = '';
-      for (const d of days) {
-        html += `<a class="day-card" href="garden/${d.date}.html">
-          <div class="date">📰 ${d.label}</div>
-          <div class="preview">${d.preview}</div>
-        </a>`;
-      }
-      container.innerHTML = html || '<p style="color:#555">暂无内容</p>';
+    const btn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.body.classList.add('light');
+      btn.textContent = '☀️ 白天';
     }
-    loadList();
+    btn.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light');
+      btn.textContent = isLight ? '☀️ 白天' : '🌙 夜间';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
   </script>
 
 </body>
