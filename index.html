@@ -42,8 +42,84 @@
     .tagline {
       color: #888;
       font-size: 14px;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
     }
+    .search-box {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 12px 44px 12px 16px;
+      background: #12121a;
+      border: 1px solid #1e1e2e;
+      border-radius: 12px;
+      color: #e0e0e0;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box input::placeholder { color: #444; }
+    .search-box input:focus { border-color: #667eea; }
+    .search-box .search-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #555;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    body.light .search-box input {
+      background: #fff;
+      border-color: #e0e0e0;
+      color: #1d1d1f;
+    }
+    body.light .search-box input::placeholder { color: #bbb; }
+    body.light .search-box .search-icon { color: #aaa; }
+
+    .search-results {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: #1a1a2e;
+      border: 1px solid #2a2a3e;
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 100;
+      display: none;
+    }
+    body.light .search-results { background: #fff; border-color: #e0e0e0; }
+    .search-results.show { display: block; }
+    .search-results a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.15s;
+      border-bottom: 1px solid #1e1e2e;
+    }
+    body.light .search-results a { color: #1d1d1f; border-color: #eee; }
+    .search-results a:last-child { border-bottom: none; }
+    .search-results a:hover { background: #2a2a3e; }
+    body.light .search-results a:hover { background: #f0f0ff; }
+    .search-results a .r-icon { font-size: 16px; }
+    .search-results a .r-name { font-weight: 500; }
+    .search-results a .r-desc { font-size: 12px; color: #666; }
+    body.light .search-results a .r-desc { color: #888; }
+    .search-results .no-result {
+      padding: 16px;
+      color: #555;
+      font-size: 13px;
+      text-align: center;
+    }
+    body.light .search-results .no-result { color: #aaa; }
 
     .sections {
       width: 100%;
@@ -114,6 +190,8 @@
       cursor: pointer;
     }
     body.light .toggle-btn { background: #fff; border-color: #d0d0d0; color: #764ba2; }
+    body.light .toggle-btn:hover { color: #8fa0fc; }
+    .toggle-btn:hover { background: #1a1a2e; }
 
     body.light {
       background: #f5f5f7;
@@ -146,6 +224,12 @@
 
   <div class="avatar">👊</div>
   <h1>KKXX</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索页面..." autocomplete="off">
+    <span class="search-icon">🔍</span>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
   <p class="tagline">效率工具 · 灵感存档 · 数字花园</p>
 
   <div class="sections">
@@ -277,6 +361,48 @@
       btn.textContent = isLight ? '☀️ 白天' : '🌙 夜间';
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
+
+    // 搜索功能
+    const PAGES = [
+      { name: '博客文章', url: 'blog.html', icon: '📝', desc: '经验记录与踩坑总结' },
+      { name: '每日新闻', url: 'blog/news.html', icon: '📰', desc: '综合科技+合肥城事' },
+      { name: '数字花园', url: 'garden.html', icon: '🌿', desc: '合肥城市新闻' },
+      { name: '项目展示', url: '#projects', icon: '💡', desc: '待添加' },
+      { name: 'ChatGPT', url: 'https://chat.openai.com', icon: '🤖', desc: 'OpenAI 对话' },
+      { name: 'Claude', url: 'https://claude.ai', icon: '🧠', desc: 'Anthropic AI' },
+      { name: 'GitHub', url: 'https://github.com', icon: '🐙', desc: '代码托管' },
+      { name: 'GPT Studio', url: 'https://gptstudio.cloud', icon: '☁️', desc: 'AI 开发平台' },
+      { name: 'Hacker News', url: 'https://news.ycombinator.com', icon: '🔥', desc: '科技资讯' },
+      { name: '微博', url: 'https://weibo.com', icon: '📡', desc: '热搜实时' },
+      { name: 'V2EX', url: 'https://www.v2ex.com', icon: '🧱', desc: '程序员社区' },
+      { name: 'Hugging Face', url: 'https://huggingface.co', icon: '🤗', desc: 'AI 模型库' },
+      { name: 'Gmail', url: 'https://mail.google.com', icon: '📧', desc: '谷歌邮箱' },
+      { name: 'Google Drive', url: 'https://drive.google.com', icon: '📁', desc: '云盘' },
+      { name: 'Google 翻译', url: 'https://translate.google.com', icon: '🌐', desc: '全文翻译' },
+      { name: 'Notion', url: 'https://www.notion.so', icon: '📓', desc: '笔记与知识库' },
+    ];
+    const input = document.getElementById('searchInput');
+    const results = document.getElementById('searchResults');
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      if (!q) { results.classList.remove('show'); return; }
+      const hits = PAGES.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+      if (hits.length === 0) {
+        results.innerHTML = '<div class="no-result">未找到匹配页面</div>';
+      } else {
+        results.innerHTML = hits.map(p =>
+          `<a href="${p.url}" target="_blank">
+            <span class="r-icon">${p.icon}</span>
+            <span class="r-name">${p.name}</span>
+            <span class="r-desc">${p.desc}</span>
+          </a>`
+        ).join('');
+      }
+      results.classList.add('show');
+    });
+    input.addEventListener('blur', () => setTimeout(()=> results.classList.remove('show'), 150));
+    input.addEventListener('focus', () => { if (input.value.trim()) results.classList.add('show'); });
   </script>
 
 </body>
