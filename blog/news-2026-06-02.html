@@ -3,193 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>每日新闻 · 2026年06月02日 · KKXX</title>
+  <title>每日新闻 2026年06月02日 · KKXX</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    a { color: inherit; text-decoration: none; }
-    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .back {
+      display: inline-block;
+      color: #667eea;
+      text-decoration: none;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
     .back:hover { text-decoration: underline; }
-    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
-    h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
-    .stats { font-size: 12px; color: #555; margin-bottom: 30px; }
-    .news-card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; transition: border-color 0.2s, transform 0.2s; }
-    .news-card:hover { border-color: #667eea; transform: translateY(-2px); }
-    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-    .card-title { font-size: 15px; font-weight: 500; color: #e0e0e0; line-height: 1.6; flex: 1; }
-    .card-tag { font-size: 11px; color: #fff; background: #667eea; border-radius: 6px; padding: 2px 8px; white-space: nowrap; flex-shrink: 0; }
-    .card-tag.intl { background: #e67e22; }
-    .card-tag.economy { background: #27ae60; }
-    .card-tag.tech { background: #9b59b6; }
-    .card-tag.cctv { background: #c0392b; }
-    .card-summary { font-size: 13px; color: #aaa; line-height: 1.7; margin-bottom: 10px; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #555; }
-    .card-link { color: #667eea; font-size: 11px; }
-    .card-link:hover { text-decoration: underline; }
-    .news-footer { font-size: 11px; color: #555; margin-top: 40px; text-align: center; }
-</style>
+    .date {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .stats {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    .news-item {
+      background: #12121a;
+      border: 1px solid #1e1e2e;
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin-bottom: 14px;
+    }
+    .news-header {
+      margin-bottom: 6px;
+    }
+    .news-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #e0e0e0;
+      text-decoration: none;
+    }
+    .news-title:hover {
+      color: #667eea;
+    }
+    .news-meta {
+      font-size: 11px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .news-summary {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .deep {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+      border-left: 3px solid #667eea;
+      padding-left: 12px;
+      margin-top: 8px;
+    }
+  </style>
 </head>
 <body>
   <a class="back" href="news.html">← 返回新闻列表</a>
   <div class="date">2026年06月02日</div>
   <h1>📰 每日新闻</h1>
-  <div class="stats">共 14 条新闻 · 含 14 个原文链接</div>
+  <div class="stats">共 0 条新闻</div>
+
   <div class="news-list">
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">1. 🇺🇸 美国总统特朗普在与以色列总理内塔尼亚胡的通话中，就以色列在黎巴嫩的军事升级行动表示“强烈不满”。特朗普在通话中称内塔尼亚胡“疯了”，并指责他忘恩负义，称自己曾帮助内塔尼亚胡在其腐败案审理中“免于入狱”。</div>
-        <span class="card-tag intl">央视</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：央视</span>
-        <a class="card-link" href="https://news.cctv.com/2026/06/02/ARTIPL6Vw4aEv6DncIztSl9E260602.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">2. 🇺🇸 特朗普怒斥内塔尼亚胡“疯了”</div>
-        <span class="card-tag intl">央视</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：央视</span>
-        <a class="card-link" href="https://news.cctv.com/2026/06/02/ARTIPL6Vw4aEv6DncIztSl9E260602.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">3. 🇺🇸 特朗普连续放话：“未来一周内”与伊朗达成协议，以军不会前往贝鲁特</div>
-        <span class="card-tag intl">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-02/doc-inhzysxp7880684.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">4. 🇺🇸 特朗普怒斥内塔尼亚胡“疯了” 不满以色列升级黎巴嫩局势</div>
-        <span class="card-tag intl">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-02/doc-inhzynrw3380926.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">5. 🇺🇸 最高票价超两百万，特朗普：很多人邀请我去看</div>
-        <span class="card-tag intl">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-02/doc-inhzyxfp4586303.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">6. 🇺🇸 【金价上涨，但中东的不确定性令前景承压】早盘金价上涨，纽约期金上涨1.2%，报每盎司4,562.40美元，此时正值市场等待美伊谈判状况明朗之际。盛宝银行分析师表示：“鉴于原油对通货膨胀预期的影响，进而对利率、债券收益率和美元的影响，黄金继续从原油市场寻找线索。“在通货膨胀担忧加剧之际，投资者还在关注本周晚些时候公布的美国非农就业人数和就业数据，以及美联储官员可能暗示货币政策未来走向的讲话。</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4912216" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">7. 💰 2025年全国24家汽车金融公司资产同比增长6.94% 新能源汽车贷款投放总额达1837.65亿元</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/roll/2026-06-02/doc-inhzzcpr1637367.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">8. 💰 【分析师：东南亚制造业开始企稳】Pantheon Macroeconomics的Miguel Chanco表示，东南亚制造业正开始从伊朗战争造成的冲击中企稳。该经济学家指出，该地区各国的经济前景继续存在巨大差异，越南和泰国的5月份采购经理人指数(PMI)稳居扩张区间，但马来西亚陷入萎缩。Chanco说，订单没有得到外部需求的支持，因为在整个东盟的PMI数据中，新出口订单分项指数进一步跌入萎缩区间。他说，尽管如此，投入和产出价格指数表明，近几个月因冲突导致的价格压力激增可能终于见顶。</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4912203" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">9. 💰 【辽港股份：H股公众持股量仍低于规定 积极寻求解决方案】辽港股份公告称，截至公告日，公司在联交所上市的H股市值约7.75亿港元，占H股已发行股份总数的3.67%，仍低于最低公众持股量规定。公司已积极寻求解决方案，包括与主要股东沟通、联系专业顾问等。联交所同意公司维持过渡期安排以恢复公众持股量，公司将按规定刊发每月进展公告。提醒股东及潜在投资者买卖股份时审慎行事。</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4912186" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">10. 📌 林教头：连续高位杀跌，半导体迎接抄反弹机会？</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="http://live.finance.sina.cn/bozhu/8004372005/168043" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">11. 📌 意法半导体量产车规电池管理芯片推出升级款</div>
-        <span class="card-tag tech">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/tech/roll/2026-06-02/doc-inhzzcpr1644745.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">12. 🤖 对话思格新能源CEO许映童：自研专属Agent与通用问答式AI最大区别是个性化智能服务</div>
-        <span class="card-tag tech">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/wm/2026-06-01/doc-inhzxewi5114508.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">13. 🤖 传赛豆科技旗下首款车型今年推出，相关人士：以官方发布信息为准，将专注AI汽车相关方向</div>
-        <span class="card-tag tech">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/tob/2026-06-01/doc-inhzwyqq3964006.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">14. 🤖 孙正义：AI才刚起步 体量有望达到互联网热潮50倍</div>
-        <span class="card-tag tech">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/tech/roll/2026-06-02/doc-inhzxrnh3711393.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
+
   </div>
-  <div class="news-footer">⏰ 简报于 2026-06-02 生成 | by KKXX</div>
 </body>
 </html>
