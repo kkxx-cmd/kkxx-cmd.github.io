@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>记一次 INSERT_MARKER 置换失败 Bug · KKXX</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
+    body.light { background: #f5f5f7; color: #1d1d1f; }
+    .toggle-btn { position: fixed; top: 16px; right: 20px; background: #12121a; border: 1px solid #2a2a3e; border-radius: 8px; padding: 6px 14px; color: #667eea; font-size: 13px; cursor: pointer; }
+    body.light .toggle-btn { background: #fff; border-color: #d0d0d0; color: #764ba2; }
+    body.light .toggle-btn:hover { color: #8fa0fc; }
+    .toggle-btn:hover { background: #1a1a2e; }
+    .back { color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; display: inline-block; }
+    body.light .back { color: #764ba2; }
+    .back:hover { color: #8fa0fc; }
+    .post-header { max-width: 720px; margin-bottom: 32px; }
+    .post-header h1 { font-size: 24px; font-weight: 600; color: #667eea; margin-bottom: 8px; line-height: 1.4; }
+    .post-header .meta { color: #555; font-size: 13px; margin-bottom: 16px; }
+    body.light .post-header h1 { color: #764ba2; }
+    body.light .post-header .meta { color: #888; }
+    .post-body { max-width: 720px; }
+    .post-body h2 { font-size: 18px; font-weight: 600; color: #667eea; margin: 32px 0 14px 0; padding-bottom: 8px; border-bottom: 1px solid #1e1e2e; }
+    body.light .post-body h2 { color: #764ba2; border-color: #e0e0e0; }
+    .post-body p { font-size: 15px; color: #c0c0c0; line-height: 1.8; margin-bottom: 16px; }
+    body.light .post-body p { color: #333; }
+    .post-body ul { margin: 0 0 16px 20px; }
+    .post-body li { font-size: 15px; color: #c0c0c0; line-height: 1.8; margin-bottom: 6px; }
+    body.light .post-body li { color: #333; }
+    .post-body code { background: #1a1a2e; color: #667eea; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    body.light .post-body code { background: #eee; color: #764ba2; }
+    .post-body pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 16px; margin: 0 0 20px 0; overflow-x: auto; }
+    body.light .post-body pre { background: #f5f5f7; border-color: #e0e0e0; }
+    .post-body pre code { background: none; padding: 0; color: #e0e0e0; font-size: 13px; }
+    .tag { display: inline-block; background: #1a1a2e; color: #667eea; font-size: 12px; padding: 3px 10px; border-radius: 20px; margin-right: 6px; }
+    body.light .tag { background: #eee; color: #764ba2; }
+    .bug-tag { background: #2a1a1a; color: #e06060; }
+    body.light .bug-tag { background: #fde8e8; color: #c04040; }
+    .fix-tag { background: #1a2a1a; color: #60c060; }
+    body.light .fix-tag { background: #e8fde8; color: #40a040; }
+    footer { margin-top: 60px; color: #333; font-size: 12px; }
+    body.light footer { color: #aaa; }
+    footer a { color: #555; text-decoration: none; }
+    footer a:hover { color: #667eea; }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" id="themeToggle">🌙 夜间</button>
+  <a class="back" href="../blog.html">← 博客文章</a>
+
+  <div class="post-header">
+    <h1>记一次 INSERT_MARKER 置换失败 Bug</h1>
+    <div class="meta">2026-06-03 · 故障排查 · 🐛 Bug & 🔧 Fix</div>
+    <div>
+      <span class="tag">Bug</span>
+      <span class="tag fix-tag">已修复</span>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <h2>问题现象</h2>
+    <p>数字花园的 <code>garden.html</code> 列表页从 6月2日之后就不再更新了，但详情页 <code>garden/2026-06-03.html</code> 已经生成，文件也存在。两个 Cron 任务（08:00 和 18:00）都正常跑过，就是列表不刷新。</p>
+
+    <h2>排查过程</h2>
+    <p>网站结构是这样的：</p>
+    <pre><code>garden/
+├── 2026-06-02.html   ← 已出现在列表
+└── 2026-06-03.html   ← 详情页存在，但列表里没有
+
+garden.html             ← 列表页，有 INSERT_MARKER 占位符
+</code></pre>
+
+    <p>脚本 <code>hefei_news.py</code> 的更新逻辑是：每次生成新详情页后，在 <code>garden.html</code> 的 <code><!-- INSERT_MARKER --></code> 位置插入新卡片，插完再把标记移回下方。</p>
+
+    <p>用 <code>grep -n "INSERT_MARKER" garden.html</code> 看到标记在第 116 行，但前一条卡片是第 118 行——这说明置换发生了，但标记没有移回正确位置。</p>
+
+    <h2>根本原因：缩进不一致</h2>
+    <p>对比脚本输出的字符串和文件里的实际缩进：</p>
+    <pre><code># 脚本里的 card 模板（8空格缩进）
+"\n        <!-- INSERT_MARKER -->"
+
+# garden.html 里的实际内容（7空格缩进）
+"    <!-- INSERT_MARKER -->"
+</code></pre>
+
+    <p>差了一个空格！<code>String.replace()</code> 要求完全匹配才能置换，所以每次都匹配失败，标记没有移回，卡片也就没有插入成功。</p>
+
+    <h2>修复方案</h2>
+    <p>统一缩进：把脚本里的 8 空格改成 7 空格，与 <code>garden.html</code> 保持一致。</p>
+    <pre><code># 修改前（错误）
+content = content.replace("\n        <!-- INSERT_MARKER -->", card)
+
+# 修改后（正确）
+content = content.replace("\n  <!-- INSERT_MARKER -->", card)
+</code></pre>
+
+    <p>同时把 <code>card</code> 模板里的缩进也统一改成 7 空格。</p>
+
+    <h2>教训</h2>
+    <ul>
+      <li><strong>字符串匹配要做 exact match 验证。</strong> 用 <code>cat -A</code> 看看实际换行和空白字符长什么样。</li>
+      <li><strong>用占位符标记做增量插入时，第一次就要保证缩进统一。</strong> 宁可不用缩进，也不要用错缩进。</li>
+      <li><strong>这类 bug 很难肉眼发现</strong>——代码看起来完全正常，只有在对比实际文件内容时才露馅。</li>
+    </ul>
+
+    <h2>后续</h2>
+    <p>修复已推送，数字花园列表恢复正常更新。以后如果列表再次停滞，先查缩进 👊</p>
+  </div>
+
+  <footer>
+    <a href="../blog.html">← 博客文章</a> · <a href="../index.html">KKXX 导航</a>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.body.classList.add('light');
+      btn.textContent = '☀️ 白天';
+    }
+    btn.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light');
+      btn.textContent = isLight ? '☀️ 白天' : '🌙 夜间';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
