@@ -16,7 +16,6 @@
     body.light { background: #f5f5f7; color: #1d1d1f; }
     body.light h1 { -webkit-text-fill-color: #1d1d1f; }
     body.light .back { color: #764ba2; }
-    body.light .day-header h1 { color: #667eea; }
     body.light .day-card { background: #fff; border-color: #e0e0e0; }
     body.light .day-card:hover { border-color: #667eea; background: #f0f0ff; }
     body.light .day-card .date { color: #667eea; }
@@ -24,7 +23,6 @@
     body.light .empty { color: #aaa; }
     body.light footer { color: #aaa; }
     body.light footer a { color: #888; }
-    body.light .tag { background: #1a1a2e; color: #667eea; }
     body.light .tag { background: #f0f0ff; color: #764ba2; }
 
     .back { color: #667eea; text-decoration: none; font-size: 14px; margin-bottom: 30px; display: inline-block; }
@@ -85,97 +83,12 @@
     <p>低价超卖股每日三更（8/11/14点）· 工作日更新</p>
   </div>
 
-  <div class="day-list" id="dayList">
-<a class="day-card" href="stock/2026-06-05.html">
-      <div class="date">📉 2026年06月05日</div>
-      <div class="preview">皇氏集团 · 宝新能源 · 节能风电</div>
-    </a>
-
-  <!-- INSERT_MARKER -->
-
-  <!-- INSERT_MARKER -->
+  <div class="day-list">
+    <!-- INSERT_MARKER -->
   </div>
 
   <footer>
     <a href="index.html">← KKXX 导航</a>
   </footer>
-
-  <script>
-    // 扫描所有 stock/YYYY-MM-DD.html 文件
-    const base = 'stock/';
-    let html = '';
-    let loaded = 0;
-    const total = 30; // 最多扫描30天
-
-    for (let i = 0; i < total; i++) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      const yyyy = d.getFullYear();
-      const mm = String(d.getMonth() + 1).padStart(2, '0');
-      const dd = String(d.getDate()).padStart(2, '0');
-      const dateStr = `${yyyy}-${mm}-${dd}`;
-      const file = base + dateStr + '.html';
-
-      (function(ds, file) {
-        const img = new Image();
-        img.onload = function() {
-          // 获取标题行
-          fetch(file + '?_=' + Date.now())
-            .then(r => r.text())
-            .then(html => {
-              const m = html.match(/<h1>(.*?)<\/h1>/);
-              const m2 = html.match(/id="stockList"[^>]*>[\s\S]*?<table[^>]*>([\s\S]*?)<\/table>/);
-              let preview = '';
-              if (m2) {
-                const rows = m2[1].match(/<td>.*?<\/td>/g) || [];
-                preview = rows.slice(0, 5).map(td => {
-                  const name = td.match(/<strong>(.*?)<\/strong>/);
-                  const pct = td.match(/class="(up|down)">([^<]+)</);
-                  if (name) return name[1] + ' ' + (pct ? pct[2] : '');
-                  return '';
-                }).filter(Boolean).join(' · ');
-              }
-              const el = document.getElementById('day-' + ds);
-              if (el) {
-                el.querySelector('.preview').textContent = preview || '查看详情 →';
-                el.style.display = 'block';
-              }
-              loaded++;
-              if (loaded === total) finalize();
-            })
-            .catch(() => {
-              const el = document.getElementById('day-' + ds);
-              if (el) el.style.display = 'none';
-              loaded++;
-              if (loaded === total) finalize();
-            });
-        };
-        img.onerror = function() {
-          const el = document.getElementById('day-' + ds);
-          if (el) el.style.display = 'none';
-          loaded++;
-          if (loaded === total) finalize();
-        };
-        img.src = file;
-      })(dateStr, file);
-
-      const displayDate = `${yyyy}年${mm}月${dd}日`;
-      html += `<a class="day-card" id="day-${dateStr}" href="${file}" style="display:none">
-        <div class="date">📉 ${displayDate}</div>
-        <div class="preview">加载中...</div>
-      </a>`;
-    }
-
-    document.getElementById('dayList').innerHTML = html;
-
-    function finalize() {
-      const visible = document.querySelectorAll('.day-card[style=""]');
-      if (visible.length === 0) {
-        document.getElementById('dayList').innerHTML =
-          '<div class="empty">📭 暂无历史数据，次日8点更新</div>';
-      }
-    }
-    setTimeout(finalize, 8000); // 8秒后强制收尾
-  </script>
 </body>
 </html>
