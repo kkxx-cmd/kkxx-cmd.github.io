@@ -16,27 +16,23 @@
     body.light { background: #f5f5f7; color: #1d1d1f; }
     body.light h1 { -webkit-text-fill-color: #1d1d1f; }
     body.light .back { color: #764ba2; }
-    body.light .update-time { color: #888; }
-    body.light .stock-table { background: #fff; border-color: #e0e0e0; }
-    body.light .stock-table th { background: #f0f0ff; color: #667eea; }
-    body.light .stock-table td { border-color: #f0f0f0; color: #1d1d1f; }
-    body.light .stock-table tr:hover { background: #fafafa; }
-    body.light .stock-table .up { color: #e53f3f; }
-    body.light .stock-table .down { color: #22c55e; }
+    body.light .day-header h1 { color: #667eea; }
+    body.light .day-card { background: #fff; border-color: #e0e0e0; }
+    body.light .day-card:hover { border-color: #667eea; background: #f0f0ff; }
+    body.light .day-card .date { color: #667eea; }
+    body.light .day-card .preview { color: #666; }
     body.light .empty { color: #aaa; }
     body.light footer { color: #aaa; }
     body.light footer a { color: #888; }
+    body.light .tag { background: #1a1a2e; color: #667eea; }
     body.light .tag { background: #f0f0ff; color: #764ba2; }
-    body.light .rsi-blue { background: #e8f0ff; color: #3b82f6; }
-    body.light .rsi-white { background: #f5f5f5; color: #666; }
-    body.light .rsi-red { background: #fff0f0; color: #ef4444; }
 
     .back { color: #667eea; text-decoration: none; font-size: 14px; margin-bottom: 30px; display: inline-block; }
     .back:hover { color: #8fa0fc; }
 
-    .header { max-width: 900px; margin-bottom: 24px; }
-    .header h1 { font-size: 24px; font-weight: 600; color: #667eea; margin-bottom: 6px; }
-    .update-time { color: #555; font-size: 13px; }
+    .header { max-width: 720px; margin-bottom: 32px; }
+    .header h1 { font-size: 24px; font-weight: 600; color: #667eea; margin-bottom: 8px; }
+    .header p { color: #555; font-size: 13px; }
 
     .tag {
       display: inline-block;
@@ -45,112 +41,52 @@
       font-size: 11px;
       padding: 2px 8px;
       border-radius: 4px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
-    .stock-table {
-      width: 100%;
-      max-width: 900px;
-      border-collapse: collapse;
+    .day-list {
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .day-card {
+      display: block;
       background: #12121a;
       border: 1px solid #1e1e2e;
       border-radius: 12px;
-      overflow: hidden;
-      font-size: 13px;
-    }
-    .stock-table th {
-      background: #1a1a2e;
-      color: #667eea;
-      font-weight: 600;
-      text-align: left;
-      padding: 12px 16px;
-      font-size: 12px;
-    }
-    .stock-table td {
-      padding: 10px 16px;
-      border-top: 1px solid #1a1a2e;
+      padding: 18px 20px;
+      text-decoration: none;
       color: #e0e0e0;
+      transition: all 0.2s;
     }
-    .stock-table tr:hover { background: #1a1a2e; }
-    .stock-table .symbol { color: #888; font-size: 12px; }
-    .stock-table .up { color: #ef4444; }
-    .stock-table .down { color: #22c55e; }
-
-    .rsi-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
+    .day-card:hover {
+      background: #1a1a2e;
+      border-color: #667eea;
+      transform: translateY(-1px);
     }
-    .rsi-blue { background: #1a2a4a; color: #60a5fa; }
-    .rsi-white { background: #2a2a3a; color: #aaa; }
-    .rsi-red { background: #4a1a1a; color: #f87171; }
+    .day-card .date { font-size: 14px; font-weight: 600; color: #667eea; margin-bottom: 6px; }
+    .day-card .preview { font-size: 13px; color: #666; line-height: 1.6; }
 
-    .score-bar { color: #555; font-size: 11px; letter-spacing: 1px; }
-    .score-bar .filled { color: #22c55e; }
-
-    .legend {
-      max-width: 900px;
-      margin-top: 16px;
-      font-size: 12px;
-      color: #555;
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .empty {
-      max-width: 900px;
-      padding: 40px;
-      text-align: center;
-      color: #555;
-      font-size: 14px;
-    }
-
-    .score-col { min-width: 80px; }
-    .rsi-col { min-width: 70px; }
-    .price-col { min-width: 70px; }
-    .pct-col { min-width: 80px; text-align: right; }
+    .empty { padding: 60px 0; text-align: center; color: #555; font-size: 14px; }
 
     footer { margin-top: 60px; color: #333; font-size: 12px; }
     footer a { color: #555; text-decoration: none; }
     footer a:hover { color: #667eea; }
-
-    .note {
-      max-width: 900px;
-      margin-top: 16px;
-      font-size: 12px;
-      color: #444;
-      border-top: 1px solid #1e1e2e;
-      padding-top: 12px;
-    }
-    body.light .note { color: #888; border-color: #eee; }
   </style>
 </head>
 <body>
   <a class="back" href="index.html">← KKXX 导航</a>
 
   <div class="header">
-    <div class="tag">📉 超卖精选</div>
+    <div class="tag">📉 A股超卖精选</div>
     <h1>股票专区</h1>
-    <div class="update-time" id="updateTime">加载中...</div>
+    <p>低价超卖股每日三更（8/11/14点）· 工作日更新</p>
   </div>
 
-  <div id="stockList">
-    <div class="empty">正在加载数据...</div>
-  </div>
-
-  <div class="note" id="note">
-    ⚠️ 超跌反弹信号仅供参考，不构成投资建议
-  </div>
-
-  <div class="legend" id="legend">
-    <span>🔵 RSI≤30 超卖</span>
-    <span>⚪ RSI 30~50 中性</span>
-    <span>🔴 RSI>50 走强</span>
-    <span>🟢 RSI评分满分80分</span>
-    <span>📊 每交易日上午8/11点、下午14点各更新一次</span>
+  <div class="day-list" id="dayList">
+  <!-- INSERT_MARKER -->
   </div>
 
   <footer>
@@ -158,72 +94,81 @@
   </footer>
 
   <script>
-    function renderScoreBar(score, max) {
-      const width = 6;
-      const filled = Math.round(score / max * width);
-      const empty = width - filled;
-      return '<span class="score-bar">' +
-        '<span class="filled">' + '🟢'.repeat(filled) + '</span>' +
-        '⚪'.repeat(empty) +
-        '</span> ' + score.toFixed(0) + '分';
+    // 扫描所有 stock/YYYY-MM-DD.html 文件
+    const base = 'stock/';
+    let html = '';
+    let loaded = 0;
+    const total = 30; // 最多扫描30天
+
+    for (let i = 0; i < total; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      const dateStr = `${yyyy}-${mm}-${dd}`;
+      const file = base + dateStr + '.html';
+
+      (function(ds, file) {
+        const img = new Image();
+        img.onload = function() {
+          // 获取标题行
+          fetch(file + '?_=' + Date.now())
+            .then(r => r.text())
+            .then(html => {
+              const m = html.match(/<h1>(.*?)<\/h1>/);
+              const m2 = html.match(/id="stockList"[^>]*>[\s\S]*?<table[^>]*>([\s\S]*?)<\/table>/);
+              let preview = '';
+              if (m2) {
+                const rows = m2[1].match(/<td>.*?<\/td>/g) || [];
+                preview = rows.slice(0, 5).map(td => {
+                  const name = td.match(/<strong>(.*?)<\/strong>/);
+                  const pct = td.match(/class="(up|down)">([^<]+)</);
+                  if (name) return name[1] + ' ' + (pct ? pct[2] : '');
+                  return '';
+                }).filter(Boolean).join(' · ');
+              }
+              const el = document.getElementById('day-' + ds);
+              if (el) {
+                el.querySelector('.preview').textContent = preview || '查看详情 →';
+                el.style.display = 'block';
+              }
+              loaded++;
+              if (loaded === total) finalize();
+            })
+            .catch(() => {
+              const el = document.getElementById('day-' + ds);
+              if (el) el.style.display = 'none';
+              loaded++;
+              if (loaded === total) finalize();
+            });
+        };
+        img.onerror = function() {
+          const el = document.getElementById('day-' + ds);
+          if (el) el.style.display = 'none';
+          loaded++;
+          if (loaded === total) finalize();
+        };
+        img.src = file;
+      })(dateStr, file);
+
+      const displayDate = `${yyyy}年${mm}月${dd}日`;
+      html += `<a class="day-card" id="day-${dateStr}" href="${file}" style="display:none">
+        <div class="date">📉 ${displayDate}</div>
+        <div class="preview">加载中...</div>
+      </a>`;
     }
 
-    function rsiBadge(rsi) {
-      if (rsi <= 30) return '<span class="rsi-badge rsi-blue">🔵 ' + rsi.toFixed(1) + '</span>';
-      if (rsi <= 50) return '<span class="rsi-badge rsi-white">⚪ ' + rsi.toFixed(1) + '</span>';
-      return '<span class="rsi-badge rsi-red">🔴 ' + rsi.toFixed(1) + '</span>';
+    document.getElementById('dayList').innerHTML = html;
+
+    function finalize() {
+      const visible = document.querySelectorAll('.day-card[style=""]');
+      if (visible.length === 0) {
+        document.getElementById('dayList').innerHTML =
+          '<div class="empty">📭 暂无历史数据，次日8点更新</div>';
+      }
     }
-
-    function loadData() {
-      fetch('stock_data.json?_=' + Date.now())
-        .then(r => r.json())
-        .then(data => {
-          document.getElementById('updateTime').textContent =
-            '📦 数据更新：' + data.updated + ' · 从 ' + data.pool + ' 只低价超卖股中选出 TOP ' + data.results.length;
-
-          if (!data.results || data.results.length === 0) {
-            document.getElementById('stockList').innerHTML =
-              '<div class="empty">❌ 今日暂无符合条件的超卖股</div>';
-            return;
-          }
-
-          const rows = data.results.map(r => {
-            const pct = parseFloat(r.changepercent);
-            const price = parseFloat(r.trade);
-            const cls = pct >= 0 ? 'up' : 'down';
-            const sign = pct >= 0 ? '+' : '';
-            return `<tr>
-              <td><strong>${r.name}</strong><br><span class="symbol">${r.symbol}</span></td>
-              <td class="price-col">¥${price.toFixed(2)}</td>
-              <td class="pct-col ${cls}">${sign}${pct.toFixed(2)}%</td>
-              <td class="rsi-col">${rsiBadge(r.rsi)}</td>
-              <td class="score-col">${renderScoreBar(r.score, 80)}</td>
-            </tr>`;
-          }).join('');
-
-          document.getElementById('stockList').innerHTML = `
-            <table class="stock-table">
-              <thead>
-                <tr>
-                  <th>股票</th>
-                  <th class="price-col">价格</th>
-                  <th class="pct-col">涨跌幅</th>
-                  <th class="rsi-col">RSI(5)</th>
-                  <th class="score-col">综合评分</th>
-                </tr>
-              </thead>
-              <tbody>${rows}</tbody>
-            </table>
-          `;
-        })
-        .catch(() => {
-          document.getElementById('stockList').innerHTML =
-            '<div class="empty">❌ 数据加载失败，请稍后刷新</div>';
-        });
-    }
-
-    loadData();
-    setInterval(loadData, 300000); // 每5分钟刷新
+    setTimeout(finalize, 8000); // 8秒后强制收尾
   </script>
 </body>
 </html>
