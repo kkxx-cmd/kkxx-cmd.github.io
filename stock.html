@@ -175,7 +175,7 @@
     }
 
     function loadData() {
-      fetch('scripts/stock_data.json?_=' + Date.now())
+      fetch('stock_data.json?_=' + Date.now())
         .then(r => r.json())
         .then(data => {
           document.getElementById('updateTime').textContent =
