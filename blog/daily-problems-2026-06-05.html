@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>每日问题记录 · 2026年6月5日 · KKXX</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
+    body.light { background: #f5f5f7; color: #1d1d1f; }
+    .toggle-btn { position: fixed; top: 16px; right: 20px; background: #12121a; border: 1px solid #2a2a3e; border-radius: 8px; padding: 6px 14px; color: #667eea; font-size: 13px; cursor: pointer; }
+    body.light .toggle-btn { background: #fff; border-color: #d0d0d0; color: #764ba2; }
+    .toggle-btn:hover { background: #1a1a2e; }
+    .back { color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; display: inline-block; }
+    body.light .back { color: #764ba2; }
+    .back:hover { color: #8fa0fc; }
+    .post-header { max-width: 720px; margin-bottom: 32px; }
+    .post-header h1 { font-size: 24px; font-weight: 600; color: #667eea; margin-bottom: 8px; }
+    body.light .post-header h1 { color: #764ba2; }
+    .post-header .meta { color: #555; font-size: 13px; margin-bottom: 12px; }
+    body.light .post-header .meta { color: #888; }
+    .tag { display: inline-block; background: #1a2a1a; color: #60c060; font-size: 12px; padding: 3px 10px; border-radius: 20px; margin-right: 6px; }
+    body.light .tag { background: #e8fde8; color: #40a040; }
+    .post-body { max-width: 720px; }
+    .post-body h2 { font-size: 16px; font-weight: 600; color: #667eea; margin: 28px 0 12px 0; padding-bottom: 8px; border-bottom: 1px solid #1e1e2e; }
+    body.light .post-body h2 { color: #764ba2; border-color: #e0e0e0; }
+    .post-body p { font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 12px; }
+    body.light .post-body p { color: #555; }
+    .issue { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+    body.light .issue { background: #fff; border-color: #e0e0e0; }
+    .issue h3 { font-size: 15px; font-weight: 600; color: #e0e0e0; margin-bottom: 10px; }
+    body.light .issue h3 { color: #1d1d1f; }
+    .fix-box { background: #0f1a0f; border-left: 3px solid #60c060; padding: 10px 14px; border-radius: 0 8px 8px 0; }
+    body.light .fix-box { background: #f8fdf8; }
+    .fix-label { font-size: 12px; font-weight: 600; color: #60c060; display: block; margin-bottom: 6px; }
+    .fix-box p { font-size: 13px; color: #999; line-height: 1.7; margin: 0; }
+    body.light .fix-box p { color: #666; }
+    footer { margin-top: 60px; color: #333; font-size: 12px; }
+    body.light footer { color: #aaa; }
+    footer a { color: #555; text-decoration: none; }
+    footer a:hover { color: #667eea; }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" id="themeToggle">🌙 夜间</button>
+  <a class="back" href="blog.html">← 博客文章</a>
+
+  <div class="post-header">
+    <h1>🔧 每日问题记录</h1>
+    <div class="meta">📅 2026年6月5日 的 Bug & 踩坑 · 生成于 2026年06月06日 12:00</div>
+    <span class="tag">✅ 问题追踪</span>
+  </div>
+
+  <div class="post-body">
+    
+    <h2>共记录 3 个问题</h2>
+    
+    <div class="issue">
+      <h3>🐛 #1 ### 踩坑记录</h3>
+      <div class="fix-box">
+        <span class="fix-label">🔧 解决方案</span>
+        <p>1. **INSERT_MARKER 重复累积**：`new_card` 字符串里带了 `<!-- INSERT_MARKER -->` 导致 MARKER 每次追加后多一个，要单独放外面
+2. **`os.chdir()` 影响相对路径**：脚本里先 chdir 到 site 再写 JSON，用 `..` 相对路径就错，全都改成绝对路径
+3. **JS innerHTML 覆盖问题**：stock.html 用 JS 动态扫描 stock/ 目录来生成卡片列表，但 Python 写的卡片在 innerHTML 执行后被清掉 → 改纯静态，Python 每次重写整个索引</p>
+      </div>
+    </div>
+
+    <div class="issue">
+      <h3>🐛 #2 3. **JS innerHTML 覆盖问题**：stock.html 用 JS 动态扫描 stock/ 目录来生成卡片列表，但 Python 写的卡片在 innerHTML 执行后被清掉 → 改纯静态，Python 每次重写整个索引</h3>
+      <div class="fix-box">
+        <span class="fix-label">🔧 解决方案</span>
+        <p>- 系统开机：6月2日 14:42，累计3天26分钟
+- OpenClaw: 正常，无 error/warn
+- 2个任务历史失败记录（合肥新闻早报+晚报），实际执行成功，状态标记问题，不影响</p>
+      </div>
+    </div>
+
+    <div class="issue">
+      <h3>🐛 #3 - 2个任务历史失败记录（合肥新闻早报+晚报），实际执行成功，状态标记问题，不影响</h3>
+      <div class="fix-box">
+        <span class="fix-label">🔧 解决方案</span>
+        <p>- API rate limit 今天触发2次（14:50/15:03），因为操作太密集
+- "继续"用得很多，说明在等结果
+- 确认时间时会困惑（九月还是六月），以系统时间为准</p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <footer>
+    <a href="blog.html">← 博客文章</a> · <a href="index.html">KKXX 导航</a>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') { document.body.classList.add('light'); btn.textContent = '☀️ 白天'; }
+    btn.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light');
+      btn.textContent = isLight ? '☀️ 白天' : '🌙 夜间';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
