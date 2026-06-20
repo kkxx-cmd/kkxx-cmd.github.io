@@ -3,70 +3,204 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>科技新闻 · 2026年06月20日 · KKXX</title>
+  <title>每日新闻 · 2026年06月20日 · KKXX</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    a { color: #667eea; text-decoration: none; }
-    .header { max-width: 800px; margin: 0 auto 32px; }
-    .header h1 { font-size: 24px; font-weight: 600; color: #667eea; margin-bottom: 8px; }
-    .header p { color: #555; font-size: 13px; }
-    .content { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-    .section { background: #12121a; border: 1px solid #1e1e2e; border-radius: 16px; padding: 24px; }
-    .section h2 { font-size: 14px; font-weight: 600; color: #667eea; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #1e1e2e; }
-    .news-card { margin-bottom: 16px; padding: 14px; background: #1a1a26; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
-    .news-card:hover { background: #22222e; }
-    .card-tag { font-size: 11px; color: #667eea; margin-bottom: 6px; }
-    .card-title { font-size: 14px; font-weight: 500; color: #e0e0e0; margin-bottom: 6px; line-height: 1.5; }
-    .card-link { font-size: 12px; color: #667eea; text-decoration: none; }
-    .summary-section { background: #1a1040; border-color: #3a2060; }
-    .summary-content { font-size: 14px; line-height: 1.8; color: #c0c0d0; white-space: pre-wrap; }
-    footer { margin-top: 60px; text-align: center; color: #333; font-size: 12px; }
-  </style>
+    a { color: inherit; text-decoration: none; }
+    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+    .stats { font-size: 12px; color: #555; margin-bottom: 30px; }
+    .news-card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; transition: border-color 0.2s, transform 0.2s; }
+    .news-card:hover { border-color: #667eea; transform: translateY(-2px); }
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .card-title { font-size: 15px; font-weight: 500; color: #e0e0e0; line-height: 1.6; flex: 1; }
+    .card-tag { font-size: 11px; color: #fff; background: #667eea; border-radius: 6px; padding: 2px 8px; white-space: nowrap; flex-shrink: 0; }
+    .card-tag.intl { background: #e67e22; }
+    .card-tag.economy { background: #27ae60; }
+    .card-tag.tech { background: #9b59b6; }
+    .card-tag.cctv { background: #c0392b; }
+    .card-summary { font-size: 13px; color: #aaa; line-height: 1.7; margin-bottom: 10px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #555; }
+    .card-link { color: #667eea; font-size: 11px; }
+    .card-link:hover { text-decoration: underline; }
+    .news-footer { font-size: 11px; color: #555; margin-top: 40px; text-align: center; }
+</style>
 </head>
 <body>
-  <div class="header">
-    <h1>📡 科技新闻 · 2026年06月20日</h1>
-    <p>HackerNews + Reddit r/programming · 自动聚合 · Ollama 本地整理</p>
+  <a class="back" href="news.html">← 返回新闻列表</a>
+  <div class="date">2026年06月20日</div>
+  <h1>📰 每日新闻</h1>
+  <div class="stats">共 15 条新闻 · 含 15 个原文链接</div>
+  <div class="news-list">
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">1. 📌 新能源车太“胖”、token太“耗”？人民锐评：创造</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/wm/2026-06-19/doc-inicwxpe3082706.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">2. 🇺🇸 据美国方面6月19日消息，知情人士透露，过去几周内，得克萨斯州拉克兰空军基地已有160多名军人感染流感病毒。</div>
+        <span class="card-tag intl">央视</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：央视</span>
+        <a class="card-link" href="https://news.cctv.com/2026/06/20/ARTI4ApVyBz0CwojsyJwvOXr260620.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">3. 🇺🇸 伊朗副外长：美国必须确保以色列遵守谅解备忘录</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-20/doc-inicyweh2347327.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">4. 🇺🇸 美以伊最新局势一文速览：特朗普称美伊须60天内达成长期协议，否则会采取让对方不高兴的行动 伊朗警告美国必须确保以色列遵守谅解备忘录</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-20/doc-iniczane2264671.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">5. 🇨🇳 中国何时做出最强大模型？马斯克：明年一季度</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/wm/2026-06-19/doc-inicxkay2932955.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">6. 📌 人民锐评：新能源车太“胖”、token太“耗”？盲目堆料不如更聪明地创造</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/chanjing/cyxw/2026-06-19/doc-inicwxpc1733391.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">7. 🇨🇳 【欧盟中国商会就欧盟《工业加速器法案》向欧委会提交反馈意见】据欧盟中国商会消息，2026年6月18日，欧盟中国商会就欧盟委员会提出的《工业加速器法案》（IAA）向欧方提交正式反馈意见，就拟议法案中涉及公共采购限制、外资审查机制及法律不确定性等条款表达系统性关切，并提出具体修改建议。商会代表超过1000家在欧中资企业，涵盖汽车制造、可再生能源、数字经济、物流及先进技术等领域。商会指出，IAA虽旨在强化欧盟产业竞争力和加速能源转型，但其多项条款可能产生适得其反的效果。</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4945504" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">8. 📌 投资人士：美联储鹰派立场不改黄金牛市格局，市场长期利好逻辑存续</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/money/forex/hbfx/2026-06-20/doc-inicymqp9342834.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">9. 🤖 捷克1：1南非，12大AI仅1家命中 平局正在成为AI预测最大克星</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/chanjing/gsnews/2026-06-19/doc-inicwxnz4998185.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">10. 🇺🇸 特朗普：伊朗被削弱了，我们会把这60天耗完，他们拿不到钱，10美分都没有！</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-20/doc-inicymqn2540023.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">11. 🇷🇺 【普京：俄方和东盟致力于构建多极世界秩序】17日至19日，俄罗斯—东盟建立对话关系35周年纪念峰会在喀山举行。18日，峰会举行全体会议，俄罗斯和东盟国家领导人出席，各方就国际和地区热点问题交换了意见。俄罗斯总统普京表示，俄罗斯和东盟国家致力于构建公正民主的多极世界秩序。峰会通过了《喀山宣言》等四份文件。文件指出，俄罗斯与东盟将加强政治对话，巩固互信和推动高层协作。双方将促进在安全、贸易、投资、能源、粮食、交通、数字化和人工智能等领域的合作。此外，双方都将推动东盟与欧亚经济联盟和上海合作组织间伙伴关系的发展。（央视）</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4945500" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">12. 🤖 蔡崇信：阿里全面投入AI，全栈布局有巨大优势</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/tech/2026-06-19/doc-inicxcvc9804815.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">13. 🤖 猎聘联合清华发布《AI时代技能趋势报告》，CEO戴科彬：AI正在重构人才坐标系与组织形态</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/tech/2026-06-19/doc-inicxcva3003369.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">14. 🇺🇸 美国一空军基地暴发流感 已有超160人感染</div>
+        <span class="card-tag intl">央视</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：央视</span>
+        <a class="card-link" href="https://news.cctv.com/2026/06/20/ARTI4ApVyBz0CwojsyJwvOXr260620.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">15. 📌 新能源汽车渗透率节节攀升</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/tech/roll/2026-06-18/doc-inicuqfz3398790.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
   </div>
-  <div class="content">
-<div class="section summary-section"><h2>📝 今日摘要</h2><div class="summary-content">🤖 AI/机器学习
-- [HN 71pts] Amateur may have cracked Linear A, a 120-year-old puzzle - This story explores an amateur's potential breakthrough in deciphering Linear A, which could lead to new insights into ancient civilizations.
-
-💻 编程语言与框架
-- [HN 422pts] Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28 - Details about advancements made through Project Valhalla for the Java Development Kit (JDK).
-- [HN 350pts] DuckDB Internals: Why Is DuckDB Fast? (Part 1) - Insights into the speed and workings behind DuckDB, a fast SQL database engine.
-- [HN 289pts] The AirPods Effect - Although this article doesn't directly discuss programming languages or frameworks, it may highlight innovations in technology that impact software development.
-
- 🔧 开源工具与开发者生态
-- [HN 177pts] Zen and the Art of Machine Learning Research
-- [HN 303pts] To study how chips work, MIT researchers built their own operating system 
-- [HN 895pts] I found 10k GitHub repositories distributing Trojan malware
-- [HN 22pts] Modeloop – From visual algorithms to microcontroller C code - A tool that bridges the gap between algorithm visualization and translating them into microcontroller-compatible C code.
-- [HN 105pts] Akse3D – open-source 3D modelling anyone can master - An introduction to Akse3D, a beginner-friendly open-source 3D modeling software.
-
- 🔒 安全与隐私
-- [HN 895pts] I found 10k GitHub repositories distributing Trojan malware - Alerts about security risks posed by potential malware found in publicly available code repositories.</div></div><div class="section"><h2>🤖 AI/机器学习</h2>
-<div class="news-card" onclick="window.open('https://www.jvm-weekly.com/p/project-valhalla-explained-how-a','_blank')"><div class="card-tag">HN 422pts</div><h3 class="card-title">Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28</h3><a class="card-link" href="https://www.jvm-weekly.com/p/project-valhalla-explained-how-a" target="_blank">🔗 www.jvm-weekly.com</a></div>
-<div class="news-card" onclick="window.open('https://startupfortune.com/hyundai-takes-full-control-of-boston-dynamics-as-softbank-exits-for-325-million/','_blank')"><div class="card-tag">HN 20pts</div><h3 class="card-title">Hyundai buys Boston Dynamics, Atlas humanoid to be used at vehicle plant by 2028</h3><a class="card-link" href="https://startupfortune.com/hyundai-takes-full-control-of-boston-dynamics-as-softbank-exits-for-325-million/" target="_blank">🔗 startupfortune.com</a></div>
-<div class="news-card" onclick="window.open('https://blog.jxmo.io/p/zen-and-the-art-of-machine-learning','_blank')"><div class="card-tag">HN 177pts</div><h3 class="card-title">Zen and the Art of Machine Learning Research</h3><a class="card-link" href="https://blog.jxmo.io/p/zen-and-the-art-of-machine-learning" target="_blank">🔗 blog.jxmo.io</a></div>
-<div class="news-card" onclick="window.open('https://www.theescapenewsletter.com/p/the-airpods-effect','_blank')"><div class="card-tag">HN 289pts</div><h3 class="card-title">The AirPods Effect</h3><a class="card-link" href="https://www.theescapenewsletter.com/p/the-airpods-effect" target="_blank">🔗 www.theescapenewsletter.com</a></div>
-</div>
-<div class="section"><h2>🔧 开源工具与开发者生态</h2>
-<div class="news-card" onclick="window.open('https://clickhouse.com/blog/open-source-10','_blank')"><div class="card-tag">HN 195pts</div><h3 class="card-title">Ten years of ClickHouse in open source</h3><a class="card-link" href="https://clickhouse.com/blog/open-source-10" target="_blank">🔗 clickhouse.com</a></div>
-<div class="news-card" onclick="window.open('https://orchidfiles.com/github-repositories-distributing-malware/','_blank')"><div class="card-tag">HN 895pts</div><h3 class="card-title">I found 10k GitHub repositories distributing Trojan malware</h3><a class="card-link" href="https://orchidfiles.com/github-repositories-distributing-malware/" target="_blank">🔗 orchidfiles.com</a></div>
-</div>
-<div class="section"><h2>🏢 大厂动态与产品</h2>
-<div class="news-card" onclick="window.open('https://aiclambake.com/clamtakes/linear-a/','_blank')"><div class="card-tag">HN 71pts</div><h3 class="card-title">Amateur may have cracked Linear A, a 120-year-old puzzle</h3><a class="card-link" href="https://aiclambake.com/clamtakes/linear-a/" target="_blank">🔗 aiclambake.com</a></div>
-<div class="news-card" onclick="window.open('https://ide.mit.edu/sites/default/files/publications/jcurve.pdf','_blank')"><div class="card-tag">HN 31pts</div><h3 class="card-title">The Productivity J-Curve [pdf] (2018)</h3><a class="card-link" href="https://ide.mit.edu/sites/default/files/publications/jcurve.pdf" target="_blank">🔗 ide.mit.edu</a></div>
-<div class="news-card" onclick="window.open('https://www.greybeam.ai/blog/duckdb-internals-part-1','_blank')"><div class="card-tag">HN 350pts</div><h3 class="card-title">DuckDB Internals: Why Is DuckDB Fast? (Part 1)</h3><a class="card-link" href="https://www.greybeam.ai/blog/duckdb-internals-part-1" target="_blank">🔗 www.greybeam.ai</a></div>
-<div class="news-card" onclick="window.open('https://overreacted.io/there-are-no-instances-in-atproto/','_blank')"><div class="card-tag">HN 20pts</div><h3 class="card-title">There Are No Instances in ATProto</h3><a class="card-link" href="https://overreacted.io/there-are-no-instances-in-atproto/" target="_blank">🔗 overreacted.io</a></div>
-<div class="news-card" onclick="window.open('https://kottke.org/26/06/telescope-ranchers','_blank')"><div class="card-tag">HN 22pts</div><h3 class="card-title">Telescope Ranchers</h3><a class="card-link" href="https://kottke.org/26/06/telescope-ranchers" target="_blank">🔗 kottke.org</a></div>
-<div class="news-card" onclick="window.open('https://news.mit.edu/2026/to-study-how-chips-really-work-mit-researchers-built-their-own-operating-system-0610','_blank')"><div class="card-tag">HN 303pts</div><h3 class="card-title">To study how chips work, MIT researchers built their own operating system</h3><a class="card-link" href="https://news.mit.edu/2026/to-study-how-chips-really-work-mit-researchers-built-their-own-operating-system-0610" target="_blank">🔗 news.mit.edu</a></div>
-<div class="news-card" onclick="window.open('https://mickael.canouil.fr/posts/2026-06-15-gribouille-0-3/','_blank')"><div class="card-tag">HN 171pts</div><h3 class="card-title">Gribouille 0.3.0: A Grammar of Graphics for Typst</h3><a class="card-link" href="https://mickael.canouil.fr/posts/2026-06-15-gribouille-0-3/" target="_blank">🔗 mickael.canouil.fr</a></div>
-<div class="news-card" onclick="window.open('https://www.modeloop.app/','_blank')"><div class="card-tag">HN 22pts</div><h3 class="card-title">Show HN: Modeloop – From visual algorithms to microcontroller C code</h3><a class="card-link" href="https://www.modeloop.app/" target="_blank">🔗 www.modeloop.app</a></div>
-</div>
-  </div>
-  <footer><a href="../blog/news.html">← 新闻列表</a> · <a href="../index.html">KKXX 导航</a></footer>
+  <div class="news-footer">⏰ 简报于 2026-06-20 生成 | by KKXX</div>
 </body>
 </html>
