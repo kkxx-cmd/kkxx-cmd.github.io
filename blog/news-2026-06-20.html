@@ -3,70 +3,369 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>科技新闻 · 2026年06月20日 · KKXX</title>
+  <title>每日新闻 · 2026年06月20日 · KKXX</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    a { color: #667eea; text-decoration: none; }
-    .header { max-width: 800px; margin: 0 auto 32px; }
-    .header h1 { font-size: 24px; font-weight: 600; color: #667eea; margin-bottom: 8px; }
-    .header p { color: #555; font-size: 13px; }
-    .content { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
-    .section { background: #12121a; border: 1px solid #1e1e2e; border-radius: 16px; padding: 24px; }
-    .section h2 { font-size: 14px; font-weight: 600; color: #667eea; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #1e1e2e; }
-    .news-card { margin-bottom: 16px; padding: 14px; background: #1a1a26; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
-    .news-card:hover { background: #22222e; }
-    .card-tag { font-size: 11px; color: #667eea; margin-bottom: 6px; }
-    .card-title { font-size: 14px; font-weight: 500; color: #e0e0e0; margin-bottom: 6px; line-height: 1.5; }
-    .card-link { font-size: 12px; color: #667eea; text-decoration: none; }
-    .summary-section { background: #1a1040; border-color: #3a2060; }
-    .summary-content { font-size: 14px; line-height: 1.8; color: #c0c0d0; white-space: pre-wrap; }
-    footer { margin-top: 60px; text-align: center; color: #333; font-size: 12px; }
-  </style>
+    a { color: inherit; text-decoration: none; }
+    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+    .stats { font-size: 12px; color: #555; margin-bottom: 30px; }
+    .news-card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; transition: border-color 0.2s, transform 0.2s; }
+    .news-card:hover { border-color: #667eea; transform: translateY(-2px); }
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .card-title { font-size: 15px; font-weight: 500; color: #e0e0e0; line-height: 1.6; flex: 1; }
+    .card-tag { font-size: 11px; color: #fff; background: #667eea; border-radius: 6px; padding: 2px 8px; white-space: nowrap; flex-shrink: 0; }
+    .card-tag.intl { background: #e67e22; }
+    .card-tag.economy { background: #27ae60; }
+    .card-tag.tech { background: #9b59b6; }
+    .card-tag.cctv { background: #c0392b; }
+    .card-summary { font-size: 13px; color: #aaa; line-height: 1.7; margin-bottom: 10px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #555; }
+    .card-link { color: #667eea; font-size: 11px; }
+    .card-link:hover { text-decoration: underline; }
+    .news-footer { font-size: 11px; color: #555; margin-top: 40px; text-align: center; }
+</style>
 </head>
 <body>
-  <div class="header">
-    <h1>📡 科技新闻 · 2026年06月20日</h1>
-    <p>HackerNews + Reddit r/programming · 自动聚合 · Ollama 本地整理</p>
+  <a class="back" href="news.html">← 返回新闻列表</a>
+  <div class="date">2026年06月20日</div>
+  <h1>📰 每日新闻</h1>
+  <div class="stats">共 30 条新闻 · 含 12 个原文链接</div>
+  <div class="news-list">
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">1. 📌 智谱创始人回应马斯克：达到Fable水平不会用很久</div>
+        
+      </div>
+      <div class="card-summary">2026年6月20日澎湃新闻发布AI行业热点资讯，此前网友向马斯克提问中国大模型追上Anthr...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥80)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E6%99%BA%E8%B0%B1%E5%88%9B%E5%A7%8B%E4%BA%BA%E5%9B%9E%E5%BA%94%E9%A9%AC%E6%96%AF%E5%85%8B%EF%BC%9A%E8%BE%BE%E5%88%B0Fable%E6%B0%B4%E5%B9%B3%E4%B8%8D%E4%BC%9A%E7%94%A8%E5%BE%88%E4%B9%85" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">2. 🇨🇳 中国4月美债持有量创18年新低，全球储备加速转向黄金</div>
+        
+      </div>
+      <div class="card-summary">中国4月持有美债降至6511亿美元，为2008年9月以来最低。同期全球央行连续19个月增持黄金，欧洲...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥88)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E4%B8%AD%E5%9B%BD4%E6%9C%88%E7%BE%8E%E5%80%BA%E6%8C%81%E6%9C%89%E9%87%8F%E5%88%9B18%E5%B9%B4%E6%96%B0%E4%BD%8E%EF%BC%8C%E5%85%A8%E7%90%83%E5%82%A8%E5%A4%87%E5%8A%A0%E9%80%9F%E8%BD%AC%E5%90%91%E9%BB%84%E9%87%91" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">3. 📌 以国家安全部长宣称“整个黎巴嫩必须燃烧”，英国外交大臣谴责：骇人听闻、令人憎恶</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-20/doc-iniczhua2183983.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">4. 📌 商务部提示澳大利亚牛肉触发配额，6月20日起加征关税</div>
+        
+      </div>
+      <div class="card-summary">2026 年 6 月 19 日，商务部贸易救济局发布《关于2026年度牛肉保障措施执行提示信息...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥88)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E5%95%86%E5%8A%A1%E9%83%A8%E6%8F%90%E7%A4%BA%E6%BE%B3%E5%A4%A7%E5%88%A9%E4%BA%9A%E7%89%9B%E8%82%89%E8%A7%A6%E5%8F%91%E9%85%8D%E9%A2%9D%EF%BC%8C6%E6%9C%8820%E6%97%A5%E8%B5%B7%E5%8A%A0%E5%BE%81%E5%85%B3%E7%A8%8E" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">5. 🇨🇳 创历史！马宁傅明周飞三名中国裁判将同场执法世界杯</div>
+        
+      </div>
+      <div class="card-summary">国际足联官宣，北京时间6月21日厄瓜多尔对阵库拉索一战，马宁任主裁、周飞任助理裁判、傅明出任VAR，...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥96)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E5%88%9B%E5%8E%86%E5%8F%B2%EF%BC%81%E9%A9%AC%E5%AE%81%E5%82%85%E6%98%8E%E5%91%A8%E9%A3%9E%E4%B8%89%E5%90%8D%E4%B8%AD%E5%9B%BD%E8%A3%81%E5%88%A4%E5%B0%86%E5%90%8C%E5%9C%BA%E6%89%A7%E6%B3%95%E4%B8%96%E7%95%8C%E6%9D%AF" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">6. 📌 西湖大学等5所新型研究型高校集体扩招，新增多省与前沿专业</div>
+        
+      </div>
+      <div class="card-summary">2026本科招生季，西湖大学、南科大、福耀科技大学、大湾区大学、深圳理工大学同步扩招，扩大招生省份、...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥92)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E8%A5%BF%E6%B9%96%E5%A4%A7%E5%AD%A6%E7%AD%895%E6%89%80%E6%96%B0%E5%9E%8B%E7%A0%94%E7%A9%B6%E5%9E%8B%E9%AB%98%E6%A0%A1%E9%9B%86%E4%BD%93%E6%89%A9%E6%8B%9B%EF%BC%8C%E6%96%B0%E5%A2%9E%E5%A4%9A%E7%9C%81%E4%B8%8E%E5%89%8D%E6%B2%BF%E4%B8%93%E4%B8%9A" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">7. 🇺🇸 美国组织雇网红在TikTok抹黑中国AI：单条视频5000美元</div>
+        
+      </div>
+      <div class="card-summary">2026年5月，美媒《连线》曝光美国组织“建设美国AI”以单条视频5000美元报酬雇佣网红，在Tik...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥85)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E7%BE%8E%E5%9B%BD%E7%BB%84%E7%BB%87%E9%9B%87%E7%BD%91%E7%BA%A2%E5%9C%A8TikTok%E6%8A%B9%E9%BB%91%E4%B8%AD%E5%9B%BDAI%EF%BC%9A%E5%8D%95%E6%9D%A1%E8%A7%86%E9%A2%915000%E7%BE%8E%E5%85%83" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">8. 📌 伊朗宣布霍尔木兹海峡免通行费60天，以色列未签协议</div>
+        
+      </div>
+      <div class="card-summary">伊朗宣布未来60天霍尔木兹海峡船只免通行费，依据美伊巴三方备忘录要求永久停火。以色列未签署协议，外界...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥85)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E4%BC%8A%E6%9C%97%E5%AE%A3%E5%B8%83%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1%E5%85%8D%E9%80%9A%E8%A1%8C%E8%B4%B960%E5%A4%A9%EF%BC%8C%E4%BB%A5%E8%89%B2%E5%88%97%E6%9C%AA%E7%AD%BE%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">9. 📌 VIP产业情报｜油、船、险、金，谁先对霍尔木兹给出反应</div>
+        
+      </div>
+      <div class="card-summary">美伊谈判的市场影响不是平均落到所有资产上，而是沿着“油价先反应、保险和船流验证、下游成本再传导...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥90)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=VIP%E4%BA%A7%E4%B8%9A%E6%83%85%E6%8A%A5%EF%BD%9C%E6%B2%B9%E3%80%81%E8%88%B9%E3%80%81%E9%99%A9%E3%80%81%E9%87%91%EF%BC%8C%E8%B0%81%E5%85%88%E5%AF%B9%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E7%BB%99%E5%87%BA%E5%8F%8D%E5%BA%94" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">10. 🤖 英伟达抢着要！郭明錤：台积电玻璃基板是AI芯片必需品</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/tech/roll/2026-06-20/doc-iniczxru1944821.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">11. 📌 双向投喂的奇妙化学反应：00后主动融入夕阳红旅游团</div>
+        
+      </div>
+      <div class="card-summary">近年国内00后青年掀起“逆龄”旅游风潮，主动融入老年旅行团，日均暴走2万步炼成“减肥特训”，与银发族...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥78)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E5%8F%8C%E5%90%91%E6%8A%95%E5%96%82%E7%9A%84%E5%A5%87%E5%A6%99%E5%8C%96%E5%AD%A6%E5%8F%8D%E5%BA%94%EF%BC%9A00%E5%90%8E%E4%B8%BB%E5%8A%A8%E8%9E%8D%E5%85%A5%E5%A4%95%E9%98%B3%E7%BA%A2%E6%97%85%E6%B8%B8%E5%9B%A2" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">12. 📌 汽车在高速路遭雷击熄火，消防部门科普“双30原则”防护</div>
+        
+      </div>
+      <div class="card-summary">6月18日广东珠海西部沿海高速一辆车遭雷击熄火，车内人员无恙。珠海交警确认车辆已拖离，专家解释汽车金...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥75)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E6%B1%BD%E8%BD%A6%E5%9C%A8%E9%AB%98%E9%80%9F%E8%B7%AF%E9%81%AD%E9%9B%B7%E5%87%BB%E7%86%84%E7%81%AB%EF%BC%8C%E6%B6%88%E9%98%B2%E9%83%A8%E9%97%A8%E7%A7%91%E6%99%AE%E2%80%9C%E5%8F%8C30%E5%8E%9F%E5%88%99%E2%80%9D%E9%98%B2%E6%8A%A4" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">13. 📌 央行、金监总局最新发声！涉及利率、房地产等</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/jinrong/yh/2026-06-17/doc-inicthnv2812360.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">14. 📌 新能源汽车渗透率节节攀升</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/tech/roll/2026-06-18/doc-inicuqfz3398790.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">15. 🇨🇳 中国居民存款大迁徙：2万亿资金撤出银行转向非银机构</div>
+        
+      </div>
+      <div class="card-summary">2026年4-5月中国居民存款锐减2.05万亿元，非银金融机构存款激增3.61万亿元。银行利率进入“...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥75)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E4%B8%AD%E5%9B%BD%E5%B1%85%E6%B0%91%E5%AD%98%E6%AC%BE%E5%A4%A7%E8%BF%81%E5%BE%99%EF%BC%9A2%E4%B8%87%E4%BA%BF%E8%B5%84%E9%87%91%E6%92%A4%E5%87%BA%E9%93%B6%E8%A1%8C%E8%BD%AC%E5%90%91%E9%9D%9E%E9%93%B6%E6%9C%BA%E6%9E%84" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">16. 🇨🇳 2027世界大学排名：中国高校集体跃升，英美霸主地位松动</div>
+        
+      </div>
+      <div class="card-summary">QS发布2027世界大学排名显示，中国85所高校上榜，61%排名上升，清华升至第14位。英美超四成高...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥85)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=2027%E4%B8%96%E7%95%8C%E5%A4%A7%E5%AD%A6%E6%8E%92%E5%90%8D%EF%BC%9A%E4%B8%AD%E5%9B%BD%E9%AB%98%E6%A0%A1%E9%9B%86%E4%BD%93%E8%B7%83%E5%8D%87%EF%BC%8C%E8%8B%B1%E7%BE%8E%E9%9C%B8%E4%B8%BB%E5%9C%B0%E4%BD%8D%E6%9D%BE%E5%8A%A8" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">17. 🇨🇳 【张朝阳到访香港车博会极氪展台 与吉利董事长李书福会面交流】据极氪微博：搜狐创始人张朝阳到访2026中国香港车博会极氪展台，与吉利控股集团董事长李书福会面交流。 现场体验009光辉座舱后，张朝阳对极氪独立分区隔音设计大加赞赏：“后排拥有专属独立空间，与前排驾驶区域隔绝”。 张朝阳为极氪8X浩瀚超级电混技术连点三个赞，直称“Very Impressed!”动力强、能耗低、续航长。馈电上高速，越跑电越多，不是“永动机”，而是通过AI大模型精密计算，为用户带来无与伦比的驾乘体验和高超的能量管理。 双方围绕高端新能源、绿色出行发展趋势展开深度探讨。</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4945714" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">18. 📌 新能源车太“胖”、token太“耗”？盲目堆料不如更聪明地创造</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/tech/roll/2026-06-20/doc-iniczxru1962184.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">19. 📌 人民锐评：新能源车太“胖”、token太“耗”？盲目堆料不如更聪明地创造</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/chanjing/cyxw/2026-06-19/doc-inicwxpc1733391.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">20. 📌 产业情报 | 成本验账期：3张表看懂CCL、PCB和光模块传导</div>
+        
+      </div>
+      <div class="card-summary">AI 硬件的下一轮分化，不是看谁更像概念股，而是看谁能在价格表、交期表、毛利表里交出证据。高速...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥90)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E4%BA%A7%E4%B8%9A%E6%83%85%E6%8A%A5%20%7C%20%E6%88%90%E6%9C%AC%E9%AA%8C%E8%B4%A6%E6%9C%9F%EF%BC%9A3%E5%BC%A0%E8%A1%A8%E7%9C%8B%E6%87%82CCL%E3%80%81PCB%E5%92%8C%E5%85%89%E6%A8%A1%E5%9D%97%E4%BC%A0%E5%AF%BC" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">21. 🇺🇸 美以伊最新局势一文速览：特朗普称美伊须60天内达成长期协议，否则会采取让对方不高兴的行动 伊朗警告美国必须确保以色列遵守谅解备忘录</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-20/doc-iniczane2264671.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">22. 🇺🇸 “60天耗完，他们一分钱都拿不到”！特朗普再发威胁，伊朗：美国必须确保以色列遵守谅解备忘录</div>
+        <span class="card-tag intl">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-20/doc-iniczhtx4080511.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">23. 💰 【内蒙古：今年1—5月全区规模以上工业增加值同比增长5.9%】据内蒙古自治区统计局消息：今年前5个月，全区工业转型升级步伐加快，民间投资、高技术产业投资持续增长，市场消费规模持续扩大，整体经济运行稳中有进。从工业领域看，今年以来，内蒙古以构建现代化产业体系为抓手，在技术改造与创新中持续提升传统工业发展水平，培育扶植新兴产业、未来产业领域一批企业做大做强，为工业发展注入新鲜血液，促进了工业经济转型升级。今年1—5月，全区规模以上工业增加值同比增长5.9%。值得关注的是，1—5月，全区现代煤化工产业增加值同比增长18.6%，装备制造业增加值同比增长22.5%，高技术制造业增加值同比增长13.1%，工业转型升级步伐持续加快。</div>
+        <span class="card-tag economy">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4945710" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">24. 📌 “用河水浇灌后蔬菜枯萎”，当地生态环境部门介入</div>
+        
+      </div>
+      <div class="card-summary">河南省驻马店市正阳县清源街道李通村村民反映，村内清水河河水发黑散发异味，取用河水浇灌花生、豆角...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥82)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E2%80%9C%E7%94%A8%E6%B2%B3%E6%B0%B4%E6%B5%87%E7%81%8C%E5%90%8E%E8%94%AC%E8%8F%9C%E6%9E%AF%E8%90%8E%E2%80%9D%EF%BC%8C%E5%BD%93%E5%9C%B0%E7%94%9F%E6%80%81%E7%8E%AF%E5%A2%83%E9%83%A8%E9%97%A8%E4%BB%8B%E5%85%A5" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">25. 📌 巴拿马海事局19日发布公告说，一艘悬挂巴拿马国旗的船只18日在黑海海域遇袭，造成1名船员死亡、2名船员受伤，其中1人伤势严重。</div>
+        <span class="card-tag intl">央视</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：央视</span>
+        <a class="card-link" href="https://news.cctv.com/2026/06/20/ARTIoN4GWabFl1auyY63LfPZ260620.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">26. 📌 全球首批柔性显示生产线！又一国家级重大产业工程落地</div>
+        
+      </div>
+      <div class="card-summary">2026年6月19日新浪财经援引央视财经消息，6月17日成都建成投产国内首条、全球首批第8.6...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥83)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E5%85%A8%E7%90%83%E9%A6%96%E6%89%B9%E6%9F%94%E6%80%A7%E6%98%BE%E7%A4%BA%E7%94%9F%E4%BA%A7%E7%BA%BF%EF%BC%81%E5%8F%88%E4%B8%80%E5%9B%BD%E5%AE%B6%E7%BA%A7%E9%87%8D%E5%A4%A7%E4%BA%A7%E4%B8%9A%E5%B7%A5%E7%A8%8B%E8%90%BD%E5%9C%B0" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">27. 🤖 3家AI精准命中3:0，巴西首胜背后AI六连中</div>
+        <span class="card-tag tech">新浪</span>
+      </div>
+      
+      <div class="card-footer">
+        <span class="card-source">📡 来源：新浪</span>
+        <a class="card-link" href="https://finance.sina.com.cn/tech/shenji/2026-06-20/doc-inicznzy2101474.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">28. 📌 是巧合吗？俄美连续坠毁战略轰炸机！</div>
+        
+      </div>
+      <div class="card-summary">2026年6月19日新浪新闻转载《新民周刊》军事评论，当地时间6月15日俄罗斯、美国在同一天各...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥80)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E6%98%AF%E5%B7%A7%E5%90%88%E5%90%97%EF%BC%9F%E4%BF%84%E7%BE%8E%E8%BF%9E%E7%BB%AD%E5%9D%A0%E6%AF%81%E6%88%98%E7%95%A5%E8%BD%B0%E7%82%B8%E6%9C%BA%EF%BC%81" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">29. 💻 外资机构密集调研A股科技公司：聚焦半导体、电子设备等</div>
+        
+      </div>
+      <div class="card-summary">中证金牛座援引 Wind 数据称，2026 年以来至 6 月 19 日，外资机构密集调研 A ...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥84)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=%E5%A4%96%E8%B5%84%E6%9C%BA%E6%9E%84%E5%AF%86%E9%9B%86%E8%B0%83%E7%A0%94A%E8%82%A1%E7%A7%91%E6%8A%80%E5%85%AC%E5%8F%B8%EF%BC%9A%E8%81%9A%E7%84%A6%E5%8D%8A%E5%AF%BC%E4%BD%93%E3%80%81%E7%94%B5%E5%AD%90%E8%AE%BE%E5%A4%87%E7%AD%89" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">30. 🤖 618数据显示AI硬件热度上升，多个智能品类成交增长</div>
+        
+      </div>
+      <div class="card-summary">2026 年 6 月 19 日，新华社/新华财经报道，今年 618 期间，AI 智能硬件、高科...</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：热点 (🔥86)</span>
+        <a class="card-link" href="https://www.bing.com/search?q=618%E6%95%B0%E6%8D%AE%E6%98%BE%E7%A4%BAAI%E7%A1%AC%E4%BB%B6%E7%83%AD%E5%BA%A6%E4%B8%8A%E5%8D%87%EF%BC%8C%E5%A4%9A%E4%B8%AA%E6%99%BA%E8%83%BD%E5%93%81%E7%B1%BB%E6%88%90%E4%BA%A4%E5%A2%9E%E9%95%BF" target="_blank" rel="noopener">🔍 搜索原文</a>
+      </div>
+    </div>
   </div>
-  <div class="content">
-<div class="section summary-section"><h2>📝 今日摘要</h2><div class="summary-content">🤖 AI/机器学习
-- 🤖 AI/LLM/开源模型相关：[HN 325pts] There are no instances in ATProto (overreacted.io)，讨论了ATProto对AI模型的影响和可能的禁用。
-
-💻 编程语言与框架
-- 💻 Python：无直接提及Python的内容。
-- 💻 JS/Rust/Go等：[HN 60pts] Egyptian Fractions (blog.plover.com) 涉及算法，可能使用多种编程语言实现。
-
-🔧 开源工具与开发者生态
-- 🔧 开源工具：[HN 325pts] There are no instances in ATProto（overreacted.io），提到了ATProto作为开源项目的动态。
-- 🏢 大厂动态与产品：无直接涉及大厂的动态或具体产品的信息。
-
-🔒 安全与隐私
-- 🔒 安全与隐私：[HN 172pts] Bobby Prince, composer for Doom, Wolfenstein 3D, and Duke Nukem 3D, has died（www.legacy.com），此条新闻不涉及安全与隐私主题，可能有误分类。其他提及网络安全和保险的相关内容在第8、9条中未明确分类。
-
-总结：
-1. 🤖 AI/机器学习：聚焦于AI模型的使用限制及开源项目动态。
-2. 💻 编程语言与框架：未直接涉及特定编程语言的信息，但提到算法实现可能性。
-3. 🔧 开源工具与开发者生态：关注ATProto作为开源项目的讨论。
-4. 🏢 大厂动态与产品：无明确提及大厂的动态或具体产品的信息。
-5. 🔒 安全与隐私：第8、9条提及保险和对太空探索公司的影响，但未直接涉及安全或隐私技术。</div></div><div class="section"><h2>🤖 AI/机器学习</h2>
-<div class="news-card" onclick="window.open('https://www.reuters.com/technology/norway-imposes-near-ban-ai-elementary-school-2026-06-19/','_blank')"><div class="card-tag">HN 393pts</div><h3 class="card-title">Norway imposes near ban on AI in elementary school</h3><a class="card-link" href="https://www.reuters.com/technology/norway-imposes-near-ban-ai-elementary-school-2026-06-19/" target="_blank">🔗 www.reuters.com</a></div>
-<div class="news-card" onclick="window.open('https://startupfortune.com/hyundai-takes-full-control-of-boston-dynamics-as-softbank-exits-for-325-million/','_blank')"><div class="card-tag">HN 625pts</div><h3 class="card-title">Hyundai buys Boston Dynamics</h3><a class="card-link" href="https://startupfortune.com/hyundai-takes-full-control-of-boston-dynamics-as-softbank-exits-for-325-million/" target="_blank">🔗 startupfortune.com</a></div>
-<div class="news-card" onclick="window.open('https://www.lloydslist.com/LL1157571/Iran-imposes-mandatory-insurance-on-ships-transiting-Strait-of-Hormuz-with-fees-likely-to-follow','_blank')"><div class="card-tag">HN 62pts</div><h3 class="card-title">Iran requires insurance on ships using Strait of Hormuz, fees likely to follow</h3><a class="card-link" href="https://www.lloydslist.com/LL1157571/Iran-imposes-mandatory-insurance-on-ships-transiting-Strait-of-Hormuz-with-fees-likely-to-follow" target="_blank">🔗 www.lloydslist.com</a></div>
-<div class="news-card" onclick="window.open('https://www.jvm-weekly.com/p/project-valhalla-explained-how-a','_blank')"><div class="card-tag">HN 536pts</div><h3 class="card-title">Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28</h3><a class="card-link" href="https://www.jvm-weekly.com/p/project-valhalla-explained-how-a" target="_blank">🔗 www.jvm-weekly.com</a></div>
-<div class="news-card" onclick="window.open('https://www.aikido.dev/blog/introducing-code-audit-find-complex-vulnerabilities-hidden-in-your-codebase','_blank')"><div class="card-tag">HN 5pts</div><h3 class="card-title">Aikido Code Audit</h3><a class="card-link" href="https://www.aikido.dev/blog/introducing-code-audit-find-complex-vulnerabilities-hidden-in-your-codebase" target="_blank">🔗 www.aikido.dev</a></div>
-</div>
-<div class="section"><h2>🏢 大厂动态与产品</h2>
-<div class="news-card" onclick="window.open('https://newsletter.kentbeck.com/p/hey-n00b-we-didnt-hire-you-to-complete','_blank')"><div class="card-tag">HN 31pts</div><h3 class="card-title">Hey, N00B, We Didn't Hire You to Complete Tasks</h3><a class="card-link" href="https://newsletter.kentbeck.com/p/hey-n00b-we-didnt-hire-you-to-complete" target="_blank">🔗 newsletter.kentbeck.com</a></div>
-<div class="news-card" onclick="window.open('https://www.legacy.com/legacy/robert-bobby-prince-lll','_blank')"><div class="card-tag">HN 172pts</div><h3 class="card-title">Bobby Prince, composer for Doom, Wolfenstein 3D, and Duke Nukem 3D, has died</h3><a class="card-link" href="https://www.legacy.com/legacy/robert-bobby-prince-lll" target="_blank">🔗 www.legacy.com</a></div>
-<div class="news-card" onclick="window.open('https://nochan.net/b/Internet-Crap/20230829-Think-Of-The-Children/','_blank')"><div class="card-tag">HN 74pts</div><h3 class="card-title">Think of the Children: How to Force Real ID for All Internet Traffic (2023)</h3><a class="card-link" href="https://nochan.net/b/Internet-Crap/20230829-Think-Of-The-Children/" target="_blank">🔗 nochan.net</a></div>
-<div class="news-card" onclick="window.open('https://overreacted.io/there-are-no-instances-in-atproto/','_blank')"><div class="card-tag">HN 325pts</div><h3 class="card-title">There are no instances in ATProto</h3><a class="card-link" href="https://overreacted.io/there-are-no-instances-in-atproto/" target="_blank">🔗 overreacted.io</a></div>
-<div class="news-card" onclick="window.open('https://theconversation.com/i-used-sound-waves-to-make-espresso-it-could-cut-coffee-brewing-energy-use-by-75-284929','_blank')"><div class="card-tag">HN 183pts</div><h3 class="card-title">I used sound waves to make espresso. It could cut coffee‑brewing energy use by ¾</h3><a class="card-link" href="https://theconversation.com/i-used-sound-waves-to-make-espresso-it-could-cut-coffee-brewing-energy-use-by-75-284929" target="_blank">🔗 theconversation.com</a></div>
-<div class="news-card" onclick="window.open('https://www.theguardian.com/science/2026/jun/19/spacex-retirement-savings-elon-musk','_blank')"><div class="card-tag">HN 122pts</div><h3 class="card-title">Americans express unease over SpaceX's influence on retirement savings</h3><a class="card-link" href="https://www.theguardian.com/science/2026/jun/19/spacex-retirement-savings-elon-musk" target="_blank">🔗 www.theguardian.com</a></div>
-<div class="news-card" onclick="window.open('https://brooker.co.za/blog/2020/08/06/erlang.html','_blank')"><div class="card-tag">HN 31pts</div><h3 class="card-title">Surprising Economics of Load-Balanced Systems</h3><a class="card-link" href="https://brooker.co.za/blog/2020/08/06/erlang.html" target="_blank">🔗 brooker.co.za</a></div>
-<div class="news-card" onclick="window.open('https://blog.plover.com/math/egyptian-fractions.html','_blank')"><div class="card-tag">HN 60pts</div><h3 class="card-title">Egyptian Fractions</h3><a class="card-link" href="https://blog.plover.com/math/egyptian-fractions.html" target="_blank">🔗 blog.plover.com</a></div>
-</div>
-  </div>
-  <footer><a href="../blog/news.html">← 新闻列表</a> · <a href="../index.html">KKXX 导航</a></footer>
+  <div class="news-footer">⏰ 简报于 2026-06-20 生成 | by KKXX</div>
 </body>
 </html>
