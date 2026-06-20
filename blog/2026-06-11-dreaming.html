@@ -1,149 +1,156 @@
----
-title: OpenClaw Dreaming 睡眠记忆系统
-date: 2026-06-11
-tags:
-  - OpenClaw
-  - 记忆系统
-  - AI
-layout: blog
----
-
-# OpenClaw Dreaming 睡眠记忆系统
-
-OpenClaw 内置了一个后台记忆整合系统，称为 **Dreaming**（睡眠记忆）。它在模型空闲时自动运行，将短期记忆信号提炼为长期记忆，同时保持整个过程可追溯、可审查。
-
-## 核心机制
-
-Dreaming 通过三个协作阶段完成记忆整理：
-
-| 阶段 | 作用 | 写入 MEMORY.md |
-|------|------|:---:|
-| Light（浅睡）| 读取并去重短期记忆信号，为深度候选做准备 | ❌ |
-| Deep（深睡）| 评分候选内容，满足阈值后写入长期记忆 | ✅ |
-| REM | 提取主题和模式，识别重复出现的想法 | ❌ |
-
-**关键原则**：只有 Deep 阶段会将内容写入 `MEMORY.md`，其余阶段只做分析。
-
-## 具体做什么
-
-**Light 阶段**：
-- 从短期召回状态、每日记忆文件、会话记录中读取近期信号
-- 去重并整理候选条目
-- 从不直接写入 `MEMORY.md`
-
-**Deep 阶段**：
-- 根据加权评分对候选内容排名
-- 需同时满足三项阈值：`minScore`（分数）、`minRecallCount`（召回次数）、`minUniqueQueries`（独立查询数）
-- 满足条件的内容追加到 `MEMORY.md`
-
-**REM 阶段**：
-- 分析近期短期记忆痕迹，建立主题和反思摘要
-- 不直接写入 `MEMORY.md`，为 Deep 阶段提供信号
-
-## 深度排名信号
-
-Deep 阶段使用六个加权信号综合评分：
-
-| 信号 | 权重 | 说明 |
-|------|------|------|
-| Frequency（频率）| 0.24 | 条目累积的短期信号数量 |
-| Relevance（相关性）| 0.30 | 平均检索质量 |
-| Query diversity（查询多样性）| 0.15 | 触发条目的独立查询/天数 |
-| Recency（时效性）| 0.15 | 时间衰减后的新鲜度 |
-| Consolidation（巩固度）| 0.10 | 多日 recurrence 强度 |
-| Conceptual richness（概念密度）| 0.06 | 概念标签密度 |
-
-## Dream Diary
-
-Dreaming 还维护一份人类可读的 **Dream Diary**（梦境日记），记录在 `DREAMS.md` 中。每次完整运行后会追加一段简短的日记条目，供人工回顾。
-
-日记内容仅供审查，**不会被自动提升为长期记忆**。
-
-## 输出文件
-
-Dreaming 写入两类数据：
-
-- **机器状态**：`memory/.dreams/` 目录（recall store、phase signals、ingestion 检查点）
-- **人类可读**：`DREAMS.md`（梦境日记）+ 可选的 `memory/dreaming/<phase>/YYYY-MM-DD.md` 分阶段报告
-
-## 默认行为
-
-| 配置项 | 默认值 |
-|--------|--------|
-| 启用状态 | **默认关闭**（opt-in） |
-| 运行时间 | 每天 03:00 |
-| 使用模型 | 默认 runtime 模型 |
-
-## 启用方式
-
-在 `openclaw.json` 中添加：
-
-```json
-{
-  "plugins": {
-    "entries": {
-      "memory-core": {
-        "config": {
-          "dreaming": {
-            "enabled": true
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-自定义运行频率（示例：每6小时一次）：
-
-```json
-{
-  "plugins": {
-    "entries": {
-      "memory-core": {
-        "config": {
-          "dreaming": {
-            "enabled": true,
-            "frequency": "0 */6 * * *"
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-## CLI 命令
-
-```bash
-# 查看状态
-openclaw memory status --deep
-
-# 手动触发记忆提升预览/应用
-openclaw memory promote
-openclaw memory promote --apply
-openclaw memory promote --limit 5
-
-# 解释为何某条内容未提升
-openclaw memory promote-explain "关键词"
-
-# 预览 REM 阶段输出（不写入）
-openclaw memory rem-harness
-```
-
-## /dreaming 命令
-
-```
-/dreaming status   # 查看当前状态
-/dreaming on       # 启用
-/dreaming off      # 禁用
-/dreaming help     # 帮助
-```
-
-## 状态显示 blocked
-
-如果 `openclaw memory status` 显示 `Dreaming status: blocked`，说明管理的 cron 存在但默认 agent 的心跳未触发。检查心跳是否启用，以及目标是否设置为 `none`。
-
----
-
-> 📖 参考来源：[OpenClaw 官方文档 - Dreaming](https://docs.openclaw.ai/concepts/dreaming)
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw Dreaming 睡眠记忆系统 · KKXX</title>
+  <meta name="description" content="KKXX 技术博客：OpenClaw Dreaming 睡眠记忆系统">
+  <meta name="robots" content="index, follow">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; line-height: 1.8; }
+    .back { display: inline-block; color: #667eea; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 30px; }
+    h2 { font-size: 18px; font-weight: 600; margin: 30px 0 12px; color: #e0e0e0; }
+    h3 { font-size: 16px; font-weight: 600; margin: 24px 0 10px; color: #c0c0c0; }
+    h4 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: #aaa; }
+    p { margin-bottom: 14px; color: #aaa; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    th, td { border: 1px solid #1e1e2e; padding: 10px 14px; text-align: left; font-size: 14px; }
+    th { background: #1a1a2e; color: #e0e0e0; }
+    td { color: #aaa; }
+    ul { margin: 12px 0 12px 24px; color: #aaa; }
+    li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid #667eea; padding: 8px 16px; margin: 16px 0; background: #12121a; color: #888; font-size: 14px; }
+    code { background: #1a1a2e; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #a8c8ff; }
+    pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 16px; overflow-x: auto; margin: 16px 0; }
+    pre code { background: none; padding: 0; color: #e0e0e0; }
+    hr { border: none; border-top: 1px solid #1e1e2e; margin: 30px 0; }
+    .footer { font-size: 11px; color: #555; margin-top: 50px; text-align: center; }
+  </style>
+</head>
+<body>
+  <a class="back" href="../blog.html">← 返回博客</a>
+  <div class="date">2026-06-11</div>
+  <h1>OpenClaw Dreaming 睡眠记忆系统</h1>
+  <div class="article-body">
+<p>title: OpenClaw Dreaming 睡眠记忆系统</p>
+<p>date: 2026-06-11</p>
+<p>tags:</p>
+<p>  - OpenClaw</p>
+<p>  - 记忆系统</p>
+<p>  - AI</p>
+<p>layout: blog</p>
+<h2>OpenClaw Dreaming 睡眠记忆系统</h2>
+<p>OpenClaw 内置了一个后台记忆整合系统，称为 <strong>Dreaming</strong>（睡眠记忆）。它在模型空闲时自动运行，将短期记忆信号提炼为长期记忆，同时保持整个过程可追溯、可审查。</p>
+<h3>核心机制</h3>
+<p>Dreaming 通过三个协作阶段完成记忆整理：</p>
+<table>
+<tr><td>阶段</td><td>作用</td><td>写入 MEMORY.md</td></tr>
+<tr><th>------</th><th>------</th><th>:---:</th></tr>
+<tr><td>Light（浅睡）</td><td>读取并去重短期记忆信号，为深度候选做准备</td><td>❌</td></tr>
+<tr><td>Deep（深睡）</td><td>评分候选内容，满足阈值后写入长期记忆</td><td>✅</td></tr>
+<tr><td>REM</td><td>提取主题和模式，识别重复出现的想法</td><td>❌</td></tr>
+</tbody></table>
+<p><strong>关键原则</strong>：只有 Deep 阶段会将内容写入 <code>MEMORY.md</code>，其余阶段只做分析。</p>
+<h3>具体做什么</h3>
+<p><strong>Light 阶段</strong>：</p>
+<ul>
+<li>从短期召回状态、每日记忆文件、会话记录中读取近期信号</li>
+<li>去重并整理候选条目</li>
+<li>从不直接写入 `MEMORY.md`</li>
+</ul>
+<p><strong>Deep 阶段</strong>：</p>
+<ul>
+<li>根据加权评分对候选内容排名</li>
+<li>需同时满足三项阈值：`minScore`（分数）、`minRecallCount`（召回次数）、`minUniqueQueries`（独立查询数）</li>
+<li>满足条件的内容追加到 `MEMORY.md`</li>
+</ul>
+<p><strong>REM 阶段</strong>：</p>
+<ul>
+<li>分析近期短期记忆痕迹，建立主题和反思摘要</li>
+<li>不直接写入 `MEMORY.md`，为 Deep 阶段提供信号</li>
+</ul>
+<h3>深度排名信号</h3>
+<p>Deep 阶段使用六个加权信号综合评分：</p>
+<table>
+<tr><td>信号</td><td>权重</td><td>说明</td></tr>
+<tr><th>------</th><th>------</th><th>------</th></tr>
+<tr><td>Frequency（频率）</td><td>0.24</td><td>条目累积的短期信号数量</td></tr>
+<tr><td>Relevance（相关性）</td><td>0.30</td><td>平均检索质量</td></tr>
+<tr><td>Query diversity（查询多样性）</td><td>0.15</td><td>触发条目的独立查询/天数</td></tr>
+<tr><td>Recency（时效性）</td><td>0.15</td><td>时间衰减后的新鲜度</td></tr>
+<tr><td>Consolidation（巩固度）</td><td>0.10</td><td>多日 recurrence 强度</td></tr>
+<tr><td>Conceptual richness（概念密度）</td><td>0.06</td><td>概念标签密度</td></tr>
+</tbody></table>
+<h3>Dream Diary</h3>
+<p>Dreaming 还维护一份人类可读的 <strong>Dream Diary</strong>（梦境日记），记录在 <code>DREAMS.md</code> 中。每次完整运行后会追加一段简短的日记条目，供人工回顾。</p>
+<p>日记内容仅供审查，<strong>不会被自动提升为长期记忆</strong>。</p>
+<h3>输出文件</h3>
+<p>Dreaming 写入两类数据：</p>
+<ul>
+<li>**机器状态**：`memory/.dreams/` 目录（recall store、phase signals、ingestion 检查点）</li>
+<li>**人类可读**：`DREAMS.md`（梦境日记）+ 可选的 `memory/dreaming/<phase>/YYYY-MM-DD.md` 分阶段报告</li>
+</ul>
+<h3>默认行为</h3>
+<table>
+<tr><td>配置项</td><td>默认值</td></tr>
+<tr><th>--------</th><th>--------</th></tr>
+<tr><td>启用状态</td><td>**默认关闭**（opt-in）</td></tr>
+<tr><td>运行时间</td><td>每天 03:00</td></tr>
+<tr><td>使用模型</td><td>默认 runtime 模型</td></tr>
+</tbody></table>
+<h3>启用方式</h3>
+<p>在 <code>openclaw.json</code> 中添加：</p>
+<p>{</p>
+<p>  "plugins": {</p>
+<p>    "entries": {</p>
+<p>      "memory-core": {</p>
+<p>        "config": {</p>
+<p>          "dreaming": {</p>
+<p>            "enabled": true</p>
+<p>          }</p>
+<p>        }</p>
+<p>      }</p>
+<p>    }</p>
+<p>  }</p>
+<p>}</p>
+<p>自定义运行频率（示例：每6小时一次）：</p>
+<p>{</p>
+<p>  "plugins": {</p>
+<p>    "entries": {</p>
+<p>      "memory-core": {</p>
+<p>        "config": {</p>
+<p>          "dreaming": {</p>
+<p>            "enabled": true,</p>
+<p>            "frequency": "0 */6 * * *"</p>
+<p>          }</p>
+<p>        }</p>
+<p>      }</p>
+<p>    }</p>
+<p>  }</p>
+<p>}</p>
+<h3>CLI 命令</h3>
+<h2>查看状态</h2>
+<p>openclaw memory status --deep</p>
+<h2>手动触发记忆提升预览/应用</h2>
+<p>openclaw memory promote</p>
+<p>openclaw memory promote --apply</p>
+<p>openclaw memory promote --limit 5</p>
+<h2>解释为何某条内容未提升</h2>
+<p>openclaw memory promote-explain "关键词"</p>
+<h2>预览 REM 阶段输出（不写入）</h2>
+<p>openclaw memory rem-harness</p>
+<h3>/dreaming 命令</h3>
+<p>/dreaming status   # 查看当前状态</p>
+<p>/dreaming on       # 启用</p>
+<p>/dreaming off      # 禁用</p>
+<p>/dreaming help     # 帮助</p>
+<h3>状态显示 blocked</h3>
+<p>如果 <code>openclaw memory status</code> 显示 <code>Dreaming status: blocked</code>，说明管理的 cron 存在但默认 agent 的心跳未触发。检查心跳是否启用，以及目标是否设置为 <code>none</code>。</p>
+<blockquote>📖 参考来源：[OpenClaw 官方文档 - Dreaming](https://docs.openclaw.ai/concepts/dreaming)</blockquote>
+  </div>
+  <div class="footer">⏰ 2026-06-11 | by KKXX</div>
+</body>
+</html>

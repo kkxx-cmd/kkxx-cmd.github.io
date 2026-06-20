@@ -1,128 +1,124 @@
----
-layout: news
-title: OpenClaw 上下文超限问题修复
-date: 2026-05-24
----
-
-## OpenClaw 上下文超限问题修复：两个参数拯救长对话
-
-**问题现象：** 对话进行到一半突然报错 "Context limit exceeded"，会话被强制重置
-
-**根本原因：** 模型上下文配置与压缩机制不匹配
-
-**解决方案：** 修正两个关键参数，5 分钟彻底解决
-
----
-
-## 🚨 问题现场
-
-Context limit exceeded. I've reset our conversation to start fresh...
-To prevent this, increase your compaction buffer by setting
-agents.defaults.compaction.reserveTokensFloor to 20000 or higher.
-
-表面看是上下文超限，实际是配置逻辑错误导致的连锁反应。
-
----
-
-## 🔍 问题根因分析
-
-### 核心矛盾：配置不匹配
-
-OpenClaw 的上下文压缩机制需要两个参数协同工作：
-
-| 参数 | 作用 | 错误配置 | 正确配置 |
-|------|------|---------|---------|
-| contextWindow | 模型支持的最大上下文长度 | 16000（默认值） | 128000（实际值） |
-| reserveTokensFloor | 压缩时预留的新内容空间 | 20000 | 40000 |
-
-### 错误链条
-
-错误的 contextWindow (16000)
- ↓
-reserveTokensFloor (20000) > contextWindow (16000)
- ↓
-压缩功能无法触发（预留空间超过总容量）
- ↓
-对话内容无限累积
- ↓
-触发硬性上限 → 会话重置
-
-**关键发现：** 当 reserveTokensFloor ≥ contextWindow 时，压缩机制会失效。
-
----
-
-## 🛠️ 修复步骤
-
-### 步骤 1：定位配置文件
-
-打开 `~/.openclaw/openclaw.json`
-
-### 步骤 2：修正模型上下文配置
-
-在 `models.providers[].models[]` 中找到自定义模型，将 contextWindow 改为实际值：
-
-```json
-{
-  "models": {
-    "providers": {
-      "custom-integrate-api-nvidia-com": {
-        "models": [
-          {
-            "id": "minimaxai/minimax-m2.7",
-            "contextWindow": 128000,  // ✅ 修正：16000 → 128000
-            "maxTokens": 4096
-          }
-        ]
-      }
-    }
-  }
-}
-```
-
-### 步骤 3：调整压缩缓冲配置
-
-```json
-{
-  "agents": {
-    "defaults": {
-      "compaction": {
-        "mode": "safeguard",
-        "timeoutSeconds": 900,
-        "reserveTokensFloor": 40000  // ✅ 修正：20000 → 40000
-      }
-    }
-  }
-}
-```
-
-### 步骤 4：验证配置关系
-
-确保：`reserveTokensFloor (40000) < contextWindow (128000)` ✅
-
-### 步骤 5：重启生效
-
-```bash
-openclaw gateway restart
-```
-
----
-
-## 📊 修复效果对比
-
-| 指标 | 修复前 | 修复后 |
-|------|--------|--------|
-| 最大对话轮数 | ~50 轮 | ~800 轮 |
-| 压缩功能 | ❌ 失效 | ✅ 正常 |
-| 会话重置 | 频繁触发 | 不再出现 |
-
----
-
-## 💡 配置原则
-
-- **contextWindow 必须填写真实值** — 主流大模型通常支持 128000
-- **reserveTokensFloor 必须小于 contextWindow** — 建议值：20000~40000
-- **更换模型时同步更新** — 不同模型的上下文长度可能不同
-
----
-
-⏰ 于 2026-05-24 同步 | 来源：博客园 yih
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw 上下文超限问题修复 · KKXX</title>
+  <meta name="description" content="KKXX 技术博客：OpenClaw 上下文超限问题修复">
+  <meta name="robots" content="index, follow">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; line-height: 1.8; }
+    .back { display: inline-block; color: #667eea; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 30px; }
+    h2 { font-size: 18px; font-weight: 600; margin: 30px 0 12px; color: #e0e0e0; }
+    h3 { font-size: 16px; font-weight: 600; margin: 24px 0 10px; color: #c0c0c0; }
+    h4 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: #aaa; }
+    p { margin-bottom: 14px; color: #aaa; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    th, td { border: 1px solid #1e1e2e; padding: 10px 14px; text-align: left; font-size: 14px; }
+    th { background: #1a1a2e; color: #e0e0e0; }
+    td { color: #aaa; }
+    ul { margin: 12px 0 12px 24px; color: #aaa; }
+    li { margin-bottom: 6px; }
+    blockquote { border-left: 3px solid #667eea; padding: 8px 16px; margin: 16px 0; background: #12121a; color: #888; font-size: 14px; }
+    code { background: #1a1a2e; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #a8c8ff; }
+    pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 16px; overflow-x: auto; margin: 16px 0; }
+    pre code { background: none; padding: 0; color: #e0e0e0; }
+    hr { border: none; border-top: 1px solid #1e1e2e; margin: 30px 0; }
+    .footer { font-size: 11px; color: #555; margin-top: 50px; text-align: center; }
+  </style>
+</head>
+<body>
+  <a class="back" href="../blog.html">← 返回博客</a>
+  <div class="date">2026-05-24</div>
+  <h1>OpenClaw 上下文超限问题修复</h1>
+  <div class="article-body">
+<p>layout: news</p>
+<p>title: OpenClaw 上下文超限问题修复</p>
+<p>date: 2026-05-24</p>
+<h3>OpenClaw 上下文超限问题修复：两个参数拯救长对话</h3>
+<p><strong>问题现象：</strong> 对话进行到一半突然报错 "Context limit exceeded"，会话被强制重置</p>
+<p><strong>根本原因：</strong> 模型上下文配置与压缩机制不匹配</p>
+<p><strong>解决方案：</strong> 修正两个关键参数，5 分钟彻底解决</p>
+<h3>🚨 问题现场</h3>
+<p>Context limit exceeded. I've reset our conversation to start fresh...</p>
+<p>To prevent this, increase your compaction buffer by setting</p>
+<p>agents.defaults.compaction.reserveTokensFloor to 20000 or higher.</p>
+<p>表面看是上下文超限，实际是配置逻辑错误导致的连锁反应。</p>
+<h3>🔍 问题根因分析</h3>
+<h4>核心矛盾：配置不匹配</h4>
+<p>OpenClaw 的上下文压缩机制需要两个参数协同工作：</p>
+<table>
+<tr><td>参数</td><td>作用</td><td>错误配置</td><td>正确配置</td></tr>
+<tr><th>------</th><th>------</th><th>---------</th><th>---------</th></tr>
+<tr><td>contextWindow</td><td>模型支持的最大上下文长度</td><td>16000（默认值）</td><td>128000（实际值）</td></tr>
+<tr><td>reserveTokensFloor</td><td>压缩时预留的新内容空间</td><td>20000</td><td>40000</td></tr>
+</tbody></table>
+<h4>错误链条</h4>
+<p>错误的 contextWindow (16000)</p>
+<p> ↓</p>
+<p>reserveTokensFloor (20000) > contextWindow (16000)</p>
+<p> ↓</p>
+<p>压缩功能无法触发（预留空间超过总容量）</p>
+<p> ↓</p>
+<p>对话内容无限累积</p>
+<p> ↓</p>
+<p>触发硬性上限 → 会话重置</p>
+<p><strong>关键发现：</strong> 当 reserveTokensFloor ≥ contextWindow 时，压缩机制会失效。</p>
+<h3>🛠️ 修复步骤</h3>
+<h4>步骤 1：定位配置文件</h4>
+<p>打开 <code>~/.openclaw/openclaw.json</code></p>
+<h4>步骤 2：修正模型上下文配置</h4>
+<p>在 <code>models.providers[].models[]</code> 中找到自定义模型，将 contextWindow 改为实际值：</p>
+<p>{</p>
+<p>  "models": {</p>
+<p>    "providers": {</p>
+<p>      "custom-integrate-api-nvidia-com": {</p>
+<p>        "models": [</p>
+<p>          {</p>
+<p>            "id": "minimaxai/minimax-m2.7",</p>
+<p>            "contextWindow": 128000,  // ✅ 修正：16000 → 128000</p>
+<p>            "maxTokens": 4096</p>
+<p>          }</p>
+<p>        ]</p>
+<p>      }</p>
+<p>    }</p>
+<p>  }</p>
+<p>}</p>
+<h4>步骤 3：调整压缩缓冲配置</h4>
+<p>{</p>
+<p>  "agents": {</p>
+<p>    "defaults": {</p>
+<p>      "compaction": {</p>
+<p>        "mode": "safeguard",</p>
+<p>        "timeoutSeconds": 900,</p>
+<p>        "reserveTokensFloor": 40000  // ✅ 修正：20000 → 40000</p>
+<p>      }</p>
+<p>    }</p>
+<p>  }</p>
+<p>}</p>
+<h4>步骤 4：验证配置关系</h4>
+<p>确保：<code>reserveTokensFloor (40000) < contextWindow (128000)</code> ✅</p>
+<h4>步骤 5：重启生效</h4>
+<p>openclaw gateway restart</p>
+<h3>📊 修复效果对比</h3>
+<table>
+<tr><td>指标</td><td>修复前</td><td>修复后</td></tr>
+<tr><th>------</th><th>--------</th><th>--------</th></tr>
+<tr><td>最大对话轮数</td><td>~50 轮</td><td>~800 轮</td></tr>
+<tr><td>压缩功能</td><td>❌ 失效</td><td>✅ 正常</td></tr>
+<tr><td>会话重置</td><td>频繁触发</td><td>不再出现</td></tr>
+</tbody></table>
+<h3>💡 配置原则</h3>
+<ul>
+<li>**contextWindow 必须填写真实值** — 主流大模型通常支持 128000</li>
+<li>**reserveTokensFloor 必须小于 contextWindow** — 建议值：20000~40000</li>
+<li>**更换模型时同步更新** — 不同模型的上下文长度可能不同</li>
+</ul>
+<p>⏰ 于 2026-05-24 同步 | 来源：博客园 yih</p>
+  </div>
+  <div class="footer">⏰ 2026-05-24 | by KKXX</div>
+</body>
+</html>
