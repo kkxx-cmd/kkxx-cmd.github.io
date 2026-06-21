@@ -3,369 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>每日新闻 · 2026年06月21日 · KKXX</title>
+  <title>科技新闻 · 2026年06月21日 · KKXX</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    a { color: inherit; text-decoration: none; }
-    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
-    .back:hover { text-decoration: underline; }
-    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
-    h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
-    .stats { font-size: 12px; color: #555; margin-bottom: 30px; }
-    .news-card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; transition: border-color 0.2s, transform 0.2s; }
-    .news-card:hover { border-color: #667eea; transform: translateY(-2px); }
-    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-    .card-title { font-size: 15px; font-weight: 500; color: #e0e0e0; line-height: 1.6; flex: 1; }
-    .card-tag { font-size: 11px; color: #fff; background: #667eea; border-radius: 6px; padding: 2px 8px; white-space: nowrap; flex-shrink: 0; }
-    .card-tag.intl { background: #e67e22; }
-    .card-tag.economy { background: #27ae60; }
-    .card-tag.tech { background: #9b59b6; }
-    .card-tag.cctv { background: #c0392b; }
-    .card-summary { font-size: 13px; color: #aaa; line-height: 1.7; margin-bottom: 10px; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #555; }
-    .card-link { color: #667eea; font-size: 11px; }
-    .card-link:hover { text-decoration: underline; }
-    .news-footer { font-size: 11px; color: #555; margin-top: 40px; text-align: center; }
-</style>
+    a { color: #667eea; text-decoration: none; }
+    .header { max-width: 800px; margin: 0 auto 32px; }
+    .header h1 { font-size: 24px; font-weight: 600; color: #667eea; margin-bottom: 8px; }
+    .header p { color: #555; font-size: 13px; }
+    .content { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+    .section { background: #12121a; border: 1px solid #1e1e2e; border-radius: 16px; padding: 24px; }
+    .section h2 { font-size: 14px; font-weight: 600; color: #667eea; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #1e1e2e; }
+    .news-card { margin-bottom: 16px; padding: 14px; background: #1a1a26; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
+    .news-card:hover { background: #22222e; }
+    .card-tag { font-size: 11px; color: #667eea; margin-bottom: 6px; }
+    .card-title { font-size: 14px; font-weight: 500; color: #e0e0e0; margin-bottom: 6px; line-height: 1.5; }
+    .card-link { font-size: 12px; color: #667eea; text-decoration: none; }
+    .summary-section { background: #1a1040; border-color: #3a2060; }
+    .summary-content { font-size: 14px; line-height: 1.8; color: #c0c0d0; white-space: pre-wrap; }
+    footer { margin-top: 60px; text-align: center; color: #333; font-size: 12px; }
+  </style>
 </head>
 <body>
-  <a class="back" href="news.html">← 返回新闻列表</a>
-  <div class="date">2026年06月21日</div>
-  <h1>📰 每日新闻</h1>
-  <div class="stats">共 30 条新闻 · 含 12 个原文链接</div>
-  <div class="news-list">
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">1. 📌 三大水运工程可减碳600万吨，相当于新增45万公顷森林</div>
-        
-      </div>
-      <div class="card-summary">平陆运河全线通水、三峡水运新通道动工等重大工程加速推进，总投资超3000亿元。项目通过完善航道网络、...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥90)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E4%B8%89%E5%A4%A7%E6%B0%B4%E8%BF%90%E5%B7%A5%E7%A8%8B%E5%8F%AF%E5%87%8F%E7%A2%B3600%E4%B8%87%E5%90%A8%EF%BC%8C%E7%9B%B8%E5%BD%93%E4%BA%8E%E6%96%B0%E5%A2%9E45%E4%B8%87%E5%85%AC%E9%A1%B7%E6%A3%AE%E6%9E%97" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">2. 📌 5大行59机构落地离岸人民币交易，上海开始补全球资金表</div>
-        
-      </div>
-      <div class="card-summary">五大行相继宣布落地离岸人民币外汇试点交易，新华社披露参与机构已达 59 家、交易规模 431....</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥90)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=5%E5%A4%A7%E8%A1%8C59%E6%9C%BA%E6%9E%84%E8%90%BD%E5%9C%B0%E7%A6%BB%E5%B2%B8%E4%BA%BA%E6%B0%91%E5%B8%81%E4%BA%A4%E6%98%93%EF%BC%8C%E4%B8%8A%E6%B5%B7%E5%BC%80%E5%A7%8B%E8%A1%A5%E5%85%A8%E7%90%83%E8%B5%84%E9%87%91%E8%A1%A8" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">3. 📌 国际金价失守4200美元，再创年内最大单日跌幅达2.2%</div>
-        
-      </div>
-      <div class="card-summary">2026年6月19日，国际金价跌破4200美元/盎司，现货黄金报4126.5美元/盎司，创年内最大单...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥82)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E5%9B%BD%E9%99%85%E9%87%91%E4%BB%B7%E5%A4%B1%E5%AE%884200%E7%BE%8E%E5%85%83%EF%BC%8C%E5%86%8D%E5%88%9B%E5%B9%B4%E5%86%85%E6%9C%80%E5%A4%A7%E5%8D%95%E6%97%A5%E8%B7%8C%E5%B9%85%E8%BE%BE2.2%25" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">4. 🤖 大摩提示AI数据中心电力缺口，能源供应成基建新瓶颈</div>
-        
-      </div>
-      <div class="card-summary">Morgan Stanley 将电力供给列为 AI 数据中心扩张的关键瓶颈，电力接入、并网、储...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥88)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E5%A4%A7%E6%91%A9%E6%8F%90%E7%A4%BAAI%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E7%94%B5%E5%8A%9B%E7%BC%BA%E5%8F%A3%EF%BC%8C%E8%83%BD%E6%BA%90%E4%BE%9B%E5%BA%94%E6%88%90%E5%9F%BA%E5%BB%BA%E6%96%B0%E7%93%B6%E9%A2%88" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">5. 🤖 产业情报｜AI 抢电表，订单先落在哪些环节</div>
-        
-      </div>
-      <div class="card-summary">AI 用电增长不能直接外推成所有电力设备受益，真正要看并网、储能、冷却、电源和数据中心订单如何...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥90)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E4%BA%A7%E4%B8%9A%E6%83%85%E6%8A%A5%EF%BD%9CAI%20%E6%8A%A2%E7%94%B5%E8%A1%A8%EF%BC%8C%E8%AE%A2%E5%8D%95%E5%85%88%E8%90%BD%E5%9C%A8%E5%93%AA%E4%BA%9B%E7%8E%AF%E8%8A%82" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">6. 🤖 我国构建AI就业支持四维体系：人才缺口500万，供需比1:10</div>
-        
-      </div>
-      <div class="card-summary">我国提出从数字素养提升、创业带动、制度保障与战略应对四维度构建适配人工智能发展的就业支持体系。数据显...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥75)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E6%88%91%E5%9B%BD%E6%9E%84%E5%BB%BAAI%E5%B0%B1%E4%B8%9A%E6%94%AF%E6%8C%81%E5%9B%9B%E7%BB%B4%E4%BD%93%E7%B3%BB%EF%BC%9A%E4%BA%BA%E6%89%8D%E7%BC%BA%E5%8F%A3500%E4%B8%87%EF%BC%8C%E4%BE%9B%E9%9C%80%E6%AF%941%3A10" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">7. 🇨🇳 【明天，深交所史上最大规模IPO来了】根据目前安排，下周将有2只新股可申购：一只为避雷器、绝缘子“小巨人”，另一只为国内领先的新能源发电运营商。拟于下周一（6月22日）申购的华润新能源是中国华润旗下主营风光发电投资运营的核心平台，也是我国主要的新能源发电企业之一。公司本次发行价10.11元/股，网上申购上限63.2万股，顶格申购需配深市市值632万元，在今年以来上市的主板新股中排名第一，预计将有较高中签率。华润新能源本次公开发行股份数量为21.07亿股，占发行后公司总股本的比例约为16.20%（超额配售选择权行使前）。公司授予中金公司不超过初始发行规模15.00%（不超过3.16亿股）的超额配售选择权，若超额配售选择权全额行使，则发行总股数将扩大至24.23亿股，占发行后总股本的比例约为18.19%（超额配售选择权全额行使后）。华润新能源本次IPO预计募集资金总额为245亿元，将刷新深交所IPO融资纪录，超越2020年上市的金龙鱼（约139亿元），成为深交所史上最大规模IPO。发行的募集资金将用于风力发电、太阳能发电项目建设。2025年以来，沪深两市仅华电新能、华润新能源发行股份总数超20亿元，华电新能中签率约0.56%，远高于0.04%的平均中签率水平。(上海证券报)</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4946384" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">8. 📌 5月用电数据发布，全社会用电量同比增6.9%</div>
-        
-      </div>
-      <div class="card-summary">2026年6月20日人民日报发布权威电力统计数据，国家能源局披露今年5月全社会用电量达8671...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥82)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=5%E6%9C%88%E7%94%A8%E7%94%B5%E6%95%B0%E6%8D%AE%E5%8F%91%E5%B8%83%EF%BC%8C%E5%85%A8%E7%A4%BE%E4%BC%9A%E7%94%A8%E7%94%B5%E9%87%8F%E5%90%8C%E6%AF%94%E5%A2%9E6.9%25" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">9. 🇨🇳 中国裁判组完整建制执法世界杯，马宁回应“执法无软肋”梗</div>
-        
-      </div>
-      <div class="card-summary">2026年美加墨世界杯中国裁判组马宁、傅明、周飞以完整建制入围引发热议。马宁就“执法无软肋”网络热梗...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥78)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E4%B8%AD%E5%9B%BD%E8%A3%81%E5%88%A4%E7%BB%84%E5%AE%8C%E6%95%B4%E5%BB%BA%E5%88%B6%E6%89%A7%E6%B3%95%E4%B8%96%E7%95%8C%E6%9D%AF%EF%BC%8C%E9%A9%AC%E5%AE%81%E5%9B%9E%E5%BA%94%E2%80%9C%E6%89%A7%E6%B3%95%E6%97%A0%E8%BD%AF%E8%82%8B%E2%80%9D%E6%A2%97" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">10. ⚔️ 伊朗总统：不会制造核武器，不会放弃铀浓缩权利</div>
-        <span class="card-tag intl">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-21/doc-inieehwq9690527.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">11. 🇺🇸 伊朗外交部发言人：美国未执行谅解备忘录第一条</div>
-        <span class="card-tag intl">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-21/doc-inieehwp2877845.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">12. 📌 新能源汽车和储能电池的重要原材料：磷酸铁锂价格一年翻倍，需求依然旺盛</div>
-        <span class="card-tag tech">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/tech/digi/2026-06-21/doc-inieehwq9651845.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">13. 📌 英特尔陈立武：加码先进封装 布局三大半导体材料赛道</div>
-        <span class="card-tag tech">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/tech/roll/2026-06-21/doc-inieeaqr2988357.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">14. 📌 人民锐评：新能源车太“胖”、token太“耗”？盲目堆料不如更聪明地创造</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/chanjing/cyxw/2026-06-19/doc-inicwxpc1733391.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">15. 💻 美伊技术层面谈判在瑞士举行 双方分别有何诉求</div>
-        <span class="card-tag intl">央视</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：央视</span>
-        <a class="card-link" href="https://news.cctv.com/2026/06/21/ARTIWJ9vMRonWHxebbQvAT1X260621.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">16. 📌 国安部通报：境外间谍利用弹窗广告实施情报搜集与思想渗透</div>
-        
-      </div>
-      <div class="card-summary">2026年6月21日，国家安全部披露境外间谍通过弹窗广告实施情报搜集与思想渗透，揭露其勾结广告公司窃...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥85)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E5%9B%BD%E5%AE%89%E9%83%A8%E9%80%9A%E6%8A%A5%EF%BC%9A%E5%A2%83%E5%A4%96%E9%97%B4%E8%B0%8D%E5%88%A9%E7%94%A8%E5%BC%B9%E7%AA%97%E5%B9%BF%E5%91%8A%E5%AE%9E%E6%96%BD%E6%83%85%E6%8A%A5%E6%90%9C%E9%9B%86%E4%B8%8E%E6%80%9D%E6%83%B3%E6%B8%97%E9%80%8F" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">17. 📌 【深圳基本半导体股份有限公司通过港交所上市聆讯】据港交所文件：深圳基本半导体股份有限公司通过港交所上市聆讯。</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://wap.cj.sina.cn/pc/7x24/4946381" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">18. 📌 存储芯片涨价传导到终端，电脑和手机价格压力抬升</div>
-        
-      </div>
-      <div class="card-summary">消费电子涨价从手机扩散到电脑，存储芯片涨价、AI 挤占产能和电子元件涨价共同推高终端价格。</...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥86)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E5%AD%98%E5%82%A8%E8%8A%AF%E7%89%87%E6%B6%A8%E4%BB%B7%E4%BC%A0%E5%AF%BC%E5%88%B0%E7%BB%88%E7%AB%AF%EF%BC%8C%E7%94%B5%E8%84%91%E5%92%8C%E6%89%8B%E6%9C%BA%E4%BB%B7%E6%A0%BC%E5%8E%8B%E5%8A%9B%E6%8A%AC%E5%8D%87" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">19. 🤖 摩尔线程、长鑫存储、Kimi的共同投资人王捷：AI这艘巨轮，越过山丘后，经济系统会发生什么？</div>
-        <span class="card-tag tech">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/tech/internet/2026-06-21/doc-iniecryw9886159.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">20. 📌 05后“杀糕局”席卷全国：社交新物种带火高端烘焙市场</div>
-        
-      </div>
-      <div class="card-summary">05后群体以拼单购买200-400元高颜值蛋糕开展线下社交活动，带动高端烘焙赛道渗透率达22%...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥78)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=05%E5%90%8E%E2%80%9C%E6%9D%80%E7%B3%95%E5%B1%80%E2%80%9D%E5%B8%AD%E5%8D%B7%E5%85%A8%E5%9B%BD%EF%BC%9A%E7%A4%BE%E4%BA%A4%E6%96%B0%E7%89%A9%E7%A7%8D%E5%B8%A6%E7%81%AB%E9%AB%98%E7%AB%AF%E7%83%98%E7%84%99%E5%B8%82%E5%9C%BA" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">21. 🇺🇸 特朗普贬损梅洛尼引欧陆震怒，意大利紧急叫停访美行程</div>
-        
-      </div>
-      <div class="card-summary">特朗普称梅洛尼会场“乞求合影”遭本人否认，西班牙、比利时等欧洲国家集体声援，意大利外长怒斥言论“严重...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥92)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E7%89%B9%E6%9C%97%E6%99%AE%E8%B4%AC%E6%8D%9F%E6%A2%85%E6%B4%9B%E5%B0%BC%E5%BC%95%E6%AC%A7%E9%99%86%E9%9C%87%E6%80%92%EF%BC%8C%E6%84%8F%E5%A4%A7%E5%88%A9%E7%B4%A7%E6%80%A5%E5%8F%AB%E5%81%9C%E8%AE%BF%E7%BE%8E%E8%A1%8C%E7%A8%8B" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">22. 📌 新能源车太“胖”、token太“耗”？人民锐评：创造</div>
-        <span class="card-tag economy">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/wm/2026-06-19/doc-inicwxpe3082706.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">23. 📌 大疆与影石竞争持续激化，中美双线互诉专利</div>
-        
-      </div>
-      <div class="card-summary">2026年6月20日中新网发布报道，大疆与影石两家总部相距仅10公里的深圳影像企业矛盾持续升级...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥84)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E5%A4%A7%E7%96%86%E4%B8%8E%E5%BD%B1%E7%9F%B3%E7%AB%9E%E4%BA%89%E6%8C%81%E7%BB%AD%E6%BF%80%E5%8C%96%EF%BC%8C%E4%B8%AD%E7%BE%8E%E5%8F%8C%E7%BA%BF%E4%BA%92%E8%AF%89%E4%B8%93%E5%88%A9" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">24. 📌 伊朗外交部称伊朗将跟进美方履行其承诺</div>
-        <span class="card-tag intl">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://news.sina.com.cn/w/2026-06-21/doc-inieehwq9693430.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">25. 🇯🇵 日本囤积弹药构建台海分层打击体系，突破“专守防卫”框架</div>
-        
-      </div>
-      <div class="card-summary">央视2026年6月20日报道，日本通过囤积弹药及构建台海分层精确打击体系，实质突破“专守防卫”...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥95)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E6%97%A5%E6%9C%AC%E5%9B%A4%E7%A7%AF%E5%BC%B9%E8%8D%AF%E6%9E%84%E5%BB%BA%E5%8F%B0%E6%B5%B7%E5%88%86%E5%B1%82%E6%89%93%E5%87%BB%E4%BD%93%E7%B3%BB%EF%BC%8C%E7%AA%81%E7%A0%B4%E2%80%9C%E4%B8%93%E5%AE%88%E9%98%B2%E5%8D%AB%E2%80%9D%E6%A1%86%E6%9E%B6" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">26. 📌 新能源汽车渗透率节节攀升</div>
-        <span class="card-tag tech">新浪</span>
-      </div>
-      
-      <div class="card-footer">
-        <span class="card-source">📡 来源：新浪</span>
-        <a class="card-link" href="https://finance.sina.com.cn/tech/roll/2026-06-18/doc-inicuqfz3398790.shtml" target="_blank" rel="noopener">🔗 原文链接</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">27. 📌 老顾客一天没来吃面老板急得报警，救了顾客一命</div>
-        
-      </div>
-      <div class="card-summary">2026年6月20日搜狐转载中国教育电视台暖心新闻，浙江嘉兴南湖面馆店主顾伟光留意到每日到店吃...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥85)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E8%80%81%E9%A1%BE%E5%AE%A2%E4%B8%80%E5%A4%A9%E6%B2%A1%E6%9D%A5%E5%90%83%E9%9D%A2%E8%80%81%E6%9D%BF%E6%80%A5%E5%BE%97%E6%8A%A5%E8%AD%A6%EF%BC%8C%E6%95%91%E4%BA%86%E9%A1%BE%E5%AE%A2%E4%B8%80%E5%91%BD" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">28. 📌 滴露广告台词涉及物化女性引发争议，公众质疑平台审核机制</div>
-        
-      </div>
-      <div class="card-summary">2026年6月，滴露消毒液广告因台词涉及物化女性引发争议。广告标注“剧情演绎”仍被批违反《广告法》及...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥75)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E6%BB%B4%E9%9C%B2%E5%B9%BF%E5%91%8A%E5%8F%B0%E8%AF%8D%E6%B6%89%E5%8F%8A%E7%89%A9%E5%8C%96%E5%A5%B3%E6%80%A7%E5%BC%95%E5%8F%91%E4%BA%89%E8%AE%AE%EF%BC%8C%E5%85%AC%E4%BC%97%E8%B4%A8%E7%96%91%E5%B9%B3%E5%8F%B0%E5%AE%A1%E6%A0%B8%E6%9C%BA%E5%88%B6" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">29. 📌 欧盟拟对华混动汽车征反补贴税，针对比亚迪奇瑞上汽</div>
-        
-      </div>
-      <div class="card-summary">欧盟拟对中国插电式混合动力汽车征收反补贴税，重点针对比亚迪、奇瑞及上汽等企业。此举被视为2024年对...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥75)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E6%AC%A7%E7%9B%9F%E6%8B%9F%E5%AF%B9%E5%8D%8E%E6%B7%B7%E5%8A%A8%E6%B1%BD%E8%BD%A6%E5%BE%81%E5%8F%8D%E8%A1%A5%E8%B4%B4%E7%A8%8E%EF%BC%8C%E9%92%88%E5%AF%B9%E6%AF%94%E4%BA%9A%E8%BF%AA%E5%A5%87%E7%91%9E%E4%B8%8A%E6%B1%BD" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
-    <div class="news-card">
-      <div class="card-header">
-        <div class="card-title">30. 🇨🇳 中国将台岛以东整片海域纳入管理，不再局限传统台湾海峡</div>
-        
-      </div>
-      <div class="card-summary">2026年6月19日搜狐转载新华日报、玉渊谭天相关解读，6月16日至18日自然资源部组织实施台...</div>
-      <div class="card-footer">
-        <span class="card-source">📡 来源：热点 (🔥83)</span>
-        <a class="card-link" href="https://www.bing.com/search?q=%E4%B8%AD%E5%9B%BD%E5%B0%86%E5%8F%B0%E5%B2%9B%E4%BB%A5%E4%B8%9C%E6%95%B4%E7%89%87%E6%B5%B7%E5%9F%9F%E7%BA%B3%E5%85%A5%E7%AE%A1%E7%90%86%EF%BC%8C%E4%B8%8D%E5%86%8D%E5%B1%80%E9%99%90%E4%BC%A0%E7%BB%9F%E5%8F%B0%E6%B9%BE%E6%B5%B7%E5%B3%A1" target="_blank" rel="noopener">🔍 搜索原文</a>
-      </div>
-    </div>
+  <div class="header">
+    <h1>📡 科技新闻 · 2026年06月21日</h1>
+    <p>HackerNews + Reddit r/programming · 自动聚合 · Ollama 本地整理</p>
   </div>
-  <div class="news-footer">⏰ 简报于 2026-06-21 生成 | by KKXX</div>
+  <div class="content">
+<div class="section"><h2>🤖 AI/机器学习</h2>
+<div class="news-card" onclick="window.open('https://alexkritchevsky.com/2024/02/28/geometric-algebra.html','_blank')"><div class="card-tag">HN 39pts</div><h3 class="card-title">The case against geometric algebra (2024)</h3><a class="card-link" href="https://alexkritchevsky.com/2024/02/28/geometric-algebra.html" target="_blank">🔗 alexkritchevsky.com</a></div>
+<div class="news-card" onclick="window.open('https://github.com/mysk-research/loupe','_blank')"><div class="card-tag">HN 359pts</div><h3 class="card-title">Loupe – A iOS app that raises awareness about what native apps can see</h3><a class="card-link" href="https://github.com/mysk-research/loupe" target="_blank">🔗 github.com</a></div>
+<div class="news-card" onclick="window.open('https://old.reddit.com/r/ClaudeAI/comments/1ubm53n/official_anthropic_to_require_identity/','_blank')"><div class="card-tag">HN 15pts</div><h3 class="card-title">Anthropic to Require ID Verification for Certain Capabilities Starting July 8</h3><a class="card-link" href="https://old.reddit.com/r/ClaudeAI/comments/1ubm53n/official_anthropic_to_require_identity/" target="_blank">🔗 old.reddit.com</a></div>
+<div class="news-card" onclick="window.open('https://www.cell.com/neuron/fulltext/S0896-6273(26)00339-9','_blank')"><div class="card-tag">HN 243pts</div><h3 class="card-title">Slow breathing modulates brain function and risk behavior</h3><a class="card-link" href="https://www.cell.com/neuron/fulltext/S0896-6273(26)00339-9" target="_blank">🔗 www.cell.com</a></div>
+</div>
+<div class="section"><h2>🔧 开源工具与开发者生态</h2>
+<div class="news-card" onclick="window.open('https://sibexi.co/posts/epoll-vs-io_uring/','_blank')"><div class="card-tag">HN 190pts</div><h3 class="card-title">Epoll vs. io_uring in Linux</h3><a class="card-link" href="https://sibexi.co/posts/epoll-vs-io_uring/" target="_blank">🔗 sibexi.co</a></div>
+</div>
+<div class="section"><h2>🏢 大厂动态与产品</h2>
+<div class="news-card" onclick="window.open('https://www.beyondallreason.info','_blank')"><div class="card-tag">HN 31pts</div><h3 class="card-title">Beyond All Reason (Free Total Annihilation Inspired RTS)</h3><a class="card-link" href="https://www.beyondallreason.info" target="_blank">🔗 www.beyondallreason.info</a></div>
+<div class="news-card" onclick="window.open('https://github.com/namgyaaal/avoxelgame','_blank')"><div class="card-tag">HN 79pts</div><h3 class="card-title">A 3D voxel game engine written in APL</h3><a class="card-link" href="https://github.com/namgyaaal/avoxelgame" target="_blank">🔗 github.com</a></div>
+<div class="news-card" onclick="window.open('https://blog.apnic.net/2026/04/28/google-hits-50-ipv6/','_blank')"><div class="card-tag">HN 201pts</div><h3 class="card-title">Google Hits 50% IPv6</h3><a class="card-link" href="https://blog.apnic.net/2026/04/28/google-hits-50-ipv6/" target="_blank">🔗 blog.apnic.net</a></div>
+<div class="news-card" onclick="window.open('https://github.com/proteanthread/bcg','_blank')"><div class="card-tag">HN 4pts</div><h3 class="card-title">David Ahl's Basic Computer Games Ported to C</h3><a class="card-link" href="https://github.com/proteanthread/bcg" target="_blank">🔗 github.com</a></div>
+<div class="news-card" onclick="window.open('https://taoofmac.com/space/blog/2026/06/18/1845','_blank')"><div class="card-tag">HN 107pts</div><h3 class="card-title">Running MicroVMs in Proxmox VE, the Easy Way</h3><a class="card-link" href="https://taoofmac.com/space/blog/2026/06/18/1845" target="_blank">🔗 taoofmac.com</a></div>
+<div class="news-card" onclick="window.open('https://zeux.io/2026/06/17/zigzag-decoding-avx512/','_blank')"><div class="card-tag">HN 92pts</div><h3 class="card-title">Zigzag Decoding with AVX-512</h3><a class="card-link" href="https://zeux.io/2026/06/17/zigzag-decoding-avx512/" target="_blank">🔗 zeux.io</a></div>
+<div class="news-card" onclick="window.open('https://www.bbc.com/future/article/20260618-the-weird-and-wonderful-libraries-of-finland','_blank')"><div class="card-tag">HN 260pts</div><h3 class="card-title">Renting a sewing machine from the library</h3><a class="card-link" href="https://www.bbc.com/future/article/20260618-the-weird-and-wonderful-libraries-of-finland" target="_blank">🔗 www.bbc.com</a></div>
+<div class="news-card" onclick="window.open('https://movq.de/blog/postings/2026-06-20/0/POSTING-en.html','_blank')"><div class="card-tag">HN 63pts</div><h3 class="card-title">Windows UI evolution: Clicking an unassociated file</h3><a class="card-link" href="https://movq.de/blog/postings/2026-06-20/0/POSTING-en.html" target="_blank">🔗 movq.de</a></div>
+</div>
+  </div>
+  <footer><a href="../blog/news.html">← 新闻列表</a> · <a href="../index.html">KKXX 导航</a></footer>
 </body>
 </html>
