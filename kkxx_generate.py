@@ -86,7 +86,7 @@ def fetch_hefei():
 def fetch_stocks():
     try:
         import akshare as ak
-        df = ak.stock_zh_a_spot_em()
+        df = ak.stock_zh_a_spot()  # 腾讯接口
         df = df[df["涨跌幅"] < 0].sort_values("涨跌幅", ascending=True).head(10)
         return [{"title": f"{r['名称']} ({r['代码']}) 跌 {r['涨跌幅']:.2f}% 现价 {r['最新价']:.2f}", "link": f"https://quote.eastmoney.com/sz{r['代码']}.html", "source": "A股"} for _, r in df.iterrows()]
     except Exception as e:
