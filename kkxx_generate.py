@@ -25,23 +25,32 @@ def fetch_news():
     import requests
     from bs4 import BeautifulSoup
     news = []
-    # 中文新闻源：新浪 RSS
+    # 中文新闻源
     sources = [
-        ("https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516&k=&num=10&page=1&r=", "新浪"),
-        ("https://www.thepaper.cn/rss/rss.xml", "澎湃"),
+        ("https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516&k=&num=10&page=1&r=", "新浪", "json"),
+        ("https://www.thepaper.cn/rss/rss.xml", "澎湃", "xml"),
+        ("https://www.sina.com.cn/rss.xml", "新浪财经", "xml"),
     ]
-    for url, name in sources:
+    for url, name, fmt in sources:
         try:
             r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"})
-            soup = BeautifulSoup(r.text, "xml") if "xml" in r.headers.get("content-type","") else BeautifulSoup(r.text, "html.parser")
-            for item in soup.find_all("item")[:5]:
-                t = item.find("title")
-                l = item.find("link")
-                if t:
-                    title = t.text.strip()
-                    link = l.text.strip() if l else ""
+            if fmt == "json" or "json" in r.headers.get("content-type", ""):
+                import json
+                data = r.json()
+                for item in data.get("result", {}).get("data", [])[:5]:
+                    title = item.get("title", "")
                     if title and len(title) > 5:
-                        news.append({"title": title, "link": link, "source": name})
+                        news.append({"title": title, "link": item.get("url", ""), "source": name})
+            else:
+                soup = BeautifulSoup(r.text, "xml")
+                for item in soup.find_all("item")[:5]:
+                    t = item.find("title")
+                    l = item.find("link")
+                    if t:
+                        title = t.text.strip()
+                        link = l.text.strip() if l else ""
+                        if title and len(title) > 5:
+                            news.append({"title": title, "link": link, "source": name})
             if len(news) >= 10:
                 break
         except Exception as e:
