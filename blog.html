@@ -1,111 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>博客文章 · KKXX</title>
 
-  <!-- SEO -->
-  <meta name="description" content="每日全球热点新闻汇总，涵盖科技、财经、国际要闻，每日三更。">
-  <meta name="keywords" content="每日新闻,全球热点,科技新闻,财经新闻,国际要闻">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="KKXX">
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="每日新闻 | KKXX">
-  <meta property="og:description" content="每日全球热点新闻汇总，涵盖科技、财经、国际要闻，每日三更。">
-  <meta property="og:url" content="https://kkxx-cmd.github.io/blog.html">
-  <meta property="og:site_name" content="KKXX">
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="每日新闻 | KKXX">
-  <meta name="twitter:description" content="每日全球热点新闻汇总，涵盖科技、财经、国际要闻，每日三更。">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0a0a0f;
-      color: #e0e0e0;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-    body.light { background: #f5f5f7; color: #1d1d1f; }
-    .toggle-btn {
-      position: fixed;
-      top: 16px;
-      right: 20px;
-      background: #12121a;
-      border: 1px solid #2a2a3e;
-      border-radius: 8px;
-      padding: 6px 14px;
-      color: #667eea;
-      font-size: 13px;
-      cursor: pointer;
-    }
-    body.light .toggle-btn { background: #fff; border-color: #d0d0d0; color: #764ba2; }
-    body.light .toggle-btn:hover { color: #8fa0fc; }
-    .toggle-btn:hover { background: #1a1a2e; }
-    .back {
-      display: inline-block;
-      color: #667eea;
-      text-decoration: none;
-      font-size: 13px;
-      margin-bottom: 30px;
-    }
-    body.light .back { color: #764ba2; }
-    .back:hover { text-decoration: underline; }
-    h2 {
-      font-size: 20px;
-      margin-bottom: 24px;
-      color: #e0e0e0;
-    }
-    body.light h2 { color: #1d1d1f; }
-    h2.section-head {
-      font-size: 12px;
-      font-weight: 600;
-      color: #555;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin: 32px 0 14px 0;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #1e1e2e;
-    }
-    body.light h2.section-head { color: #aaa; border-color: #e0e0e0; }
-    .post {
-      background: #12121a;
-      border: 1px solid #1e1e2e;
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 14px;
-      text-decoration: none;
-      color: #e0e0e0;
-      display: block;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    body.light .post { background: #fff; border-color: #e0e0e0; color: #1d1d1f; }
-    .post:hover {
-      border-color: #667eea;
-      transform: translateY(-2px);
-    }
-    body.light .post:hover { background: #f0f0ff; }
-    .post h3 {
-      font-size: 16px;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-    .post .meta {
-      font-size: 12px;
-      color: #555;
-      margin-bottom: 8px;
-    }
-    body.light .post .meta { color: #888; }
-    .post .summary {
-      font-size: 13px;
-      color: #777;
-      line-height: 1.6;
-    }
-    body.light .post .summary { color: #666; }
-  </style>
 </head>
 <body>
 
@@ -153,6 +46,26 @@
   <a class="post" href="blog/news-2026-05-25.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-25</div></a>
   <a class="post" href="blog/news-2026-05-24.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-24</div></a>
   <a class="post" href="blog/news-2026-05-23.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-23</div></a>
+
+  <div class="post-stub">
+    <h3>🌿 数字花园功能上线</h3>
+    <div class="meta">2026-06-02</div>
+    <div class="summary">新增合肥新闻每日推送（08:00 / 18:00），独立详情页 + 索引列表，同步到网站数字花园。加入全站搜索框和白天/夜间模式切换。</div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.body.classList.add('light');
+      btn.textContent = '☀️ 白天';
+    }
+    btn.addEventListener('click', () => {
+      const isLight = document.body.classList.toggle('light');
+      btn.textContent = isLight ? '☀️ 白天' : '🌙 夜间';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
 
 </body>
 </html>
