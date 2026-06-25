@@ -25,18 +25,28 @@ def fetch_news():
     import requests
     from bs4 import BeautifulSoup
     news = []
-    for url in ["https://feeds.bbci.co.uk/news/world/rss.xml", "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"]:
+    # 中文新闻源：新浪 RSS
+    sources = [
+        ("https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516&k=&num=10&page=1&r=", "新浪"),
+        ("https://www.thepaper.cn/rss/rss.xml", "澎湃"),
+    ]
+    for url, name in sources:
         try:
-            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
-            soup = BeautifulSoup(r.text, "xml")
+            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"})
+            soup = BeautifulSoup(r.text, "xml") if "xml" in r.headers.get("content-type","") else BeautifulSoup(r.text, "html.parser")
             for item in soup.find_all("item")[:5]:
                 t = item.find("title")
                 l = item.find("link")
                 if t:
-                    news.append({"title": t.text.strip(), "link": l.text.strip() if l else "", "source": url.split("/")[2].split(".")[1].upper()})
+                    title = t.text.strip()
+                    link = l.text.strip() if l else ""
+                    if title and len(title) > 5:
+                        news.append({"title": title, "link": link, "source": name})
+            if len(news) >= 10:
+                break
         except Exception as e:
-            print(f"RSS {url}: {e}")
-    return news
+            print(f"新闻 {name}: {e}")
+    return news[:10]
 
 def fetch_hefei():
     import requests
@@ -110,9 +120,13 @@ def update_list(list_file, new_card, marker="<!-- INSERT_MARKER -->"):
     try:
         with open(list_file, 'r', encoding='utf-8') as f:
             content = f.read()
+        # 防重复：先检查是否已存在今日链接（精确匹配）
+        if new_card.strip() in content.strip():
+            print(f"列表已存在，跳过: {list_file}")
+            return True
         pattern = re.compile(rf'{re.escape(marker)}', re.IGNORECASE)
         if pattern.search(content):
-            content = pattern.sub(f'{new_card}\n  {marker}', content)
+            content = pattern.sub(f'{new_card}\n  {marker}', content, count=1)
             with open(list_file, 'w', encoding='utf-8') as f:
                 f.write(content)
             return True
