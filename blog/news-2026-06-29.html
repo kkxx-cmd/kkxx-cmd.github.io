@@ -3,40 +3,263 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>每日新闻 · 2026年06月29日</title>
+  <title>每日新闻 · 2026年06月29日 · KKXX</title>
   <style>
-    body{ font-family: -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 20px; max-width: 800px; margin: 0 auto; }
-    h1{ background: linear-gradient(90deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; font-size: 22px; }
-    .back{ color: #667eea; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 16px; }
-    .card{ background: #12121a; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid #1e1e2e; }
-    .card-title{ font-size: 15px; color: #e0e0e0; line-height: 1.6; }
-    .source{ color: #667eea; font-size: 12px; margin-top: 6px; }
-    a{ color: #667eea; text-decoration: none; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
+    a { color: inherit; text-decoration: none; }
+    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+    .stats { font-size: 12px; color: #555; margin-bottom: 30px; }
+    .news-card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; transition: border-color 0.2s, transform 0.2s; }
+    .news-card:hover { border-color: #667eea; transform: translateY(-2px); }
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .card-title { font-size: 15px; font-weight: 500; color: #e0e0e0; line-height: 1.6; flex: 1; }
+    .card-tag { font-size: 11px; color: #fff; background: #667eea; border-radius: 6px; padding: 2px 8px; white-space: nowrap; flex-shrink: 0; }
+    .card-tag.intl { background: #e67e22; }
+    .card-tag.economy { background: #27ae60; }
+    .card-tag.tech { background: #9b59b6; }
+    .card-tag.cctv { background: #c0392b; }
+    .card-tag.society { background: #16a085; }
+    .card-tag.entertainment { background: #e91e63; }
+    .card-tag.military { background: #795548; }
+    .card-summary { font-size: 13px; color: #aaa; line-height: 1.7; margin-bottom: 10px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #555; }
+    .card-link { color: #667eea; font-size: 11px; }
+    .card-link:hover { text-decoration: underline; }
+    .news-footer { font-size: 11px; color: #555; margin-top: 40px; text-align: center; }
+    .heat { color: #ff6b6b; }
   </style>
 </head>
 <body>
-  <a class="back" href="../blog.html">← 返回</a>
-  <h1>📰 每日新闻 · 2026年06月29日</h1>
-    <div class="card">
-    <div class="card-title">1. 百度旗下昆仑芯要求IPO投资者采购其芯片</div>
-    <div class="source">🔗 <a href="https://finance.sina.com.cn/stock/usstock/c/2026-06-29/doc-inifapyw6999729.shtml" target="_blank">新浪</a></div>
+  <a class="back" href="news.html">← 返回新闻列表</a>
+  <div class="date">2026年06月29日</div>
+  <h1>📰 每日新闻</h1>
+  <div class="stats">共 20 条新闻 · 热度来源：api.cjiot.cc</div>
+  <div class="news-list">
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">1. 🤖 中复神鹰三条高性能碳纤维产线投产：行业评价逻辑已变</div>
+        <span class="card-tag tech">科技</span>
+      </div>
+      <div class="card-summary">三条产线分别针对不同下游市场：48K大丝束面向风电/压力容器，1000吨T1100级面向航空航天/无人机，高端市场准入门槛提高，碳纤维从"产能释放"进入"产品分层"时代。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 86</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17162" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">2. 🤖 智能体互联7项国标覆盖AI应用：能入网不等于能入企</div>
+        <span class="card-tag tech">科技</span>
+      </div>
+      <div class="card-summary">市场监管总局发布《人工智能 智能体互联》7项国家标准，涵盖身份码、身份管理、发现、交互、工具调用等。标准解决的不是"模型聪不聪明"，而是AI应用有没有资格进入企业级系统。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 94</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17148" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">3. 💊 557个药品通过2026年医保目录初审：不等同于已经能报销</div>
+        <span class="card-tag economy">时政</span>
+      </div>
+      <div class="card-summary">国家医保局公布557个基本医保药品通过初审，54个商保创新药通过形式审查。申报材料共818份，涉及674个药品通用名。医保目录调整本质是支付资源的分配题。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 82</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17140" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">4. 🏭 商务部列管20家日本实体，禁止出口两用物品项</div>
+        <span class="card-tag intl">时政</span>
+      </div>
+      <div class="card-summary">商务部将三菱造船等20家日本实体列入出口管制管控名单，禁止出口经营者向其出口两用物品项。相关公告自2026年2月24日起实施，主要针对参与提升日本军事实力的日本实体。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 87</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17136" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">5. 💰 专项债余额首破40万亿，地方化债压力加大</div>
+        <span class="card-tag economy">财经</span>
+      </div>
+      <div class="card-summary">财政部最新数据显示，截至2026年5月末，全国地方政府债务余额58.2万亿元，其中专项债务40.3万亿元，地方专项债余额首次突破40万亿台阶。专家认为专项债仍是稳投资重要工具。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 88</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17119" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">6. ✈️ 中俄第11次联合空巡，日本战机紧急升空</div>
+        <span class="card-tag intl">时政</span>
+      </div>
+      <div class="card-summary">中俄两军6月27日组织第11次联合空中层战略巡航，编队飞跃日本海和东海相关空域。日本防卫省称，航空自卫队战机紧急升空应对，并通过外交渠道表达所谓关切。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 89</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17145" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">7. 🚀 10架运-20B公开同框，国产大飞机器投送能力升级</div>
+        <span class="card-tag tech">科技</span>
+      </div>
+      <div class="card-summary">近期多架换装国产涡扇-20的运-20B在央视公开画面中同框亮相，10架运-20B列阵说明其量产规模已显著提升。运-20B换装国产发动机后，最大起飞重量、载重能力和平台价值都有明显提升。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 89</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17097" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">8. 🚀 五家商业航天公司冲刺资本市场，三家火箭公司仍在辅导</div>
+        <span class="card-tag economy">财经</span>
+      </div>
+      <div class="card-summary">蓝箭航天和中科宇航已进入科创板IPO审核流程；星河动力、天兵科技、星图荣耀仍处于上市辅导或辅导进展披露阶段，尚未看到交易所受理记录。五家公司业务路线不同，进展差异很大。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 88</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17157" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">9. 📚 中部六省两年新增29所高校，占全国增量三成多</div>
+        <span class="card-tag intl">时政</span>
+      </div>
+      <div class="card-summary">教育部最新高校名单显示，2024年至2026年，全国高校共新增84所，其中山西、安徽、江西、河南、湖北、湖南中部六省新增29所，占全国新增总量的34.5%。人口大省和中西部地正成为高校扩容重点。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 88</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17171" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">10. 🌍 四川宜宾高县5.5级地震，13人受轻微伤</div>
+        <span class="card-tag society">社会</span>
+      </div>
+      <div class="card-summary">6月29日0时12分，四川宜宾市高县发生5.5级地震，震源深度6公里。中国地震局已启动三级应急响应，截至3时30分，地震已造成13人受轻微伤，已送医，紧争转移安置196人。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 90</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17107" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">11. 🔒 近300亿份游戏扫描数据涉军事用途，国安部提醒</div>
+        <span class="card-tag intl">时政</span>
+      </div>
+      <div class="card-summary">国家安全部6月29日发文提醒，近期有外媒披露某知名AR手游旗下人工智能公司获取了约300亿份玩家上传的环境扫描数据，可能用于训练识别和理解物理空间的人工智能模型。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 90</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17122" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">12. 🎬 AI短剧赚钱更难：内容制作成本大降90%，流量入口变贵了</div>
+        <span class="card-tag economy">财经</span>
+      </div>
+      <div class="card-summary">今年一季度国内上线短剧约12.8万部，其中AI短剧占比超95%。制作成本下降90%，但流量成本同比上涨超100%，收益端下降50%以上。竞争重心已从制作端转到分发端。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 88</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17154" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">13. ⚖️ 体育总局原副司长胡光宇贪腐案，一审获刑13年</div>
+        <span class="card-tag intl">时政</span>
+      </div>
+      <div class="card-summary">6月29日，北京市第一中级人民法院依法公开宣判国家体育总局政策法规司原副司长胡光宇贪腐案，胡光宇因犯贪污罪被判处有期徒刑13年，并处罚金人民币300万元。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 88</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17175" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">14. 💳 腾讯内测TenPayGo，面向境外华人支付</div>
+        <span class="card-tag tech">科技</span>
+      </div>
+      <div class="card-summary">近日腾讯旗下一款名为TenPayGo的应用悄然上架苹果App Store，引发"腾讯要做独立支付App"的猜测。腾讯回应称，该产品是面向境外华人的生活的便利助手，目前仍处于小范围测试阶段。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 86</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17100" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">15. 💻 三星海力士美光遭集体诉讼，被控操纵内存价格</div>
+        <span class="card-tag tech">科技</span>
+      </div>
+      <div class="card-summary">三星、SK海力士和美光三家全球主要存储芯片企业，于6月25日在美国加利福尼亚联邦法院被提起集体诉讼。原告指控三家公司以转向AI高带宽内存HBM为由，协减DDR3、DDR4等传统内存产量，导致价格大幅上涨。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 88</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17181" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">16. 🚢 日本拟在南鸟岛部署反舰导弹，强化东部防御</div>
+        <span class="card-tag military">军事</span>
+      </div>
+      <div class="card-summary">日媒称，日本政府计划在最东端领土南鸟岛部署陆上自卫队地对舰导弹部队，最早于2026年度末启动相关安排。南鸟岛位于东京东南约1800公里，是日本最东端岛屿。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 88</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17176" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">17. ⚖️ 韩国拟限制下调刑责年龄，重罪惯犯降至13岁</div>
+        <span class="card-tag intl">时政</span>
+      </div>
+      <div class="card-summary">韩媒报道，韩国政府拟采取折中方案，仅针对谋杀、抢劫、性犯罪等严重犯罪以及惯犯，将刑事责任年龄标准从现行14岁下调至13岁。该方案最早可能于6月30日提交国会审议报告。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 89</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17128" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">18. 📷 女子拍邻居居家中裸照发业主群，律师称涉嫌侵权</div>
+        <span class="card-tag society">社会</span>
+      </div>
+      <div class="card-summary">近日，女业主拍下对面楼男邻居在家中未着衣物画面并发到业主群的旧案再次引发讨论。律师认为，即便男子在家中行为不雅，只要不是故意对外暴露，女业主拍摄并散发照片仍可能侵犯隐私权。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 84</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17123" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">19. 🎭 TVB配音员于小华病逝，曾配邓萃雯版《上海滩》冯程程</div>
+        <span class="card-tag entertainment">娱乐</span>
+      </div>
+      <div class="card-summary">TVB国语配音组资深女配音员于小华于6月27日下午因癌症病逝，享年78岁。她曾为赵雅芝版《上海滩》程程、李若彤版《神雕侠侣》小龙女等经典角色配音，是一代港剧观众熟悉的幕后声音。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 86</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17177" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="card-header">
+        <div class="card-title">20. 🚗 4名孩子爬上法拉利当滑梯，车主称协商未果</div>
+        <span class="card-tag society">社会</span>
+      </div>
+      <div class="card-summary">近日，一名法拉利车主称，4名孩子爬上其停放车辆车顶玩闹，并将跑车当作"滑梯"，导致车身多处划伤。车主表示，事发后已报警，但与孩子家长就赔偿问题暂未达成一致。</div>
+      <div class="card-footer">
+        <span class="card-source">📡 来源：日知录 · <span class="heat">🔥 83</span></span>
+        <a class="card-link" href="https://api.cjiot.cc/api/v1/articles/17137" target="_blank" rel="noopener">📖 查看详情</a>
+      </div>
+    </div>
   </div>
-  <div class="card">
-    <div class="card-title">2. 昔日地产大佬许荣茂父子拟被罚770万元，儿子许世坛拟被禁入6年，旗下公司港股市值6年蒸发99%</div>
-    <div class="source">🔗 <a href="https://finance.sina.com.cn/stock/s/2026-06-29/doc-inifapyq5367452.shtml" target="_blank">新浪</a></div>
-  </div>
-  <div class="card">
-    <div class="card-title">3. 中天策略:6月29日市场分析</div>
-    <div class="source">🔗 <a href="https://finance.sina.com.cn/money/future/fmnews/2026-06-29/doc-inifapyw6990494.shtml" target="_blank">新浪</a></div>
-  </div>
-  <div class="card">
-    <div class="card-title">4. 伊朗称本周没有与美国举行技术性会谈的安排</div>
-    <div class="source">🔗 <a href="https://finance.sina.com.cn/world/2026-06-29/doc-inifapys2134106.shtml" target="_blank">新浪</a></div>
-  </div>
-  <div class="card">
-    <div class="card-title">5. 视频 | 蔚来ES9提车半个月 洗车时高压水枪冲破车漆 公司回应：不存在质量问题</div>
-    <div class="source">🔗 <a href="https://finance.sina.com.cn/chanjing/gsnews/2026-06-29/doc-inifapyw6989116.shtml" target="_blank">新浪</a></div>
-  </div>
-
+  <div class="news-footer">⏰ 简报于 2026-06-29 生成 | by KKXX · 数据来源：api.cjiot.cc 日知录</div>
 </body>
 </html>
