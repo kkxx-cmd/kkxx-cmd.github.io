@@ -5,119 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>每日新闻 · 2026年06月29日</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    body.light { background: #f5f5f7; color: #1d1d1f; }
-    body.light h1 { -webkit-text-fill-color: #1d1d1f; }
-    body.light .back { color: #764ba2; }
-    body.light .day-header h1 { color: #667eea; }
-    body.light .section { background: #fff; border-color: #e0e0e0; }
-    body.light .section h2 { color: #667eea; border-color: #eee; }
-    body.light .news-item h3 { color: #1d1d1f; }
-    body.light .news-item p { color: #666; }
-    body.light footer { color: #aaa; }
-    body.light footer a { color: #888; }
-    .back { color: #667eea; text-decoration: none; font-size: 14px; margin-bottom: 30px; display: inline-block; }
-    .back:hover { color: #8fa0fc; }
-    .day-header { max-width: 720px; margin-bottom: 32px; }
-    .day-header h1 { font-size: 24px; font-weight: 600; background: linear-gradient(90deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
-    body.light .day-header h1 { background: none; -webkit-text-fill-color: #667eea; }
-    .day-header p { color: #555; font-size: 13px; }
-    .content { max-width: 720px; display: flex; flex-direction: column; gap: 24px; }
-    .section { background: #12121a; border: 1px solid #1e1e2e; border-radius: 16px; padding: 24px; }
-    .section h2 { font-size: 14px; font-weight: 600; color: #667eea; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #1e1e2e; }
-    body.light .section h2 { border-color: #eee; }
-    .news-item { margin-bottom: 16px; }
-    .news-item:last-child { margin-bottom: 0; }
-    .news-item h3 { font-size: 14px; font-weight: 500; color: #e0e0e0; margin-bottom: 6px; line-height: 1.5; }
-    .news-item p { font-size: 13px; color: #888; line-height: 1.75; }
-    body.light .news-item h3 { color: #1d1d1f; }
-    body.light .news-item p { color: #666; }
-    .source { display: inline-block; margin-top: 6px; font-size: 12px; color: #667eea; text-decoration: none; }
-    .source:hover { color: #8fa0fc; }
-    footer { margin-top: 60px; color: #333; font-size: 12px; }
-    footer a { color: #555; text-decoration: none; }
-    footer a:hover { color: #667eea; }
+    body{ font-family: -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 20px; max-width: 800px; margin: 0 auto; }
+    h1{ background: linear-gradient(90deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; font-size: 22px; }
+    .back{ color: #667eea; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 16px; }
+    .card{ background: #12121a; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid #1e1e2e; }
+    .card-title{ font-size: 15px; color: #e0e0e0; line-height: 1.6; }
+    .source{ color: #667eea; font-size: 12px; margin-top: 6px; }
+    a{ color: #667eea; text-decoration: none; }
   </style>
 </head>
 <body>
   <a class="back" href="../blog.html">← 返回</a>
-  <div class="day-header">
-    <div class="date">2026年06月29日</div>
-    <h1>📰 每日新闻 · 2026年06月29日</h1>
-    <p>全球热点 · BBC/FT中文网/大皖新闻</p>
+  <h1>📰 每日新闻 · 2026年06月29日</h1>
+    <div class="card">
+    <div class="card-title">1. 百度旗下昆仑芯要求IPO投资者采购其芯片</div>
+    <div class="source">🔗 <a href="https://finance.sina.com.cn/stock/usstock/c/2026-06-29/doc-inifapyw6999729.shtml" target="_blank">新浪</a></div>
   </div>
-  <div class="content">
-    <div class="section">
-      <h2>🌍 国际</h2>
-      <div class="news-item">
-        <h3>委内瑞拉地震：废墟中救出33人，两名男孩获救</h3>
-        <p>数万人在地震中失踪，亲属等待亲人消息的关键搜救窗口正在关闭。</p>
-        <a class="source" href="https://www.bbc.co.uk/news/articles/cr47dvywvy5o" target="_blank">🔗 BBC News</a>
-      </div>
-      <div class="news-item">
-        <h3>巴基斯坦跨境空袭阿富汗，杀伤数十人</h3>
-        <p>巴方称空袭是对"恐怖袭击"的回应，塔利班方面称之为"懦弱行径"。</p>
-        <a class="source" href="https://www.bbc.co.uk/news/articles/cy8wygyed0wo" target="_blank">🔗 BBC News</a>
-      </div>
-      <div class="news-item">
-        <h3>欧洲热浪已造成1300人死亡，德国记录41.7°C高温</h3>
-        <p>世卫组织总干事谭德塞警告欧洲尚未做好应对高温天气的准备。</p>
-        <a class="source" href="https://www.bbc.co.uk/news/articles/cn4d2vv935lo" target="_blank">🔗 BBC News</a>
-      </div>
-      <div class="news-item">
-        <h3>美伊互相指责对方违反停火协议</h3>
-        <p>伊朗称对科威特和巴林美国基础设施发动报复性打击，此前美国声称对伊朗境内多个目标实施了打击。</p>
-        <a class="source" href="https://www.bbc.co.uk/news/articles/cdxdwkgqgq0o" target="_blank">🔗 BBC News</a>
-      </div>
-    </div>
-    <div class="section">
-      <h2>⚽ 体育</h2>
-      <div class="news-item">
-        <h3>韩国足球队教练辞职，总统要求调查世界杯失利</h3>
-        <p>韩国在世界杯预选赛中被淘汰，无缘八强最佳第三名球队之列。</p>
-        <a class="source" href="https://www.bbc.co.uk/news/articles/cdx7jk0kq4vo" target="_blank">🔗 BBC News</a>
-      </div>
-    </div>
-    <div class="section">
-      <h2>✈️ 事故</h2>
-      <div class="news-item">
-        <h3>法国跳伞飞机坠毁，11人死亡</h3>
-        <p>飞行员和10名乘客（含5名首次跳伞者）在法国东部事故中全部遇难。</p>
-        <a class="source" href="https://www.bbc.co.uk/news/articles/c5yz9yj9x74o" target="_blank">🔗 BBC News</a>
-      </div>
-      <div class="news-item">
-        <h3>沙特阿拉伯直升机坠毁，14人死亡</h3>
-        <p>事故涉及沙特阿美石油公司直升机，当局正在调查坠机原因。</p>
-        <a class="source" href="https://www.bbc.co.uk/news/articles/c3eyd9j5g7xo" target="_blank">🔗 BBC News</a>
-      </div>
-      <div class="news-item">
-        <h3>科罗拉多-犹他边境野火，3名消防员殉职</h3>
-        <p>两州州长均已宣布进入紧急状态，多起火灾同时蔓延。</p>
-        <a class="source" href="https://www.bbc.co.uk/news/articles/cp8l7mpmdggo" target="_blank">🔗 BBC News</a>
-      </div>
-    </div>
-    <div class="section">
-      <h2>💼 财经观察</h2>
-      <div class="news-item">
-        <h3>夏季达沃斯：为何中东将成为全球规模化创新的重要场域？</h3>
-        <p>中东正跳出地缘冲突和能源供给中心的单一标签，悄然成为全球规模化创新浪潮里举足轻重的落地试验场。</p>
-        <a class="source" href="https://www.ftchinese.com/story/001110172" target="_blank">🔗 FT中文网</a>
-      </div>
-      <div class="news-item">
-        <h3>中国钢铁行业产能新规能否加速绿色转型？</h3>
-        <p>政策制定者的关注点正从产业升级进一步转向钢铁脱碳，新规或将为绿色钢铁发展创造有利条件。</p>
-        <a class="source" href="https://www.ftchinese.com/story/001110169" target="_blank">🔗 FT中文网</a>
-      </div>
-    </div>
+  <div class="card">
+    <div class="card-title">2. 昔日地产大佬许荣茂父子拟被罚770万元，儿子许世坛拟被禁入6年，旗下公司港股市值6年蒸发99%</div>
+    <div class="source">🔗 <a href="https://finance.sina.com.cn/stock/s/2026-06-29/doc-inifapyq5367452.shtml" target="_blank">新浪</a></div>
   </div>
-  <footer>
-    <a href="../index.html">← KKXX 导航</a>
-  </footer>
-  <script>
-    if (localStorage.getItem('theme') === 'light') {
-      document.body.classList.add('light');
-    }
-  </script>
+  <div class="card">
+    <div class="card-title">3. 中天策略:6月29日市场分析</div>
+    <div class="source">🔗 <a href="https://finance.sina.com.cn/money/future/fmnews/2026-06-29/doc-inifapyw6990494.shtml" target="_blank">新浪</a></div>
+  </div>
+  <div class="card">
+    <div class="card-title">4. 伊朗称本周没有与美国举行技术性会谈的安排</div>
+    <div class="source">🔗 <a href="https://finance.sina.com.cn/world/2026-06-29/doc-inifapys2134106.shtml" target="_blank">新浪</a></div>
+  </div>
+  <div class="card">
+    <div class="card-title">5. 视频 | 蔚来ES9提车半个月 洗车时高压水枪冲破车漆 公司回应：不存在质量问题</div>
+    <div class="source">🔗 <a href="https://finance.sina.com.cn/chanjing/gsnews/2026-06-29/doc-inifapyw6989116.shtml" target="_blank">新浪</a></div>
+  </div>
+
 </body>
 </html>
