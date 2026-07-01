@@ -137,25 +137,25 @@ def classify_stocks(stocks):
         if s['change'] <= -4:
             s['severity'] = 'os-high'; s['level'] = '严重超卖'
             oversold.append(s)
-        elif s['change'] <= -2.5:
+        elif s['change'] <= -2:
             s['severity'] = 'os-mid'; s['level'] = '中度超卖'
             oversold.append(s)
-        elif s['change'] <= -2 and s['amplitude'] >= 5:
+        elif s['change'] <= -1 and s['amplitude'] >= 4:
             s['severity'] = 'os-low'; s['level'] = '轻度超卖'
             oversold.append(s)
         elif s['change'] >= 4:
             s['severity'] = 'ob-high'; s['level'] = '严重超买'
             overbought.append(s)
-        elif s['change'] >= 2.5:
+        elif s['change'] >= 2:
             s['severity'] = 'ob-mid'; s['level'] = '中度超买'
             overbought.append(s)
-        elif s['change'] >= 2 and s['amplitude'] >= 5:
+        elif s['change'] >= 1 and s['amplitude'] >= 4:
             s['severity'] = 'ob-low'; s['level'] = '轻度超买'
             overbought.append(s)
 
     oversold.sort(key=lambda x: x['change'])
     overbought.sort(key=lambda x: x['change'], reverse=True)
-    return oversold[:15], overbought[:15]
+    return oversold[:30], overbought[:30]
 
 
 def make_cards(stocks, is_oversold=True):
