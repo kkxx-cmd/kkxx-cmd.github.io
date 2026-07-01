@@ -22,40 +22,47 @@ def send_tg(msg):
         print(f"TG: {e}")
 
 def fetch_news():
+    """抓取多源新闻：新浪多分类 + 百度热词兜底"""
     import requests
     from bs4 import BeautifulSoup
     news = []
-    # 中文新闻源
-    sources = [
-        ("https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516&k=&num=10&page=1&r=", "新浪", "json"),
-        ("https://www.thepaper.cn/rss/rss.xml", "澎湃", "xml"),
-        ("https://www.sina.com.cn/rss.xml", "新浪财经", "xml"),
+    
+    # 新浪新闻 - 多个分类
+    # lid: 2512国内 2513国际 2514科技 2516财经 2517娱乐 2518军事
+    CATEGORIES = [
+        (2512, "国内"),
+        (2513, "国际"),
+        (2514, "科技"),
+        (2516, "财经"),
+        (2517, "娱乐"),
     ]
-    for url, name, fmt in sources:
+    for lid, cat in CATEGORIES:
+        url = f"https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid={lid}&k=&num=5&page=1&r="
         try:
-            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"})
-            if fmt == "json" or "json" in r.headers.get("content-type", ""):
-                import json
-                data = r.json()
-                for item in data.get("result", {}).get("data", [])[:5]:
-                    title = item.get("title", "")
-                    if title and len(title) > 5:
-                        news.append({"title": title, "link": item.get("url", ""), "source": name})
-            else:
-                soup = BeautifulSoup(r.text, "xml")
-                for item in soup.find_all("item")[:5]:
-                    t = item.find("title")
-                    l = item.find("link")
-                    if t:
-                        title = t.text.strip()
-                        link = l.text.strip() if l else ""
-                        if title and len(title) > 5:
-                            news.append({"title": title, "link": link, "source": name})
-            if len(news) >= 10:
-                break
+            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            data = r.json()
+            for item in data.get("result", {}).get("data", [])[:4]:
+                title = item.get("title", "")
+                if title and len(title) > 5:
+                    news.append({"title": f"[{cat}] {title}", "link": item.get("url", ""), "source": "新浪"})
         except Exception as e:
-            print(f"新闻 {name}: {e}")
-    return news[:10]
+            print(f"新浪{cat}: {e}")
+        if len(news) >= 15:
+            break
+    
+    # 百度热词兜底
+    if len(news) < 15:
+        try:
+            r = requests.get("https://top.baidu.com/board?tab=realtime", timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            soup = BeautifulSoup(r.text, "html.parser")
+            for item in soup.find_all("div", class_="c-single-text-ellipsis")[:10]:
+                title = item.get_text(strip=True)
+                if title and len(title) > 5 and len(news) < 20:
+                    news.append({"title": f"[热榜] {title}", "link": "https://top.baidu.com", "source": "百度"})
+        except:
+            pass
+    
+    return news[:20]
 
 def fetch_hefei():
     import requests
