@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw 生态全景：社区项目展示 · KKXX</title>
+  <meta name="description" content="从自动化到硬件控制，从 PR 审查到 3D 打印——探索 OpenClaw 社区最酷的项目集成。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="OpenClaw 生态全景：社区项目展示 · KKXX">
+  <meta property="og:description" content="从自动化到硬件控制，从 PR 审查到 3D 打印——探索 OpenClaw 社区最酷的项目集成。">
+  <meta property="og:url" content="https://kkxx-cmd.github.io/blog/openclaw-showcase.html">
+  <meta property="og:site_name" content="KKXX">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
+    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+    .meta { font-size: 12px; color: #555; margin-bottom: 28px; }
+    .content { font-size: 14px; color: #aaa; line-height: 1.8; max-width: 680px; }
+    .content h2 { font-size: 16px; color: #e0e0e0; margin: 28px 0 12px; border-left: 3px solid #667eea; padding-left: 10px; }
+    .content h3 { font-size: 14px; color: #ccc; margin: 20px 0 8px; }
+    .content p { margin-bottom: 10px; }
+    .content code { background: #1e1e2e; padding: 2px 8px; border-radius: 4px; font-size: 13px; color: #667eea; }
+    .content pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; font-size: 12px; line-height: 1.6; }
+    .content li { margin-bottom: 8px; margin-left: 16px; }
+    .tag { display: inline-block; background: #1e1e2e; color: #667eea; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-right: 6px; }
+    .card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+    .card h3 { margin: 0 0 6px; color: #e0e0e0; }
+    .card p { color: #aaa; font-size: 13px; margin-bottom: 6px; }
+    .section-intro { background: linear-gradient(135deg, #0f1520 0%, #121828 100%); border: 1px solid #1e2e3e; border-radius: 12px; padding: 20px; margin: 20px 0 28px; }
+    .section-intro p { color: #999; font-size: 13px; }
+    a { color: #667eea; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .highlight { color: #e0a060; }
+    .stats { display: flex; gap: 16px; margin: 16px 0 24px; }
+    .stat { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 12px 16px; flex: 1; text-align: center; }
+    .stat-value { font-size: 28px; font-weight: 700; color: #667eea; }
+    .stat-label { font-size: 11px; color: #666; margin-top: 4px; }
+  </style>
+</head>
+<body>
+<a class="back" href="blog.html">← 返回博客</a>
+<h1>🛠️ OpenClaw 生态全景：社区项目展示</h1>
+<div class="meta">2026-07-01 · <span class="tag">OpenClaw</span><span class="tag">生态</span><span class="tag">社区</span></div>
+
+<div class="content">
+
+<p>OpenClaw 不是玩具演示。人们正在用它从熟悉的渠道交付代码审查、自动化购物、硬件控制、语音系统、知识管理工具。以下是官方 showcase 页面的深度总结。</p>
+
+<div class="section-intro">
+  <p><strong>来源：</strong><code>docs.openclaw.ai/zh-CN/start/showcase</code></p>
+  <p>从 Discord 新鲜项目到基础设施部署——OpenClaw 社区的创意远超想象。</p>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-value">30+</div>
+    <div class="stat-label">展示项目</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">6</div>
+    <div class="stat-label">核心场景</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">∞</div>
+    <div class="stat-label">可能性</div>
+  </div>
+</div>
+
+<h2>🔥 编码与开发工具</h2>
+
+<div class="card">
+  <h3>🔄 PR Review → Telegram Feedback</h3>
+  <p><strong>@bangnokia</strong> · review · github · telegram</p>
+  <p>OpenCode 提交变更并开 PR → OpenClaw 审查 diff → 在 Telegram 推送结论和合并建议。代码审查工作聊天原生完成，无需切换上下文。</p>
+</div>
+
+<div class="card">
+  <h3>📸 SNAG 截图转 Markdown</h3>
+  <p><strong>@am-will</strong> · <a href="https://github.com/am-will/snag">GitHub</a> · devtools · screenshots</p>
+  <p>热键框选屏幕区域 → Gemini 视觉识别 → Markdown 直接进入剪贴板。速记场景截图一键转结构化文档。</p>
+</div>
+
+<div class="card">
+  <h3>📋 Agents UI</h3>
+  <p><strong>@kitze</strong> · <a href="https://releaseflow.net/kitze/agents-ui">应用</a> · ui · skills · sync</p>
+  <p>跨平台桌面客户端，统一在 Agents / Claude / Codex / OpenClaw 之间管理 Skills 和命令。多后端配置不再混乱。</p>
+</div>
+
+<div class="card">
+  <h3>👁️ CodexMonitor</h3>
+  <p><strong>@odrobnik</strong> · <a href="https://clawhub.ai/odrobnik/skills/codexmonitor">ClawHub</a> · devtools · codex</p>
+  <p>Homebrew 一键安装，列出、检查、监看本地 OpenAI Codex 会话（CLI + VS Code）。AI coding agent 的统一仪表板。</p>
+</div>
+
+<div class="card">
+  <h3>📊 Linear CLI</h3>
+  <p><strong>@NessZerra</strong> · <a href="https://github.com/Finesssee/linear-cli">GitHub</a> · linear · cli</p>
+  <p>终端管理 Linear issue/项目/工作流，可被 Claude Code / OpenClaw 调用。Dev loop 的 chat-native 桥梁。</p>
+</div>
+
+<div class="card">
+  <h3>🎯 Jira Skill 一键生成</h3>
+  <p><strong>@jdrhyne</strong> · jira · skill</p>
+  <p>OpenClaw 连接 Jira 后即时生成对应 skill，并发布到 ClawHub。从连接到技能生态最快路径。</p>
+</div>
+
+<h2>🤖 智能体与自动化</h2>
+
+<div class="card">
+  <h3>🛒 Tesco Shop Autopilot</h3>
+  <p><strong>@marchattonhere</strong> · automation · browser · shopping</p>
+  <p>每周餐食规划、常购清单、预订配送、下单确认——全程浏览器控制，无需超市 API。真实电商自动化范例。</p>
+</div>
+
+<div class="card">
+  <h3>🏓 Padel 球场预订</h3>
+  <p><strong>@joshp123</strong> · <a href="https://github.com/joshp123/padel-cli">GitHub</a> · booking · cli</p>
+  <p>Playtomic 余位监控 + CLI 预订脚本。再也不会错过开放时段。</p>
+</div>
+
+<div class="card">
+  <h3>📑 会计文档自动化</h3>
+  <p><strong>Community</strong> · automation · email · pdf</p>
+  <p>自动从邮件收集 PDF，为税务顾问拼接文档。月度账务的端到端自动驾驶。</p>
+</div>
+
+<div class="card">
+  <h3>�� Couch Potato 网站重建</h3>
+  <p><strong>@davekiss</strong> · <a href="https://davekiss.com">博客</a> · telegram · astro</p>
+  <p>一边看 Netflix，一边通过 Telegram 聊天将博客从 Notion 迁移到 Astro，18 篇文章 + DNS 切 Cloudflare，全程没碰笔记本电脑。</p>
+</div>
+
+<div class="card">
+  <h3>💼 Job Search Agent</h3>
+  <p><strong>@attol8</strong> · api · skill</p>
+  <p>JSearch API 搜索职位 → 匹配简历关键词 → 返回推荐列表。30 分钟内完成原型。</p>
+</div>
+
+<div class="card">
+  <h3>📈 TradingView 自动化</h3>
+  <p><strong>@bheem1798</strong> · finance · browser</p>
+  <p>浏览器自动登录 TradingView → 截图 → 执行技术分析。纯浏览器控制，不需要付费 API。</p>
+</div>
+
+<div class="card">
+  <h3>🐦 Slack 自动值班</h3>
+  <p><strong>@henrymascot</strong> · slack · support</p>
+  <p>监控公司 Slack 频道 → 主动回复问题 → 转发通知到 Telegram → 还自主修了一个生产 bug。AI 值班员。</p>
+</div>
+
+<div class="card">
+  <h3>✅ Todoist Skill 通过 Telegram 生成</h3>
+  <p><strong>@iamsubhrajyoti</strong> · todoist · telegram</p>
+  <p>直接让 OpenClaw 在 Todoist 对话中自动化任务并生成对应 skill。</p>
+</div>
+
+<h2>🏠 家庭与硬件</h2>
+
+<div class="card">
+  <h3>🏡 GoHome 家庭自动化</h3>
+  <p><strong>@joshp123</strong> · <a href="https://github.com/joshp123/gohome">GitHub</a> · nix · grafana</p>
+  <p>Nix 原生家庭自动化系统，以 OpenClaw 为交互界面，带 Grafana 仪表板。</p>
+</div>
+
+<div class="card">
+  <h3>🤖 Roborock 扫地机</h3>
+  <p><strong>@joshp123</strong> · <a href="https://github.com/joshp123/gohome/tree/main/plugins/roborock">GitHub</a> · vacuum · iot</p>
+  <p>自然语言控制Roborock 机器人。清扫任务，一句话搞定。</p>
+</div>
+
+<div class="card">
+  <h3>💨 Winix 空气净化器</h3>
+  <p><strong>@antonplex</strong> · hardware · air-quality</p>
+  <p>Claude Code 发现协议 → OpenClaw 接管管理室内空气质量。全闭环无需人类介入。</p>
+</div>
+
+<div class="card">
+  <h3>🖨️ BambuLab 3D 打印机</h3>
+  <p><strong>@tobiasbischoff</strong> · <a href="https://clawhub.ai/tobiasbischoff/skills/bambu-cli">ClawHub</a> · 3d-printing · skill</p>
+  <p>状态监控、任务管理、摄像头、AMS、校准——一句话搞定。3D 打印玩家的 remote。</p>
+</div>
+
+<div class="card">
+  <h3>🏠 Home Assistant Skill</h3>
+  <p><strong>@homeofe</strong> · <a href="https://clawhub.ai/homeofe/skills/openclaw-homeassistant">ClawHub</a> · homeassistant · automation</p>
+  <p>通过自然语言控制 Home  Assistant 设备。灯、暖通、媒体——加个聊天入口即可。</p>
+</div>
+
+<div class="card">
+  <h3>Pretty Sky 天空抓拍</h3>
+  <p><strong>@signalgaining</strong> · automation · camera</p>
+  <p>屋顶摄像头检测天空构图 → 拍下最美的天空照片。能自己设计 skill 并执行，这是属于自动化的优雅。</p>
+</div>
+
+<h2>🧠 知识与记忆</h2>
+
+<div class="card">
+  <h3>🇨🇳 中文发音学习引擎</h3>
+  <p><strong>@joshp123</strong> · <a href="https://github.com/joshp123/xuezh">GitHub</a> · learning · voice</p>
+  <p>OpenClaw 驱动的中文学习引擎，提供发音纠正和学习流程，带录音对比反馈。</p>
+</div>
+
+<div class="card">
+  <h3>📂 WhatsApp 记忆保险库</h3>
+  <p><strong>Community</strong> · memory · transcription · indexing</p>
+  <p>导入完整 WhatsApp 聊天记录 → 转录 1000+ 条语音 → 与 git 日志交叉核对 → 输出带链接的 Markdown 报告。</p>
+</div>
+
+<div class="card">
+  <h3>🔍 Karakeep 向量搜索</h3>
+  <p><strong>@jamesbrooksco</strong> · <a href="https://github.com/jamesbrooksco/karakeep-semantic-search">GitHub</a> · search · vector</p>
+  <p>Qdrant + OpenAI/Ollama embeddings 为 Karakeep 书签添加语义搜索。模糊匹配再见。</p>
+</div>
+
+<div class="card">
+  <h3>🧩 Inside-Out-2 自我模型</h3>
+  <p><strong>Community</strong> · memory · beliefs</p>
+  <p>将会话文件 → 记忆 → 信念 → 不断演进的自我模型。AI 人格化的参考实现。</p>
+</div>
+
+<h2>🎙️ 语音与电话</h2>
+
+<div class="card">
+  <h3>📞 Clawdia 电话桥接</h3>
+  <p><strong>@alejandroOPI</strong> · <a href="https://github.com/alejandroOPI/clawdia-bridge">GitHub</a> · voice · vapi</p>
+  <p>连接 Vapi 语音助手与 OpenClaw HTTP，让智能体接近实时地打电话。</p>
+</div>
+
+<div class="card">
+  <h3>🎤 多语言音频转写</h3>
+  <p><strong>@obviyus</strong> · <a href="https://clawhub.ai/obviyus/skills/openrouter-transcribe">ClawHub</a> · transcription · multilingual</p>
+  <p>OpenRouter (Gemini 等) 驱动的跨语言音频转录。播客/会议语音内容一键转文字。</p>
+</div>
+
+<div class="card">
+  <h3>🔊 Telegram 语音笔记 (papla.media)</h3>
+  <p><strong>Community</strong> · <a href="https://papla.media/docs">papla.media docs</a> · voice · tts · telegram</p>
+  <p>封装 TTS 引擎并以 Telegram 语音消息形式发送，不自动播放。再也不是冷冰冰的文字了。</p>
+</div>
+
+<h2>🛤️ 出行与生活</h2>
+
+<div class="card">
+  <h3>🚇 维也纳公共交通实时查询</h3>
+  <p><strong>@hjanuschka</strong> · <a href="https://clawhub.ai/hjanuschka/skills/wienerlinien">ClawHub</a> · travel · transport</p>
+  <p>Wiener Linien 实时发车、故障中断、电梯状态、路线规划——出行信息一站式。</p>
+</div>
+
+<div class="card">
+  <h3>🎓 ParentPay 英国学校餐食预订</h3>
+  <p><strong>@George5562</strong> · automation · browser · parenting</p>
+  <p>通过 ParentPay 自动预订学校午餐，鼠标坐标精确点击表格单元格。家长的好帮手。</p>
+</div>
+
+<div class="card">
+  <h3>🍷 Wine Cellar Skill 90 秒生成</h3>
+  <p><strong>@prades_maxime</strong> · skills · local · csv</p>
+  <p>给 962 瓶酒的 CSV 导出 + 存储路径 → OpenClaw 自动构建酒窖管理 skill。快速原型。</p>
+</div>
+
+<div class="card">
+  <h3>📅 每日视觉简报</h3>
+  <p><strong>@buddyhadry</strong> · automation · briefing · telegram</p>
+  <p>定时 OpenClaw 人格生成一张场景图：天气、待办、日期、喜欢的帖子或引语。每天清晨一张卡片。</p>
+</div>
+
+<h2>🏗️ 基础设施与部署</h2>
+
+<div class="card">
+  <h3>📡 Home Assistant 插件</h3>
+  <p><strong>@ngutman</strong> · <a href="https://github.com/ngutman/openclaw-ha-addon">GitHub</a> · homeassistant · docker · raspberry-pi</p>
+  <p>OpenClaw Gateway 在 Home Assistant OS 上跑，支持 SSH 隧道和持久状态。树莓派即可部署。</p>
+</div>
+
+<div class="card">
+  <h3>❄️ Nix 化部署</h3>
+  <p><strong>@openclaw</strong> · <a href="https://github.com/openclaw/nix-openclaw">GitHub</a> · nix · packaging</p>
+  <p>带完整配置的 Nix 配置，实现可复现部署。NixOS 用户的天堂。</p>
+</div>
+
+<div class="card">
+  <h3>📅 CalDAV 日历 Skill</h3>
+  <p><strong>@asleep123</strong> · <a href="https://clawhub.ai/asleep123/skills/caldav-calendar">ClawHub</a> · calendar · caldav</p>
+  <p>khal + vdirsyncer 驱动的日历技能。自托管日历集成，不依赖 Google。</p>
+</div>
+
+<div class="card">
+  <h3>☁️ R2 / S3 上传</h3>
+  <p><strong>@julianengel</strong> · <a href="https://clawhub.ai/julianengel/skills/r2-upload">ClawHub</a> · files · r2 · presigned-urls</p>
+  <p>上传到 Cloudflare R2 或 S3，生成预签名下载链接。远程  OpenClaw 的文件桥梁。</p>
+</div>
+
+<h2>🚀 综合生态</h2>
+
+<div class="card">
+  <h3>🧑‍🤝‍🧑 14+ Agents 编排</h3>
+  <p><strong>@adam91holt</strong> · <a href="https://github.com/adam91holt/orchestrated-ai-articles">文章</a> · multi-agent · orchestration</p>
+  <p>单一 Gateway 下运行 14+ 智能体，由 Opus 4.5 编排器委派给 Codex worker。<a href="https://github.com/adam91holt/clawdspace">Clawdspace</a> 智能体沙箱隔离参考。</p>
+</div>
+
+<div class="card">
+  <h3>⭐ StarSwap 天文设备市场</h3>
+  <p><strong>Community</strong> · <a href="https://star-swap.com/">star-swap.com</a> · marketplace · astronomy</p>
+  <p>围绕 OpenClaw 生态系统构建的完整电商网站，专营天文设备。展示 framework 的产品化潜力。</p>
+</div>
+
+<div class="card">
+  <h3>💰 Oura 戒指健康助手</h3>
+  <p><strong>@AS</strong> · health · oura · calendar</p>
+  <p>将 Oura 戒指数据与日历、预约、健身房日程集成，AI 驱动个人健康管理。</p>
+</div>
+
+<div class="card">
+  <h3>📱 纯 Telegram 开发 iOS 应用</h3>
+  <p><strong>@coard</strong> · ios · xcode · testflight</p>
+  <p>全程通过 Telegram 聊天，构建带地图和语音录制的 iOS App，并部署到 TestFlight。移动端 / 远程开发的人机交互新篇章。</p>
+</div>
+
+<div class="card">
+  <h3>💬 Beeper CLI</h3>
+  <p><strong>@jules</strong> · <a href="https://github.com/blqke/beepcli">GitHub</a> · messaging · beeper</p>
+  <p>通过 Beeper Desktop 读取 / 发送 / 归档消息。iMessage、WhatsApp 等，一个 hub 全搞定。</p>
+</div>
+
+<h2>💡 启示</h2>
+
+<p>这些项目揭示了一个共同模式：<span class="highlight">人们不是在"用工具"，而是在用 Agent 重构自己的工作流</span>。</p>
+
+<p>从 Telegram 到 Home Assistant，从截图到 3 3D 打印——OpenClaw 的价值不在于某个单一功能，而在于它让 AI 从"网页问答框"变成了真正能操作数字和物理世界的 <strong>pilot</strong>。下一步才是重点：从 MVP 到产品。</p>
+
+<p style="margin-top:20px;color:#666;font-size:12px;">数据来源：<a href="https://docs.openclaw.ai/zh-CN/start/showcase">docs.openclaw.ai/zh-CN/start/showcase</a> · 最后更新：2026-07-01</p>
+
+</div>
+</body>
+</html>
