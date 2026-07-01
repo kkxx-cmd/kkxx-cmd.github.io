@@ -5,6 +5,7 @@
 """
 import os
 import sys
+import time
 import requests
 import json
 from datetime import datetime
@@ -63,22 +64,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 def fetch_eastmoney_data():
     """从东方财富获取全A股数据"""
     url = "https://push2.eastmoney.com/api/qt/clist/get"
+    # 获取所有A股数据：分涨序和跌序两次，每次取Top200
     all_stocks = []
-    for page in range(1, 9):
+    for sort_type in [1, -1]:  # 1=跌幅, -1=涨幅
+        url = 'https://push2.eastmoney.com/api/qt/clist/get'
         params = {
-            'pn': page, 'pz': 100, 'po': 1, 'np': 1, 'fltt': 2, 'invt': 2,
+            'pn': 1, 'pz': 200, 'po': sort_type, 'np': 1, 'fltt': 2, 'invt': 2,
             'fid': 'f3',
             'fs': 'm:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23',
             'fields': 'f2,f3,f7,f8,f12,f14'
         }
         try:
-            r = requests.get(url, params=params, timeout=15, headers={
+            r = requests.get(url, params=params, timeout=20, headers={
                 'User-Agent': 'Mozilla/5.0',
                 'Referer': 'https://quote.eastmoney.com/'
             })
             items = r.json().get('data', {}).get('diff', [])
-            if not items:
-                break
             for item in items:
                 code = str(item.get('f12', ''))
                 name = item.get('f14', '')
@@ -96,8 +97,10 @@ def fetch_eastmoney_data():
                     'amplitude': float(amplitude), 'turnover_rate': float(turnover_rate)
                 })
         except Exception as e:
-            print(f"Page{page}: {e}")
-            break
+            print(f'东方财富{sort_type}: {e}')
+        
+        import time
+        time.sleep(1)
     return all_stocks
 
 
