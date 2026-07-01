@@ -69,7 +69,7 @@ def fetch_eastmoney_data():
     for sort_type in [1, -1]:  # 1=跌幅, -1=涨幅
         url = 'https://push2.eastmoney.com/api/qt/clist/get'
         params = {
-            'pn': 1, 'pz': 200, 'po': sort_type, 'np': 1, 'fltt': 2, 'invt': 2,
+            'pn': 1, 'pz': 300, 'po': sort_type, 'np': 1, 'fltt': 2, 'invt': 2,
             'fid': 'f3',
             'fs': 'm:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23',
             'fields': 'f2,f3,f7,f8,f12,f14'
