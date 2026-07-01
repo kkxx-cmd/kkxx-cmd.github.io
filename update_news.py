@@ -5,6 +5,7 @@
 """
 import os
 import sys
+import re
 import json
 import subprocess
 from datetime import datetime
@@ -62,6 +63,38 @@ def make_cards(news_list):
     return html
 
 
+def normalize_title(title):
+    """标准化标题：去空格/标点/小写，用于去重比较"""
+    return re.sub(r'[\s\W_]+', '', title.lower())
+
+
+def dedup_news(news_list, threshold=0.7):
+    """按标题相似度去重，保留 first occurrence（优先级高的源在前）"""
+    from difflib import SequenceMatcher
+    
+    unique = []
+    seen_norms = []
+    
+    for item in news_list:
+        title = item.get('title', '')
+        norm = normalize_title(title)
+        if not norm:
+            continue
+        
+        is_dup = False
+        for prev_norm in seen_norms:
+            sim = SequenceMatcher(None, norm, prev_norm).ratio()
+            if sim >= threshold:
+                is_dup = True
+                break
+        
+        if not is_dup:
+            unique.append(item)
+            seen_norms.append(norm)
+    
+    return unique
+
+
 def fetch_news_with_skill():
     """通过 news-aggregator-skill 获取新闻"""
     cmd = [
@@ -73,18 +106,15 @@ def fetch_news_with_skill():
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=SITE_PATH)
         if result.returncode == 0:
-            # 解析 JSON 输出
             output = result.stdout.strip()
-            # 跳过非 JSON 的行（比如进度提示）
             json_start = output.find('[')
             if json_start >= 0:
                 json_str = output[json_start:]
                 data = json.loads(json_str)
-                # 兼容 fetch_news.py 返回的不同格式
                 if isinstance(data, list):
-                    return data
+                    return dedup_news(data)
                 elif isinstance(data, dict) and "items" in data:
-                    return data["items"]
+                    return dedup_news(data["items"])
         print(f"Skill stderr: {result.stderr[:500] if result.stderr else '(empty)'}")
         print(f"Skill stdout: {result.stdout[:500] if result.stdout else '(empty)'}")
     except Exception as e:
@@ -92,18 +122,55 @@ def fetch_news_with_skill():
     return []
 
 
-def update_list(html_file, link_html):
-    """向列表页追加链接（在 </body> 前）"""
-    path = os.path.join(SITE_PATH, html_file)
-    if not os.path.exists(path):
+def extract_date_from_href(href):
+    """从链接提取日期"""
+    m = re.search(r'(\d{4})-(\d{2})-(\d{2})', href)
+    if m:
+        return f"{m.group(1)}{m.group(2)}{m.group(3)}"
+    return "19700101"
+
+
+def update_list(html_file, new_card):
+    """全量重建列表：去重 + 按日期倒序"""
+    if not os.path.exists(html_file):
         print(f"文件不存在: {html_file}")
         return False
-    with open(path, "r", encoding="utf-8") as f:
+    
+    with open(html_file, 'r', encoding='utf-8') as f:
         content = f.read()
-    # 在 </body> 前插入
-    content = content.replace("</body>", link_html + "\n</body>")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(content)
+    
+    post_pattern = re.compile(r'(<a class="post"[^>]*>.*?</a>)', re.DOTALL)
+    existing_posts = post_pattern.findall(content)
+    all_posts = existing_posts + [new_card]
+    
+    # 去重：按 href，保留最后出现的
+    seen = {}
+    for post in all_posts:
+        href_match = re.search(r'href="([^"]*)"', post)
+        if href_match:
+            seen[href_match.group(1)] = post
+    
+    unique_posts = list(seen.values())
+    unique_posts.sort(
+        key=lambda p: extract_date_from_href(re.search(r'href="([^"]*)"', p).group(1)) if re.search(r'href="([^"]*)"', p) else "19700101",
+        reverse=True
+    )
+    
+    # 找到第一个和最后一个 post 的位置
+    first_match = post_pattern.search(content)
+    if not first_match:
+        return False
+    
+    last_match = None
+    for m in post_pattern.finditer(content):
+        last_match = m
+    
+    before = content[:first_match.start()]
+    after = content[last_match.end():]
+    new_content = before + '\n'.join(unique_posts) + '\n' + after
+    
+    with open(html_file, 'w', encoding='utf-8') as f:
+        f.write(new_content)
     return True
 
 
