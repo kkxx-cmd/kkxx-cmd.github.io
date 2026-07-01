@@ -82,14 +82,18 @@ def update_list(list_file, new_card, marker="<!-- INSERT_MARKER -->"):
 
 
 def git_push(msg):
+    """提交并推送，返回 (成功, 错误信息)"""
     try:
         subprocess.run(["git", "add", "."], check=True, capture_output=True)
         subprocess.run(["git", "commit", "-m", msg], check=True, capture_output=True)
         r = subprocess.run(["git", "push"], capture_output=True, text=True)
-        return r.returncode == 0
+        if r.returncode != 0:
+            return False, r.stderr or r.stdout
+        return True, None
+    except subprocess.CalledProcessError as e:
+        return False, str(e)
     except Exception as e:
-        print(f"Git: {e}")
-        return False
+        return False, str(e)
 
 
 # ==============================================

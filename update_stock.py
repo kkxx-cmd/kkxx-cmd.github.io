@@ -8,57 +8,26 @@ import sys
 import time
 import requests
 import json
+import traceback
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from kkxx_generate import update_list, git_push, send_tg
+from kkxx_generate import update_list, git_push, send_tg, HTML_TEMPLATE, make_cards
 
 SITE_PATH = "/home/qgg/.openclaw/workspace/repo"
+TG_TOKEN = "867692…GtQ4"
+TG_CHAT_ID = "5222823781"
 
-HTML_TEMPLATE = """<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <style>
-    body {{ font-family: -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 20px; max-width: 800px; margin: 0 auto; }}
-    h2 {{ font-size: 20px; margin-bottom: 16px; margin-top: 24px; }}
-    .section-title.oversold {{ color: #e74c3c; }}
-    .section-title.overbought {{ color: #27ae60; }}
-    .back {{ color: #667eea; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 16px; }}
-    .card {{ background: #12121a; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid #1e1e2e; }}
-    .card-title {{ font-size: 15px; color: #e0e0e0; line-height: 1.6; }}
-    .source {{ color: #667eea; font-size: 12px; margin-top: 6px; }}
-    .card-header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }}
-    .stock-code {{ color: #555; font-size: 12px; }}
-    a {{ color: #667eea; text-decoration: none; }}
-    .severity {{ padding: 2px 8px; border-radius: 4px; font-size: 11px; color: #fff; }}
-    .sev-os-high {{ background: #e74c3c; }}
-    .sev-os-mid {{ background: #e67e22; }}
-    .sev-os-low {{ background: #f39c12; }}
-    .sev-ob-high {{ background: #27ae60; }}
-    .sev-ob-mid {{ background: #2ecc71; }}
-    .sev-ob-low {{ background: #58d68d; color: #333; }}
-    .change-down {{ color: #e74c3c; font-size: 14px; }}
-    .change-up {{ color: #27ae60; font-size: 14px; }}
-    .meta {{ color: #555; font-size: 12px; margin-top: 4px; }}
-    .summary-text {{ color: #aaa; font-size: 13px; margin: 4px 0; }}
-  </style>
-</head>
-<body>
-  <a class="back" href="../stock.html">← 返回</a>
-  <h2 class="section-title oversold">📉 超卖区域 ({oversold_count}只)</h2>
-  {oversold_cards}
-  <h2 class="section-title overbought">📈 超买区域 ({overbought_count}只)</h2>
-  {overbought_cards}
-  <div style="margin-top:30px;color:#555;font-size:12px;">
-    数据来源：{source_name} | 更新时间：{update_time}<br>
-    超卖 - 跌幅 ≥4%(红) / 2-4%(橙) / 1%+振幅≥4%(黄)<br>
-    超买 - 涨幅 ≥4%(深绿) / 2-4%(绿) / 1%+振幅≥4%(浅绿)
-  </div>
-</body>
-</html>"""
+
+def send_alert(task, error_msg):
+    """发送 CRITICAL 告警"""
+    import requests
+    try:
+        url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
+        msg = f"🚨 <b>[CRITICAL] {task} 失败</b>\n\n时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n错误：<code>{error_msg}</code>"
+        requests.post(url, json={"chat_id": TG_CHAT_ID, "text": msg, "parse_mode": "HTML"}, timeout=10)
+    except Exception as e:
+        print(f"Alert TG: {e}")
 
 
 def fetch_eastmoney():
@@ -143,7 +112,6 @@ def fetch_sina():
                     continue
                 if not code or not name:
                     continue
-                # 计算振幅
                 amplitude = 0
                 if settlement > 0:
                     amplitude = (high - low) / settlement * 100
@@ -171,7 +139,6 @@ def fetch_stock_data():
         print(f"新浪也仅{len(stocks)}条，尝试合并...")
         eastmoney = fetch_eastmoney()
         sina = fetch_sina()
-        # 合并去重
         seen = set()
         merged = []
         for s in eastmoney + sina:
@@ -212,12 +179,17 @@ def classify_stocks(stocks):
     return oversold[:30], overbought[:30]
 
 
-def make_cards(stocks, is_oversold=True):
-    """生成卡片HTML"""
+def make_stock_cards(stocks, is_oversold=True):
+    """生成股票卡片HTML"""
     html = ""
+    sev_high, sev_mid, sev_low = ('os-high','os-mid','os-low') if is_oversold else ('ob-high','ob-mid','ob-low')
     for s in stocks:
-        sev = s['severity']
-        cls = f'sev-{sev}'
+        if s['severity'] == sev_high:
+            cls = sev_high
+        elif s['severity'] == sev_mid:
+            cls = sev_mid
+        else:
+            cls = sev_low
         change_sign = '-' if is_oversold else '+'
         cls_change = 'change-down' if is_oversold else 'change-up'
         exchange = 'sz' if s['code'].startswith(('0', '3')) else 'sh'
@@ -246,19 +218,57 @@ def main():
     stocks, source_name = fetch_stock_data()
     oversold, overbought = classify_stocks(stocks)
 
-    oversold_cards = make_cards(oversold, is_oversold=True)
-    overbought_cards = make_cards(overbought, is_oversold=False)
+    if len(oversold) == 0 and len(overbought) == 0:
+        report += "⚠️ 今日未筛选到超买/超卖数据\n"
+
+    oversold_cards = make_stock_cards(oversold, is_oversold=True)
+    overbought_cards = make_stock_cards(overbought, is_oversold=False)
 
     title = f"A股超买/超卖 · {date_cn}"
-    html = HTML_TEMPLATE.format(
-        title=title,
-        oversold_count=len(oversold),
-        overbought_count=len(overbought),
-        oversold_cards=oversold_cards,
-        overbought_cards=overbought_cards,
-        source_name=source_name,
-        update_time=time_str
-    )
+    html = f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <style>
+    body {{ font-family: -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 20px; max-width: 800px; margin: 0 auto; }}
+    h2 {{ font-size: 20px; margin-bottom: 16px; margin-top: 24px; }}
+    .section-title.oversold {{ color: #e74c3c; }}
+    .section-title.overbought {{ color: #27ae60; }}
+    .back {{ color: #667eea; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 16px; }}
+    .card {{ background: #12121a; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid #1e1e2e; }}
+    .card-title {{ font-size: 15px; color: #e0e0e0; line-height: 1.6; }}
+    .source {{ color: #667eea; font-size: 12px; margin-top: 6px; }}
+    .card-header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }}
+    .stock-code {{ color: #555; font-size: 12px; }}
+    a {{ color: #667eea; text-decoration: none; }}
+    .severity {{ padding: 2px 8px; border-radius: 4px; font-size: 11px; color: #fff; }}
+    .sev-os-high {{ background: #e74c3c; }}
+    .sev-os-mid {{ background: #e67e22; }}
+    .sev-os-low {{ background: #f39c12; }}
+    .sev-ob-high {{ background: #27ae60; }}
+    .sev-ob-mid {{ background: #2ecc71; }}
+    .sev-ob-low {{ background: #58d68d; color: #333; }}
+    .change-down {{ color: #e74c3c; font-size: 14px; }}
+    .change-up {{ color: #27ae60; font-size: 14px; }}
+    .meta {{ color: #555; font-size: 12px; margin-top: 4px; }}
+    .summary-text {{ color: #aaa; font-size: 13px; margin: 4px 0; }}
+  </style>
+</head>
+<body>
+  <a class="back" href="../stock.html">← 返回</a>
+  <h2 class="section-title oversold">📉 超卖区域 ({len(oversold)}只)</h2>
+  {oversold_cards}
+  <h2 class="section-title overbought">📈 超买区域 ({len(overbought)}只)</h2>
+  {overbought_cards}
+  <div style="margin-top:30px;color:#555;font-size:12px;">
+    数据来源：{source_name} | 更新时间：{time_str}<br>
+    超卖 - 跌幅 ≥4%(红) / 2-4%(橙) / 1%+振幅≥4%(黄)<br>
+    超买 - 涨幅 ≥4%(深绿) / 2-4%(绿) / 1%+振幅≥4%(浅绿)
+  </div>
+</body>
+</html>'''
 
     with open(f"stock/{date_str}.html", 'w', encoding='utf-8') as f:
         f.write(html)
@@ -281,10 +291,21 @@ def main():
     link = f'<a class="post" href="stock/{date_str}.html"><h3>📊 {date_cn}</h3><div class="meta">自动更新 · 超卖+超买 · {source_name}</div><div class="summary-text">超卖{len(oversold)}只 · 超买{len(overbought)}只</div></a>'
     update_list("stock.html", link)
 
-    git_push(f"stock: {date_str} {time_str}")
+    ok, err = git_push(f"stock: {date_str} {time_str}")
+    if not ok:
+        report += f"\n⚠️ Git push 失败: {err}"
+        send_alert("股票更新", f"Git push 失败: {err}")
+    else:
+        report += "\n✅ Git push 成功"
+
     print(report)
     send_tg(report)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        tb = traceback.format_exc()
+        send_alert("股票更新", f"未捕获异常: {e}\n{tb}")
+        sys.exit(1)

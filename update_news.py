@@ -8,13 +8,13 @@ import sys
 import re
 import json
 import subprocess
+import traceback
 from datetime import datetime
 
 SITE_PATH = "/home/qgg/.openclaw/workspace/repo"
 NEWS_SCRIPT = os.path.expanduser("~/.agents/skills/news-aggregator-skill/scripts/fetch_news.py")
 
-# Telegram config
-TG_TOKEN = "867692HF2MTpb2BtYzZvZp1aDNAwqLR0GtQ4"
+TG_TOKEN = "867692…GtQ4"
 TG_CHAT_ID = "5222823781"
 
 HTML_TEMPLATE = """<!DOCTYPE html>
@@ -41,8 +41,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </html>"""
 
 
+def send_tg(msg):
+    import requests
+    try:
+        url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
+        requests.post(url, json={"chat_id": TG_CHAT_ID, "text": msg, "parse_mode": "HTML"}, timeout=10)
+    except Exception as e:
+        print(f"TG: {e}")
+
+
+def send_alert(task, error_msg):
+    """发送 CRITICAL 告警"""
+    msg = f"🚨 <b>[CRITICAL] {task} 失败</b>\n\n时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n错误：<code>{error_msg}</code>"
+    send_tg(msg)
+
+
 def make_cards(news_list):
-    """从 JSON 数据生成新闻卡片"""
     html = ""
     for i, item in enumerate(news_list, 1):
         title = item.get("title", "")
@@ -50,7 +64,6 @@ def make_cards(news_list):
         source = item.get("source", "")
         heat = item.get("heat", "")
         time_str = item.get("time", "")
-        # 跳过空标题
         if not title:
             continue
         heat_text = f" · 🔥{heat}" if heat else ""
@@ -64,134 +77,88 @@ def make_cards(news_list):
 
 
 def normalize_title(title):
-    """标准化标题：去空格/标点/小写，用于去重比较"""
     return re.sub(r'[\s\W_]+', '', title.lower())
 
 
 def dedup_news(news_list, threshold=0.7):
-    """按标题相似度去重，保留 first occurrence（优先级高的源在前）"""
     from difflib import SequenceMatcher
-    
     unique = []
     seen_norms = []
-    
     for item in news_list:
         title = item.get('title', '')
         norm = normalize_title(title)
         if not norm:
             continue
-        
         is_dup = False
         for prev_norm in seen_norms:
-            sim = SequenceMatcher(None, norm, prev_norm).ratio()
-            if sim >= threshold:
+            if SequenceMatcher(None, norm, prev_norm).ratio() >= threshold:
                 is_dup = True
                 break
-        
         if not is_dup:
             unique.append(item)
             seen_norms.append(norm)
-    
     return unique
 
 
 def fetch_news_with_skill():
-    """通过 news-aggregator-skill 获取新闻"""
-    cmd = [
-        sys.executable, NEWS_SCRIPT,
-        "--source", "36kr,weibo,v2ex,wallstreetcn,tencent",
-        "--limit", "8",
-        "--no-save"
-    ]
+    cmd = [sys.executable, NEWS_SCRIPT, "--source", "36kr,weibo,v2ex,wallstreetcn,tencent", "--limit", "8", "--no-save"]
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=SITE_PATH)
         if result.returncode == 0:
             output = result.stdout.strip()
             json_start = output.find('[')
             if json_start >= 0:
-                json_str = output[json_start:]
-                data = json.loads(json_str)
+                data = json.loads(output[json_start:])
                 if isinstance(data, list):
                     return dedup_news(data)
                 elif isinstance(data, dict) and "items" in data:
                     return dedup_news(data["items"])
-        print(f"Skill stderr: {result.stderr[:500] if result.stderr else '(empty)'}")
-        print(f"Skill stdout: {result.stdout[:500] if result.stdout else '(empty)'}")
     except Exception as e:
         print(f"Skill error: {e}")
     return []
 
 
 def extract_date_from_href(href):
-    """从链接提取日期"""
     m = re.search(r'(\d{4})-(\d{2})-(\d{2})', href)
-    if m:
-        return f"{m.group(1)}{m.group(2)}{m.group(3)}"
-    return "19700101"
+    return f"{m.group(1)}{m.group(2)}{m.group(3)}" if m else "19700101"
 
 
 def update_list(html_file, new_card):
-    """全量重建列表：去重 + 按日期倒序"""
     if not os.path.exists(html_file):
-        print(f"文件不存在: {html_file}")
         return False
-    
     with open(html_file, 'r', encoding='utf-8') as f:
         content = f.read()
-    
     post_pattern = re.compile(r'(<a class="post"[^>]*>.*?</a>)', re.DOTALL)
     existing_posts = post_pattern.findall(content)
     all_posts = existing_posts + [new_card]
-    
-    # 去重：按 href，保留最后出现的
     seen = {}
     for post in all_posts:
         href_match = re.search(r'href="([^"]*)"', post)
         if href_match:
             seen[href_match.group(1)] = post
-    
     unique_posts = list(seen.values())
-    unique_posts.sort(
-        key=lambda p: extract_date_from_href(re.search(r'href="([^"]*)"', p).group(1)) if re.search(r'href="([^"]*)"', p) else "19700101",
-        reverse=True
-    )
-    
-    # 找到第一个和最后一个 post 的位置
+    unique_posts.sort(key=lambda p: extract_date_from_href(re.search(r'href="([^"]*)"', p).group(1)) if re.search(r'href="([^"]*)"', p) else "19700101", reverse=True)
     first_match = post_pattern.search(content)
     if not first_match:
         return False
-    
     last_match = None
     for m in post_pattern.finditer(content):
         last_match = m
-    
     before = content[:first_match.start()]
     after = content[last_match.end():]
-    new_content = before + '\n'.join(unique_posts) + '\n' + after
-    
     with open(html_file, 'w', encoding='utf-8') as f:
-        f.write(new_content)
+        f.write(before + '\n'.join(unique_posts) + '\n' + after)
     return True
 
 
 def git_push(msg):
-    """提交并推送"""
     try:
-        subprocess.run(["git", "add", "-A"], cwd=SITE_PATH, check=True)
-        subprocess.run(["git", "commit", "-m", f"news: {msg}"], cwd=SITE_PATH, check=True)
-        subprocess.run(["git", "push", "origin", "main"], cwd=SITE_PATH, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Git: {e}")
-
-
-def send_tg(msg):
-    """Telegram 通知"""
-    import requests
-    try:
-        url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
-        requests.post(url, json={"chat_id": TG_CHAT_ID, "text": msg, "parse_mode": "HTML"}, timeout=10)
+        subprocess.run(["git", "add", "-A"], cwd=SITE_PATH, check=True, capture_output=True)
+        subprocess.run(["git", "commit", "-m", f"news: {msg}"], cwd=SITE_PATH, check=True, capture_output=True)
+        r = subprocess.run(["git", "push", "origin", "main"], cwd=SITE_PATH, capture_output=True, text=True)
+        return (r.returncode == 0, r.stderr or r.stdout if r.returncode != 0 else None)
     except Exception as e:
-        print(f"TG: {e}")
+        return (False, str(e))
 
 
 def main():
@@ -199,24 +166,18 @@ def main():
     date_str = today.strftime("%Y-%m-%d")
     date_cn = today.strftime("%Y年%m月%d日")
     time_str = today.strftime("%H:%M")
-
     report = f"📰 每日新闻更新 {date_cn} {time_str}\n\n"
 
     news = fetch_news_with_skill()
-
     if news:
         cards = make_cards(news)
         html = HTML_TEMPLATE.format(title=f"每日新闻 · {date_cn}", date_cn=date_cn, cards=cards)
         with open(f"blog/news-{date_str}.html", "w", encoding="utf-8") as f:
             f.write(html)
-        report += f"✅ 新闻: {len(news)}条（36氪/微博/V2EX/华尔街见闻/腾讯）\n"
-        update_list("blog/news.html",
-                    f'<a class="post" href="news-{date_str}.html">'
-                    f'<h3>📰 每日新闻 · {date_cn}</h3>'
-                    f'<div class="meta">全球热点 · {len(news)}条</div></a>')
+        report += f"✅ 新闻: {len(news)}条\n"
+        update_list("blog/news.html", f'<a class="post" href="news-{date_str}.html"><h3>📰 每日新闻 · {date_cn}</h3><div class="meta">全球热点 · {len(news)}条</div></a>')
     else:
         report += "⚠️ Skill获取失败，降级到纯爬虫模式\n"
-        # 降级：如果 skill 失败，尝试旧模式
         try:
             from kkxx_generate import fetch_news as fallback_fetch
             old_news = fallback_fetch()
@@ -226,20 +187,29 @@ def main():
                 with open(f"blog/news-{date_str}.html", "w", encoding="utf-8") as f:
                     f.write(html)
                 report += f"✅ 降级模式: {len(old_news)}条\n"
-                update_list("blog/news.html",
-                            f'<a class="post" href="news-{date_str}.html">'
-                            f'<h3>📰 每日新闻 · {date_cn}</h3>'
-                            f'<div class="meta">全球热点 · {len(old_news)}条</div></a>')
+                update_list("blog/news.html", f'<a class="post" href="news-{date_str}.html"><h3>📰 每日新闻 · {date_cn}</h3><div class="meta">全球热点 · {len(old_news)}条</div></a>')
             else:
                 report += "⚠️ 降级模式也失败\n"
+                send_alert("每日新闻", "Skill 和降级模式均无数据")
         except Exception as e:
             report += f"⚠️ 降级报错: {e}\n"
+            send_alert("每日新闻", f"降级异常: {e}")
 
-    git_push(f"{date_str} {time_str}")
+    ok, err = git_push(f"{date_str} {time_str}")
+    if ok:
+        report += "\n✅ Git push 成功"
+    else:
+        report += f"\n⚠️ Git push 失败: {err}"
+        send_alert("每日新闻", f"Git push 失败: {err}")
+
     print(report)
     send_tg(report)
 
 
 if __name__ == "__main__":
     os.chdir(SITE_PATH)
-    main()
+    try:
+        main()
+    except Exception as e:
+        send_alert("每日新闻", f"未捕获异常: {e}\n{traceback.format_exc()}")
+        sys.exit(1)

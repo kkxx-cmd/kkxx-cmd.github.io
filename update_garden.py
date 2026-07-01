@@ -4,10 +4,27 @@
 """
 import os
 import sys
+import traceback
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from kkxx_generate import fetch_hefei, update_list, git_push, send_tg, HTML_TEMPLATE, make_cards
 from datetime import datetime
+
+SITE_PATH = "/home/qgg/.openclaw/workspace/repo"
+TG_TOKEN = "867692…GtQ4"
+TG_CHAT_ID = "5222823781"
+
+
+def send_alert(task, error_msg):
+    """发送 CRITICAL 告警"""
+    import requests
+    try:
+        url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
+        msg = f"🚨 <b>[CRITICAL] {task} 失败</b>\n\n时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n错误：<code>{error_msg}</code>"
+        requests.post(url, json={"chat_id": TG_CHAT_ID, "text": msg, "parse_mode": "HTML"}, timeout=10)
+    except Exception as e:
+        print(f"Alert TG: {e}")
+
 
 def main():
     today = datetime.now()
@@ -26,10 +43,23 @@ def main():
         update_list("garden.html", f'<a class="post" href="garden/{date_str}.html"><h3>🌿 数字花园 · {date_cn}</h3><div class="meta">合肥城事 · {len(items)}条</div></a>')
     else:
         report += "⚠️ 安徽新闻获取失败\n"
+        send_alert("数字花园", "安徽新闻网无数据")
     
-    git_push(f"garden: {date_str} {time_str}")
+    ok, err = git_push(f"garden: {date_str} {time_str}")
+    if ok:
+        report += "\n✅ Git push 成功"
+    else:
+        report += f"\n⚠️ Git push 失败: {err}"
+        send_alert("数字花园", f"Git push 失败: {err}")
+    
     print(report)
     send_tg(report)
 
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        tb = traceback.format_exc()
+        send_alert("数字花园", f"未捕获异常: {e}\n{tb}")
+        sys.exit(1)
