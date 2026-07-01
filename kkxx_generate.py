@@ -111,23 +111,91 @@ def make_cards(items):
   </div>\n"""
     return html
 
+import os
+import re
+import subprocess
+from datetime import datetime
+
+SITE_PATH = "/home/qgg/.openclaw/workspace/repo"
+TG_TOKEN = "867692…GtQ4"
+TG_CHAT_ID = "5222823781"
+os.chdir(SITE_PATH)
+
+
+def send_tg(msg):
+    import requests
+    try:
+        url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
+        requests.post(url, json={"chat_id": TG_CHAT_ID, "text": msg, "parse_mode": "HTML"}, timeout=10)
+    except Exception as e:
+        print(f"TG: {e}")
+
+
+def extract_date_from_href(href):
+    """从链接提取日期，如 'news-2026-07-01.html' → '2026-07-01'"""
+    m = re.search(r'(\d{4})-(\d{2})-(\d{2})', href)
+    if m:
+        return f"{m.group(1)}{m.group(2)}{m.group(3)}"
+    return "19700101"
+
+
 def update_list(list_file, new_card, marker="<!-- INSERT_MARKER -->"):
+    """全量重建列表页：提取所有文章链接 → 去重 → 按日期倒序 → 重写文件"""
     try:
         with open(list_file, 'r', encoding='utf-8') as f:
             content = f.read()
-        # 防重复：先检查是否已存在今日链接（精确匹配）
-        if new_card.strip() in content.strip():
-            print(f"列表已存在，跳过: {list_file}")
-            return True
-        pattern = re.compile(rf'{re.escape(marker)}', re.IGNORECASE)
-        if pattern.search(content):
-            content = pattern.sub(f'{new_card}\n  {marker}', content, count=1)
-            with open(list_file, 'w', encoding='utf-8') as f:
-                f.write(content)
-            return True
+        
+        # 提取所有 <a class="post" ...>...</a> 块
+        post_pattern = re.compile(r'(<a class="post"[^>]*>.*?</a>)', re.DOTALL)
+        existing_posts = post_pattern.findall(content)
+        
+        # 新卡片也是一种 post
+        all_posts = existing_posts + [new_card]
+        
+        # 去重：按 href，保留最后出现的（即内容更完整的）
+        seen = {}
+        for post in all_posts:
+            href_match = re.search(r'href="([^"]*)"', post)
+            if href_match:
+                seen[href_match.group(1)] = post
+        
+        # 按日期倒序排列
+        unique_posts = list(seen.values())
+        unique_posts.sort(
+            key=lambda p: extract_date_from_href(re.search(r'href="([^"]*)"', p).group(1)) if re.search(r'href="([^"]*)"', p) else "19700101",
+            reverse=True
+        )
+        
+        # 找到第一个 post 的开始位置和最后一个 post 的结束位置
+        first_match = post_pattern.search(content)
+        if not first_match:
+            # 没有现有 posts，直接插入到 marker 前
+            pattern = re.compile(rf'{re.escape(marker)}', re.IGNORECASE)
+            if pattern.search(content):
+                content = pattern.sub(f'{new_card}\n  {marker}', content, count=1)
+                with open(list_file, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                return True
+            return False
+        
+        # 找最后一个 post 的结束位置
+        last_match = None
+        for m in post_pattern.finditer(content):
+            last_match = m
+        
+        # 替换整个区间
+        before = content[:first_match.start()]
+        after = content[last_match.end():]
+        
+        new_content = before + '\n  '.join(unique_posts) + '\n' + after
+        
+        with open(list_file, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        
+        return True
     except Exception as e:
         print(f"列表更新失败 {list_file}: {e}")
-    return False
+        return False
 
 def git_push(msg):
     try:
