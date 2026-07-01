@@ -1,1 +1,20 @@
-backup/
+# 日志文件
+*.log
+generate.log
+
+# 临时脚本
+migrate_blog.py
+
+# 旧版/重复文件
+stock/stock.html
+stock_data.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
