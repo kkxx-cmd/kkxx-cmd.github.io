@@ -64,7 +64,7 @@ def fetch_eastmoney_data():
     """从东方财富获取全A股数据"""
     url = "https://push2.eastmoney.com/api/qt/clist/get"
     all_stocks = []
-    for page in range(1, 6):
+    for page in range(1, 9):
         params = {
             'pn': page, 'pz': 100, 'po': 1, 'np': 1, 'fltt': 2, 'invt': 2,
             'fid': 'f3',
@@ -106,28 +106,28 @@ def classify_stocks(stocks):
     oversold = []
     overbought = []
     for s in stocks:
-        if s['change'] <= -6:
+        if s['change'] <= -4:
             s['severity'] = 'os-high'; s['level'] = '严重超卖'
             oversold.append(s)
-        elif s['change'] <= -4:
+        elif s['change'] <= -2.5:
             s['severity'] = 'os-mid'; s['level'] = '中度超卖'
             oversold.append(s)
-        elif s['change'] <= -3 and s['amplitude'] >= 6:
+        elif s['change'] <= -2 and s['amplitude'] >= 5:
             s['severity'] = 'os-low'; s['level'] = '轻度超卖'
             oversold.append(s)
-        elif s['change'] >= 6:
+        elif s['change'] >= 4:
             s['severity'] = 'ob-high'; s['level'] = '严重超买'
             overbought.append(s)
-        elif s['change'] >= 4:
+        elif s['change'] >= 2.5:
             s['severity'] = 'ob-mid'; s['level'] = '中度超买'
             overbought.append(s)
-        elif s['change'] >= 3 and s['amplitude'] >= 6:
+        elif s['change'] >= 2 and s['amplitude'] >= 5:
             s['severity'] = 'ob-low'; s['level'] = '轻度超买'
             overbought.append(s)
 
     oversold.sort(key=lambda x: x['change'])
     overbought.sort(key=lambda x: x['change'], reverse=True)
-    return oversold[:10], overbought[:10]
+    return oversold[:15], overbought[:15]
 
 
 def make_cards(stocks, is_oversold=True):
