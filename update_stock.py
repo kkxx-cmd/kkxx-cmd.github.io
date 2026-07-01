@@ -69,9 +69,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 
 def fetch_eastmoney_data():
-    """从东方财富获取全A股数据，按换手率和涨跌幅双维度筛选"""
+    """从东方财富获取全A股数据，一次 po=1 降序取前600，两头分别为超买/超卖"""
     url = "https://push2.eastmoney.com/api/qt/clist/get"
-    # 使用 Session 复用连接
     s = requests.Session()
     s.headers.update({
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -79,27 +78,27 @@ def fetch_eastmoney_data():
         'Referer': 'https://quote.eastmoney.com/',
         'X-Requested-With': 'XMLHttpRequest'
     })
-    all_stocks = []
     
-    # po=1: 涨跌幅降序（超买在前），po=-1: 涨跌幅升序（超卖在前）
-    for sort_type in [1, -1]:
+    all_stocks = []
+    # po=1 = 涨跌幅降序。从 pn=1 开始翻页，每次 300 条
+    for pn in [1, 2]:
         params = dict(FETCH_PARAMS)
-        params['pn'] = 1
+        params['pn'] = pn
         params['pz'] = 300
-        params['po'] = sort_type
+        params['po'] = 1
         
         try:
             r = s.get(url, params=params, timeout=30)
             if r.status_code != 200:
-                print(f"HTTP {r.status_code} for po={sort_type}")
+                print(f"HTTP {r.status_code} for pn={pn}")
                 continue
-            
             data = r.json()
             if data.get('rc') != 0:
-                print(f"API error for po={sort_type}: {data}")
+                print(f"API error for pn={pn}: {data}")
                 continue
-            
             items = data.get('data', {}).get('diff', []) or []
+            if not items:
+                break
             for item in items:
                 code = str(item.get('f12', ''))
                 name = item.get('f14', '')
@@ -117,9 +116,8 @@ def fetch_eastmoney_data():
                     'amplitude': float(amplitude), 'turnover_rate': float(turnover_rate)
                 })
         except Exception as e:
-            print(f"EastMoney po={sort_type}: {e}")
-        
-        time.sleep(1.5)
+            print(f"EastMoney pn={pn}: {e}")
+        time.sleep(1)
     
     # 去重
     seen = set()
