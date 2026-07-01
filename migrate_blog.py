@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""修复：重新迁移 blog.html，排除 news-* 文件，news-* 只存在于 blog/news.html"""
+"""修复：正确提取标题，处理带 front matter 的文件"""
 import os
 import re
 
@@ -14,11 +14,29 @@ for f in sorted(os.listdir(os.path.join(SITE_PATH, "blog"))):
     with open(path, "r", encoding="utf-8") as fp:
         content = fp.read()
     
+    # 提取日期
     date_match = re.search(r"(\d{4})-(\d{2})-(\d{2})", f) or re.search(r"(\d{4})-(\d{2})-(\d{2})", content)
     date = f"{date_match.group(1)}-{date_match.group(2)}-{date_match.group(3)}" if date_match else "2026-01-01"
     
+    # 提取标题（多种方式）
+    title = None
+    # 方式1: HTML heading 标签
     title_match = re.search(r"<h[123][^>]*>([^<]+)</h[123]>", content)
-    title = title_match.group(1).strip() if title_match else f
+    if title_match:
+        title = title_match.group(1).strip()
+    
+    # 方式2: 正文第一行（排除 front matter）
+    if not title:
+        # 去掉 front matter 后的第一行
+        text = re.sub(r"^---[\s\S]*?---\s*", "", content).strip()
+        first_line = text.split("\n")[0].strip()
+        if first_line:
+            # 去掉 markdown heading 符号
+            title = re.sub(r"^#+\s*", "", first_line).strip()
+    
+    # 兜底：使用文件名
+    if not title:
+        title = f.replace(".html", "")
     
     posts.append({"date": date, "title": title, "file": f})
 
@@ -63,4 +81,6 @@ html = '''<!DOCTYPE html>
 with open(BLOG_HTML, "w", encoding="utf-8") as f:
     f.write(html)
 
-print(f"已迁移 {len(posts)} 篇文章到 blog.html（已排除新闻文件）")
+print(f"已迁移 {len(posts)} 篇文章到 blog.html")
+for p in posts[:10]:
+    print(f"  {p['date']} | {p['title']}")
