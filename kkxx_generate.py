@@ -22,30 +22,45 @@ def send_tg(msg):
         print(f"TG: {e}")
 
 def fetch_hefei():
+    """抓取安徽省本地新闻，来源：安徽新闻网（中安在线）"""
     import requests
-    from bs4 import BeautifulSoup
-    for url in [
-        "https://www.sohu.com/tag/2446954827/",
-        "https://news.baidu.com/ns?word=%E5%90%88%E8%82%A5%E6%96%B0%E9%97%BB",
-    ]:
+    import re
+    
+    news = []
+    
+    # 安徽新闻网（中安在线）
+    sources = [
+        ('http://ah.anhuinews.com/szxw/', '安徽新闻'),
+        ('http://ah.anhuinews.com/rs/', '人事任免'),
+        ('http://ah.anhuinews.com/lsa/', '政策法规'),
+        ('http://ah.anhuinews.com/ahtopic/', '专题'),
+    ]
+    
+    for url, cat in sources:
         try:
-            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)"}, proxies={"http": None, "https": None})
-            soup = BeautifulSoup(r.text, "html.parser")
-            items = []
-            for a in soup.find_all("a", href=True)[:15]:
-                t = a.get_text(strip=True)
-                if t and 5 < len(t) < 80 and "合肥" in t:
-                    href = a["href"]
-                    if href.startswith("//"):
-                        href = "https:" + href
-                    elif href.startswith("/"):
-                        href = "https://www.sohu.com" + href
-                    items.append({"title": t, "link": href, "source": "合肥"})
-            if items:
-                return items[:5]
+            r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=10)
+            r.encoding = r.apparent_encoding or 'gbk'
+            html = r.text
+            
+            # 提取链接和标题
+            links = re.findall(r'<a[^>]*href=["\'](http://ah\.anhuinews\.com/[^"\']*\.html?)["\'][^>]*>([^<]+)</a>', html)
+            
+            for href, title in links:
+                title = title.strip()
+                # 过滤：标题长度合理 + 含年份
+                if not title or len(title) < 6 or len(title) > 60:
+                    continue
+                if not re.search(r'202[6-9]', href):
+                    continue
+                # 去重
+                if not any(n['link'] == href for n in news):
+                    news.append({'title': f'[{cat}] {title}', 'link': href, 'source': '安徽新闻网'})
         except Exception as e:
-            print(f"合肥 {url[:30]}: {e}")
-    return [{"title": "合肥城事更新", "link": "https://www.hefei.gov.cn/", "source": "合肥市政府"}]
+            print(f"安徽新闻网{cat}: {e}")
+        if len(news) >= 10:
+            break
+    
+    return news[:10]
 
 def fetch_stocks():
     try:

@@ -22,10 +22,10 @@ def main():
         html = HTML_TEMPLATE.format(title=f"数字花园 · {date_cn}", heading=f"🌿 数字花园 · {date_cn}", back="../garden.html", cards=make_cards(items))
         with open(f"garden/{date_str}.html", 'w', encoding='utf-8') as f:
             f.write(html)
-        report += f"✅ 合肥: {len(items)}条新闻\n"
+        report += f"✅ 安徽: {len(items)}条新闻\n"
         update_list("garden.html", f'<a class="post" href="garden/{date_str}.html"><h3>🌿 数字花园 · {date_cn}</h3><div class="meta">合肥城事 · {len(items)}条</div></a>')
     else:
-        report += "⚠️ 合肥新闻获取失败\n"
+        report += "⚠️ 安徽新闻获取失败\n"
     
     git_push(f"garden: {date_str} {time_str}")
     print(report)
