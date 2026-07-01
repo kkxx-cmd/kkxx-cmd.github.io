@@ -15,6 +15,13 @@ from kkxx_generate import update_list, git_push, send_tg
 
 SITE_PATH = "/home/qgg/.openclaw/workspace/repo"
 
+FETCH_PARAMS = {
+    'np': 1, 'fltt': 2, 'invt': 2,
+    'fid': 'f3',
+    'fs': 'm:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23',
+    'fields': 'f2,f3,f7,f8,f12,f14'
+}
+
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -62,24 +69,37 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 
 def fetch_eastmoney_data():
-    """从东方财富获取全A股数据"""
+    """从东方财富获取全A股数据，按换手率和涨跌幅双维度筛选"""
     url = "https://push2.eastmoney.com/api/qt/clist/get"
-    # 获取所有A股数据：分涨序和跌序两次，每次取Top200
+    # 使用 Session 复用连接
+    s = requests.Session()
+    s.headers.update({
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Referer': 'https://quote.eastmoney.com/',
+        'X-Requested-With': 'XMLHttpRequest'
+    })
     all_stocks = []
-    for sort_type in [1, -1]:  # 1=跌幅, -1=涨幅
-        url = 'https://push2.eastmoney.com/api/qt/clist/get'
-        params = {
-            'pn': 1, 'pz': 300, 'po': sort_type, 'np': 1, 'fltt': 2, 'invt': 2,
-            'fid': 'f3',
-            'fs': 'm:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23',
-            'fields': 'f2,f3,f7,f8,f12,f14'
-        }
+    
+    # po=1: 涨跌幅降序（超买在前），po=-1: 涨跌幅升序（超卖在前）
+    for sort_type in [1, -1]:
+        params = dict(FETCH_PARAMS)
+        params['pn'] = 1
+        params['pz'] = 300
+        params['po'] = sort_type
+        
         try:
-            r = requests.get(url, params=params, timeout=20, headers={
-                'User-Agent': 'Mozilla/5.0',
-                'Referer': 'https://quote.eastmoney.com/'
-            })
-            items = r.json().get('data', {}).get('diff', []) or []
+            r = s.get(url, params=params, timeout=30)
+            if r.status_code != 200:
+                print(f"HTTP {r.status_code} for po={sort_type}")
+                continue
+            
+            data = r.json()
+            if data.get('rc') != 0:
+                print(f"API error for po={sort_type}: {data}")
+                continue
+            
+            items = data.get('data', {}).get('diff', []) or []
             for item in items:
                 code = str(item.get('f12', ''))
                 name = item.get('f14', '')
@@ -97,11 +117,18 @@ def fetch_eastmoney_data():
                     'amplitude': float(amplitude), 'turnover_rate': float(turnover_rate)
                 })
         except Exception as e:
-            print(f'东方财富{sort_type}: {e}')
+            print(f"EastMoney po={sort_type}: {e}")
         
-        import time
-        time.sleep(1)
-    return all_stocks
+        time.sleep(1.5)
+    
+    # 去重
+    seen = set()
+    unique = []
+    for item in all_stocks:
+        if item['code'] not in seen:
+            seen.add(item['code'])
+            unique.append(item)
+    return unique
 
 
 def classify_stocks(stocks):
