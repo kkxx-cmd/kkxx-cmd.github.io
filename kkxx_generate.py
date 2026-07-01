@@ -21,49 +21,6 @@ def send_tg(msg):
     except Exception as e:
         print(f"TG: {e}")
 
-def fetch_news():
-    """抓取多源新闻：新浪多分类 + 百度热词兜底"""
-    import requests
-    from bs4 import BeautifulSoup
-    news = []
-    
-    # 新浪新闻 - 多个分类
-    # lid: 2512国内 2513国际 2514科技 2516财经 2517娱乐 2518军事
-    CATEGORIES = [
-        (2512, "国内"),
-        (2513, "国际"),
-        (2514, "科技"),
-        (2516, "财经"),
-        (2517, "娱乐"),
-    ]
-    for lid, cat in CATEGORIES:
-        url = f"https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid={lid}&k=&num=5&page=1&r="
-        try:
-            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
-            data = r.json()
-            for item in data.get("result", {}).get("data", [])[:4]:
-                title = item.get("title", "")
-                if title and len(title) > 5:
-                    news.append({"title": f"[{cat}] {title}", "link": item.get("url", ""), "source": "新浪"})
-        except Exception as e:
-            print(f"新浪{cat}: {e}")
-        if len(news) >= 15:
-            break
-    
-    # 百度热词兜底
-    if len(news) < 15:
-        try:
-            r = requests.get("https://top.baidu.com/board?tab=realtime", timeout=10, headers={"User-Agent": "Mozilla/5.0"})
-            soup = BeautifulSoup(r.text, "html.parser")
-            for item in soup.find_all("div", class_="c-single-text-ellipsis")[:10]:
-                title = item.get_text(strip=True)
-                if title and len(title) > 5 and len(news) < 20:
-                    news.append({"title": f"[热榜] {title}", "link": "https://top.baidu.com", "source": "百度"})
-        except:
-            pass
-    
-    return news[:20]
-
 def fetch_hefei():
     import requests
     from bs4 import BeautifulSoup
@@ -166,17 +123,6 @@ def main():
     date_cn = today.strftime("%Y年%m月%d日")
     time_str = today.strftime("%H:%M")
     report = f"📊 KKXX 内容更新 {date_cn} {time_str}\n\n"
-    
-    # 新闻
-    news = fetch_news()
-    if news:
-        html = HTML_TEMPLATE.format(title=f"每日新闻 · {date_cn}", heading=f"📰 每日新闻 · {date_cn}", back="../blog.html", cards=make_cards(news))
-        with open(f"blog/news-{date_str}.html", 'w', encoding='utf-8') as f:
-            f.write(html)
-        report += f"✅ 新闻: {len(news)}条\n"
-        update_list("blog.html", f'<a class="post" href="blog/news-{date_str}.html"><h3>📰 每日新闻 · {date_cn}</h3><div class="meta">全球热点 · {len(news)}条</div></a>')
-    else:
-        report += "⚠️ 新闻获取失败\n"
     
     # 合肥
     hefei = fetch_hefei()
