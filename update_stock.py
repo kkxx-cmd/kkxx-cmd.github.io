@@ -79,7 +79,7 @@ def fetch_eastmoney_data():
                 'User-Agent': 'Mozilla/5.0',
                 'Referer': 'https://quote.eastmoney.com/'
             })
-            items = r.json().get('data', {}).get('diff', [])
+            items = r.json().get('data', {}).get('diff', []) or []
             for item in items:
                 code = str(item.get('f12', ''))
                 name = item.get('f14', '')
