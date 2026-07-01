@@ -53,8 +53,18 @@ def fetch_hefei():
                 if not re.search(r'202[6-9]', href):
                     continue
                 # 去重
-                if not any(n['link'] == href for n in news):
-                    news.append({'title': f'[{cat}] {title}', 'link': href, 'source': '安徽新闻网'})
+                    if not any(n['link'] == href for n in news):
+                        # 从 URL 分类
+                        cat_class = cat
+                        if '/rs/' in href:
+                            cat_class = '人事任免'
+                        elif '/lsa/' in href:
+                            cat_class = '政策法规'
+                        elif '/ahtopic/' in href:
+                            cat_class = '专题'
+                        elif '/szxw/' in href:
+                            cat_class = '安徽新闻'
+                        news.append({'title': f'[{cat_class}] {title}', 'link': href, 'source': '安徽新闻网'})
         except Exception as e:
             print(f"安徽新闻网{cat}: {e}")
         if len(news) >= 10:
