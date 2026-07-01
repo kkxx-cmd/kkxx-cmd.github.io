@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 股票专区更新 - 工作日10:00运行
-东方财富接口获取A股超卖 + 超买数据
+东方财富 + 新浪财经 双数据源，获取A股超卖 + 超买数据
 """
 import os
 import sys
@@ -14,13 +14,6 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from kkxx_generate import update_list, git_push, send_tg
 
 SITE_PATH = "/home/qgg/.openclaw/workspace/repo"
-
-FETCH_PARAMS = {
-    'np': 1, 'fltt': 2, 'invt': 2,
-    'fid': 'f3',
-    'fs': 'm:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23',
-    'fields': 'f2,f3,f7,f8,f12,f14'
-}
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -60,42 +53,40 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <h2 class="section-title overbought">📈 超买区域 ({overbought_count}只)</h2>
   {overbought_cards}
   <div style="margin-top:30px;color:#555;font-size:12px;">
-    数据来源：东方财富 | 更新时间：{update_time}<br>
-    超卖 - 跌幅 ≥6%(红) / 4-6%(橙) / 3%+振幅≥6%(黄)<br>
-    超买 - 涨幅 ≥6%(深绿) / 4-6%(绿) / 3%+振幅≥6%(浅绿)
+    数据来源：{source_name} | 更新时间：{update_time}<br>
+    超卖 - 跌幅 ≥4%(红) / 2-4%(橙) / 1%+振幅≥4%(黄)<br>
+    超买 - 涨幅 ≥4%(深绿) / 2-4%(绿) / 1%+振幅≥4%(浅绿)
   </div>
 </body>
 </html>"""
 
 
-def fetch_eastmoney_data():
-    """从东方财富获取全A股数据，一次 po=1 降序取前600，两头分别为超买/超卖"""
+def fetch_eastmoney():
+    """从东方财富获取A股数据"""
     url = "https://push2.eastmoney.com/api/qt/clist/get"
+    params_base = {
+        'np': 1, 'fltt': 2, 'invt': 2, 'fid': 'f3',
+        'fs': 'm:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23',
+        'fields': 'f2,f3,f7,f8,f12,f14'
+    }
     s = requests.Session()
     s.headers.update({
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'application/json, text/javascript, */*; q=0.01',
-        'Referer': 'https://quote.eastmoney.com/',
-        'X-Requested-With': 'XMLHttpRequest'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://quote.eastmoney.com/'
     })
-    
     all_stocks = []
-    # po=1 = 涨跌幅降序。从 pn=1 开始翻页，每次 300 条
     for pn in [1, 2]:
-        params = dict(FETCH_PARAMS)
+        params = dict(params_base)
         params['pn'] = pn
-        params['pz'] = 300
+        params['pz'] = 100
         params['po'] = 1
-        
         try:
-            r = s.get(url, params=params, timeout=30)
+            r = s.get(url, params=params, timeout=20)
             if r.status_code != 200:
-                print(f"HTTP {r.status_code} for pn={pn}")
-                continue
+                break
             data = r.json()
             if data.get('rc') != 0:
-                print(f"API error for pn={pn}: {data}")
-                continue
+                break
             items = data.get('data', {}).get('diff', []) or []
             if not items:
                 break
@@ -117,16 +108,79 @@ def fetch_eastmoney_data():
                 })
         except Exception as e:
             print(f"EastMoney pn={pn}: {e}")
-        time.sleep(1)
-    
-    # 去重
-    seen = set()
-    unique = []
-    for item in all_stocks:
-        if item['code'] not in seen:
-            seen.add(item['code'])
-            unique.append(item)
-    return unique
+            break
+        time.sleep(0.5)
+    return all_stocks
+
+
+def fetch_sina():
+    """从新浪财经获取A股数据（降级方案）"""
+    url = "https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData"
+    s = requests.Session()
+    s.headers.update({
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer': 'https://finance.sina.com.cn/'
+    })
+    all_stocks = []
+    for page in range(1, 4):
+        try:
+            r = s.get(url, params={
+                'page': page, 'num': 200, 'sort': 'changepercent', 'asc': 0, 'node': 'hs_a'
+            }, timeout=20)
+            data = r.json()
+            if not data:
+                break
+            for item in data:
+                code = str(item.get('code', ''))
+                name = item.get('name', '')
+                price = item.get('trade')
+                change = item.get('changepercent')
+                turnover = item.get('turnoverratio', 0) or 0
+                high = item.get('high', 0) or 0
+                low = item.get('low', 0) or 0
+                settlement = item.get('settlement', 0) or 0
+                if price is None or change is None:
+                    continue
+                if not code or not name:
+                    continue
+                # 计算振幅
+                amplitude = 0
+                if settlement > 0:
+                    amplitude = (high - low) / settlement * 100
+                all_stocks.append({
+                    'code': code, 'name': name,
+                    'price': float(price), 'change': float(change),
+                    'amplitude': float(amplitude), 'turnover_rate': float(turnover)
+                })
+        except Exception as e:
+            print(f"Sina page{page}: {e}")
+            break
+        time.sleep(0.5)
+    return all_stocks
+
+
+def fetch_stock_data():
+    """获取股票数据，东方财富优先，失败降级新浪"""
+    stocks = fetch_eastmoney()
+    source_name = "东方财富"
+    if len(stocks) < 50:
+        print(f"东方财富仅{len(stocks)}条，降级到新浪财经...")
+        stocks = fetch_sina()
+        source_name = "新浪财经"
+    if len(stocks) < 50:
+        print(f"新浪也仅{len(stocks)}条，尝试合并...")
+        eastmoney = fetch_eastmoney()
+        sina = fetch_sina()
+        # 合并去重
+        seen = set()
+        merged = []
+        for s in eastmoney + sina:
+            if s['code'] not in seen:
+                seen.add(s['code'])
+                merged.append(s)
+        stocks = merged
+        source_name = "东方财富+新浪"
+    return stocks, source_name
 
 
 def classify_stocks(stocks):
@@ -189,7 +243,7 @@ def main():
 
     report = f"📊 股票超卖/超买更新 {date_cn} {time_str}\n\n"
 
-    stocks = fetch_eastmoney_data()
+    stocks, source_name = fetch_stock_data()
     oversold, overbought = classify_stocks(stocks)
 
     oversold_cards = make_cards(oversold, is_oversold=True)
@@ -202,6 +256,7 @@ def main():
         overbought_count=len(overbought),
         oversold_cards=oversold_cards,
         overbought_cards=overbought_cards,
+        source_name=source_name,
         update_time=time_str
     )
 
@@ -211,17 +266,19 @@ def main():
     with open("data/stock-data.json", 'w', encoding='utf-8') as f:
         json.dump({
             'date': date_str,
+            'source': source_name,
             'oversold': [{'code': s['code'], 'name': s['name'], 'change': s['change'], 'level': s['level']} for s in oversold],
             'overbought': [{'code': s['code'], 'name': s['name'], 'change': s['change'], 'level': s['level']} for s in overbought]
         }, f, ensure_ascii=False, indent=2)
 
+    report += f"数据源: {source_name}\n"
     report += f"超卖: {len(oversold)}只 | 超买: {len(overbought)}只\n"
     for s in oversold[:5]:
         report += f"• {s['name']}({s['code']}) 跌{abs(s['change']):.1f}%\n"
     for s in overbought[:5]:
         report += f"• {s['name']}({s['code']}) 涨{s['change']:.1f}%\n"
 
-    link = f'<a class="post" href="stock/{date_str}.html"><h3>📊 {date_cn}</h3><div class="meta">自动更新 · 超卖+超买</div><div class="summary-text">超卖{len(oversold)}只 · 超买{len(overbought)}只</div></a>'
+    link = f'<a class="post" href="stock/{date_str}.html"><h3>📊 {date_cn}</h3><div class="meta">自动更新 · 超卖+超买 · {source_name}</div><div class="summary-text">超卖{len(oversold)}只 · 超买{len(overbought)}只</div></a>'
     update_list("stock.html", link)
 
     git_push(f"stock: {date_str} {time_str}")
