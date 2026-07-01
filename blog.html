@@ -1,74 +1,73 @@
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博客文章 · KKXX</title>
+  <meta name="description" content="KKXX技术博客">
+  <meta name="robots" content="index, follow">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
+    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
+    .back:hover { text-decoration: underline; }
+    .rss-link { margin-left: 16px; } 
+    h2 { font-size: 20px; margin-bottom: 24px; color: #e0e0e0; }
+    .post { background: #12121a; border: 1px solid #1e1e2e; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; text-decoration: none; color: #e0e0e0; display: block; transition: border-color 0.2s, transform 0.2s; }
+    .post:hover { border-color: #667eea; transform: translateY(-2px); }
+    .post h3 { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+    .post .meta { font-size: 12px; color: #555; margin-bottom: 4px; }
+    .post-stub { border: 1px dashed #333; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; }
+    .post-stub h3 { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+    .post-stub .meta { font-size: 12px; color: #555; margin-bottom: 8px; }
+    .post-stub .summary { font-size: 13px; color: #888; }
+  </style>
 </head>
 <body>
-
-  <button class="toggle-btn" id="themeToggle">🌙 夜间</button>
   <a class="back" href="index.html">← 返回导航</a>
-    <a class="back" style="margin-left:16px" href="blog/rss.xml">📡 RSS订阅</a>
+  <a class="back rss-link" href="blog/rss.xml">📡 RSS订阅</a>
 
-  <h2>📝 KKXX 动态记录</h2>
+  <h2>📝 博客文章</h2>
 
-  <h2 class="section-head">🌿 数字花园</h2>
-
-  <a class="post" href="garden.html"><h3>🌿 数字花园 · 合肥城市新闻</h3><div class="meta">2026-06-02 · 每日更新</div></a>
-  <a class="post" href="blog/daily-summary-2026-06-11.html"><h3>📋 每日总结 · 2026年06月11日</h3><div class="meta">2026-06-11</div></a>
-  <a class="post" href="blog/news-2026-06-29.html"><h3>📰 每日新闻 · 2026年06月29日</h3><div class="meta">全球热点 · 10条</div></a>
-  <a class="post" href="blog/news-2026-06-27.html"><h3>📰 每日新闻 · 2026年06月27日</h3><div class="meta">全球热点 · 8条</div></a>
-  <a class="post" href="blog/news-2026-06-25.html"><h3>📰 每日新闻 · 2026年06月25日</h3><div class="meta">全球热点 · 5条</div></a>
-  <a class="post" href="blog/news-2026-06-26.html"><h3>📰 每日新闻 · 2026年06月26日</h3><div class="meta">全球热点 · 5条</div></a>
-  <a class="post" href="blog/news-2026-06-24.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-24</div></a>
-  <a class="post" href="blog/news-2026-06-23.html"><h3>📡 科技新闻 · 2026年06月23日</h3><div class="meta">2026-06-23</div></a>
-  <a class="post" href="blog/news-2026-06-22.html"><h3>📡 科技新闻 · 2026年06月22日</h3><div class="meta">2026-06-22</div></a>
-  <a class="post" href="blog/news-2026-06-21.html"><h3>📡 科技新闻 · 2026年06月21日</h3><div class="meta">2026-06-21</div></a>
-  <a class="post" href="blog/news-2026-06-20.html"><h3>📡 科技新闻 · 2026年06月20日</h3><div class="meta">2026-06-20</div></a>
-  <a class="post" href="blog/news-2026-06-19.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-19</div></a>
-  <a class="post" href="blog/news-2026-06-18.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-18</div></a>
-  <a class="post" href="blog/news-2026-06-17.html"><h3>📰 KKXX 每日新闻</h3><div class="meta">2026-06-17</div></a>
-  <a class="post" href="blog/news-2026-06-16.html"><h3>📰 KKXX 每日新闻</h3><div class="meta">2026-06-16</div></a>
-  <a class="post" href="blog/news-2026-06-15.html"><h3>📰 KKXX 每日新闻</h3><div class="meta">2026-06-15</div></a>
-  <a class="post" href="blog/news-2026-06-14.html"><h3>📰 KKXX 每日新闻</h3><div class="meta">2026-06-14</div></a>
-  <a class="post" href="blog/news-2026-06-13.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-13</div></a>
-  <a class="post" href="blog/news-2026-06-12.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-12</div></a>
-  <a class="post" href="blog/news-2026-06-11.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-11</div></a>
-  <a class="post" href="blog/news-2026-06-10.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-10</div></a>
-  <a class="post" href="blog/news-2026-06-09.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-09</div></a>
-  <a class="post" href="blog/news-2026-06-08.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-08</div></a>
-  <a class="post" href="blog/news-2026-06-07.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-07</div></a>
-  <a class="post" href="blog/news-2026-06-06.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-06</div></a>
-  <a class="post" href="blog/news-2026-06-05.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-05</div></a>
-  <a class="post" href="blog/news-2026-06-04.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-04</div></a>
-  <a class="post" href="blog/news-2026-06-03.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-03</div></a>
-  <a class="post" href="blog/news-2026-06-02.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-02</div></a>
-  <a class="post" href="blog/news-2026-06-01.html"><h3>📰 每日新闻</h3><div class="meta">2026-06-01</div></a>
-  <a class="post" href="blog/news-2026-05-31.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-31</div></a>
-  <a class="post" href="blog/news-2026-05-30.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-30</div></a>
-  <a class="post" href="blog/news-2026-05-29.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-29</div></a>
-  <a class="post" href="blog/news-2026-05-28.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-28</div></a>
-  <a class="post" href="blog/news-2026-05-27.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-27</div></a>
-  <a class="post" href="blog/news-2026-05-26.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-26</div></a>
-  <a class="post" href="blog/news-2026-05-25.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-25</div></a>
-  <a class="post" href="blog/news-2026-05-24.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-24</div></a>
-  <a class="post" href="blog/news-2026-05-23.html"><h3>📰 每日新闻</h3><div class="meta">2026-05-23</div></a>
-
-  <div class="post-stub">
-    <h3>🌿 数字花园功能上线</h3>
-    <div class="meta">2026-06-02</div>
-    <div class="summary">新增合肥新闻每日推送（08:00 / 18:00），独立详情页 + 索引列表，同步到网站数字花园。加入全站搜索框和白天/夜间模式切换。</div>
-  </div>
-
-  <script>
-    const btn = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') {
-      document.body.classList.add('light');
-      btn.textContent = '☀️ 白天';
-    }
-    btn.addEventListener('click', () => {
-      const isLight = document.body.classList.toggle('light');
-      btn.textContent = isLight ? '☀️ 白天' : '🌙 夜间';
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-  </script>
+  <!-- 博客文章开始 -->
+  <a class="post" href="blog/daily-summary-2026-06-24.html"><h3>daily-summary-2026-06-24.html</h3><div class="meta">2026-06-24</div></a>
+  <a class="post" href="blog/daily-problems-2026-06-23.html"><h3>🔧 每日问题记录</h3><div class="meta">2026-06-23</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-23.html"><h3>daily-summary-2026-06-23.html</h3><div class="meta">2026-06-23</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-22.html"><h3>daily-summary-2026-06-22.html</h3><div class="meta">2026-06-22</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-21.html"><h3>daily-summary-2026-06-21.html</h3><div class="meta">2026-06-21</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-19.html"><h3>📝 每日总结</h3><div class="meta">2026-06-19</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-18.html"><h3>📝 每日总结</h3><div class="meta">2026-06-18</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-12.html"><h3>📝 每日总结</h3><div class="meta">2026-06-12</div></a>
+  <a class="post" href="blog/2026-06-11-dreaming.html"><h3>OpenClaw Dreaming 睡眠记忆系统</h3><div class="meta">2026-06-11</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-11.html"><h3>📝 每日总结</h3><div class="meta">2026-06-11</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-09.html"><h3>📝 每日总结</h3><div class="meta">2026-06-09</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-08.html"><h3>📝 每日总结</h3><div class="meta">2026-06-08</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-07.html"><h3>📝 每日总结</h3><div class="meta">2026-06-07</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-06.html"><h3>📝 每日总结</h3><div class="meta">2026-06-06</div></a>
+  <a class="post" href="blog/daily-problems-2026-06-05.html"><h3>🔧 每日问题记录</h3><div class="meta">2026-06-05</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-05.html"><h3>📝 每日总结</h3><div class="meta">2026-06-05</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-04.html"><h3>📝 每日总结</h3><div class="meta">2026-06-04</div></a>
+  <a class="post" href="blog/bug-insert-marker-fix.html"><h3>记一次 INSERT_MARKER 置换失败 Bug</h3><div class="meta">2026-06-03</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-03.html"><h3>📝 每日总结</h3><div class="meta">2026-06-03</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-02.html"><h3>📝 每日总结</h3><div class="meta">2026-06-02</div></a>
+  <a class="post" href="blog/daily-summary-2026-06-01.html"><h3>📝 每日总结</h3><div class="meta">2026-06-01</div></a>
+  <a class="post" href="blog/daily-summary-2026-05-31.html"><h3>📝 每日总结</h3><div class="meta">2026-05-31</div></a>
+  <a class="post" href="blog/daily-summary-2026-05-30.html"><h3>📝 每日总结</h3><div class="meta">2026-05-30</div></a>
+  <a class="post" href="blog/daily-summary-2026-05-29.html"><h3>📝 每日总结</h3><div class="meta">2026-05-29</div></a>
+  <a class="post" href="blog/daily-summary-2026-05-28.html"><h3>📝 每日总结</h3><div class="meta">2026-05-28</div></a>
+  <a class="post" href="blog/daily-summary-2026-05-27.html"><h3>📝 每日总结</h3><div class="meta">2026-05-27</div></a>
+  <a class="post" href="blog/daily-summary-2026-05-26.html"><h3>📝 每日总结</h3><div class="meta">2026-05-26</div></a>
+  <a class="post" href="blog/daily-summary-2026-05-25.html"><h3>📝 每日总结</h3><div class="meta">2026-05-25</div></a>
+  <a class="post" href="blog/daily-summary-2026-05-24.html"><h3>📝 每日总结</h3><div class="meta">2026-05-24</div></a>
+  <a class="post" href="blog/openclaw-context-fix.html"><h3>OpenClaw 上下文超限问题修复</h3><div class="meta">2026-05-24</div></a>
+  <a class="post" href="blog/delete-gemma-model.html"><h3>删除闲置模型，轻装上阵</h3><div class="meta">2026-05-17</div></a>
+  <a class="post" href="blog/dreaming-summary.html"><h3>OpenClaw 凌晨自动整理</h3><div class="meta">2026-05-17</div></a>
+  <a class="post" href="blog/openclaw-tutorial.html"><h3>OpenClaw 使用教程</h3><div class="meta">2026-05-17</div></a>
+  <a class="post" href="blog/tools-profile-fix.html"><h3>OpenClaw 配置避坑：tools profile 不能只设 coding</h3><div class="meta">2026-05-17</div></a>
+  <a class="post" href="blog/openclaw-core-concepts.html"><h3>OpenClaw 核心概念</h3><div class="meta">2026-05-12</div></a>
+  <a class="post" href="blog/openclaw-system-knowledge.html"><h3>OpenClaw 系统知识库</h3><div class="meta">2026-05-12</div></a>
+  <!-- BLOG_POSTS_MARKER -->
+  <!-- 博客文章结束 -->
 
 </body>
 </html>

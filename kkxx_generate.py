@@ -8,7 +8,7 @@ import re
 import subprocess
 from datetime import datetime
 
-SITE_PATH = "/home/qgg/site"
+SITE_PATH = "/home/qgg/.openclaw/workspace/repo"
 TG_TOKEN = "8676921192:AAE9_TSFANr34-zM7Omnxr8w1YGKhWGtQ4"
 TG_CHAT_ID = "5222823781"
 os.chdir(SITE_PATH)
