@@ -101,7 +101,7 @@ def git_push(msg):
 def fetch_news():
     """抓取多源新闻：新浪多分类 + 百度热词兜底"""
     import requests
-    from bs4 import BeautifulSoup
+    import re
     news = []
 
     CATEGORIES = [
@@ -128,13 +128,13 @@ def fetch_news():
     if len(news) < 15:
         try:
             r = requests.get("https://top.baidu.com/board?tab=realtime", timeout=10, headers={"User-Agent": "Mozilla/5.0"})
-            soup = BeautifulSoup(r.text, "html.parser")
-            for item in soup.find_all("div", class_="c-single-text-ellipsis")[:10]:
-                title = item.get_text(strip=True)
-                if title and len(title) > 5 and len(news) < 20:
-                    news.append({"title": f"[热榜] {title}", "link": "https://top.baidu.com", "source": "百度"})
-        except:
-            pass
+            titles = re.findall(r'<div class="c-single-text-ellipsis"[^>]*>([^<]+)</div>', r.text)
+            for title in titles[:10]:
+                t = title.strip()
+                if t and len(t) > 5 and len(news) < 20:
+                    news.append({"title": f"[热榜] {t}", "link": "https://top.baidu.com", "source": "百度"})
+        except Exception as e:
+            print(f"百度: {e}")
 
     return news[:20]
 
