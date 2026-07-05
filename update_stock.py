@@ -105,9 +105,9 @@ def fetch_sina():
                 price = item.get('trade')
                 change = item.get('changepercent')
                 turnover = item.get('turnoverratio', 0) or 0
-                high = item.get('high', 0) or 0
-                low = item.get('low', 0) or 0
-                settlement = item.get('settlement', 0) or 0
+                high = float(item.get('high', 0) or 0)
+                low = float(item.get('low', 0) or 0)
+                settlement = float(item.get('settlement', 0) or 0)
                 if price is None or change is None:
                     continue
                 if not code or not name:

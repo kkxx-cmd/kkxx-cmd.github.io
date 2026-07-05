@@ -98,6 +98,47 @@ def git_push(msg):
 
 # ==============================================
 
+def fetch_news():
+    """抓取多源新闻：新浪多分类 + 百度热词兜底"""
+    import requests
+    from bs4 import BeautifulSoup
+    news = []
+
+    CATEGORIES = [
+        (2512, "国内"),
+        (2513, "国际"),
+        (2514, "科技"),
+        (2516, "财经"),
+        (2517, "娱乐"),
+    ]
+    for lid, cat in CATEGORIES:
+        url = f"https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid={lid}&k=&num=5&page=1&r="
+        try:
+            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            data = r.json()
+            for item in data.get("result", {}).get("data", [])[:4]:
+                title = item.get("title", "")
+                if title and len(title) > 5:
+                    news.append({"title": f"[{cat}] {title}", "link": item.get("url", ""), "source": "新浪"})
+        except Exception as e:
+            print(f"新浪{cat}: {e}")
+        if len(news) >= 15:
+            break
+
+    if len(news) < 15:
+        try:
+            r = requests.get("https://top.baidu.com/board?tab=realtime", timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            soup = BeautifulSoup(r.text, "html.parser")
+            for item in soup.find_all("div", class_="c-single-text-ellipsis")[:10]:
+                title = item.get_text(strip=True)
+                if title and len(title) > 5 and len(news) < 20:
+                    news.append({"title": f"[热榜] {title}", "link": "https://top.baidu.com", "source": "百度"})
+        except:
+            pass
+
+    return news[:20]
+
+
 def fetch_hefei():
     """抓取安徽省本地新闻，来源：安徽新闻网（中安在线）全频道"""
     import requests
