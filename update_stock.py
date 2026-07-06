@@ -82,8 +82,8 @@ def fetch_eastmoney():
     return all_stocks
 
 
-def fetch_sina():
-    """从新浪财经获取A股数据（降级方案）"""
+def fetch_sina(asc=0, pages=5):
+    """从新浪财经获取A股数据"""
     url = "https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData"
     s = requests.Session()
     s.headers.update({
@@ -91,10 +91,10 @@ def fetch_sina():
         'Referer': 'https://finance.sina.com.cn/'
     })
     all_stocks = []
-    for page in range(1, 4):
+    for page in range(1, pages + 1):
         try:
             r = s.get(url, params={
-                'page': page, 'num': 200, 'sort': 'changepercent', 'asc': 0, 'node': 'hs_a'
+                'page': page, 'num': 200, 'sort': 'changepercent', 'asc': asc, 'node': 'hs_a'
             }, timeout=20)
             data = r.json()
             if not data:
@@ -128,25 +128,38 @@ def fetch_sina():
 
 
 def fetch_stock_data():
-    """获取股票数据，东方财富优先，失败降级新浪"""
-    stocks = fetch_eastmoney()
-    source_name = "东方财富"
-    if len(stocks) < 50:
-        print(f"东方财富仅{len(stocks)}条，降级到新浪财经...")
-        stocks = fetch_sina()
+    """获取股票数据，东方财富优先，失败降级新浪双向取数"""
+    # 东方财富部分（优先尝试）
+    em_stocks = fetch_eastmoney()
+    has_eastmoney = len(em_stocks) >= 50
+
+    # 新浪双向：asc=0 涨幅降序（超买候选），asc=1 跌幅降序（超卖候选）
+    sina_up = fetch_sina(asc=0, pages=8)   # 涨幅前 1600 条
+    sina_down = fetch_sina(asc=1, pages=8) # 跌幅前 1600 条
+    sina_stocks = list(sina_up) + list(sina_down)
+
+    # 新浪去重
+    seen = set()
+    sina_merged = []
+    for stock in sina_stocks:
+        if stock['code'] not in seen:
+            seen.add(stock['code'])
+            sina_merged.append(stock)
+    sina_stocks = sina_merged
+
+    if has_eastmoney:
+        stocks = em_stocks
+        source_name = "东方财富"
+        # 如果东方财富数据量不够，用新浪补齐
+        if len(em_stocks) < 200:
+            extra = [s for s in sina_stocks if s['code'] not in {x['code'] for x in em_stocks}]
+            stocks = em_stocks + extra
+            source_name = "东方财富+新浪"
+    else:
+        stocks = sina_stocks
         source_name = "新浪财经"
-    if len(stocks) < 50:
-        print(f"新浪也仅{len(stocks)}条，尝试合并...")
-        eastmoney = fetch_eastmoney()
-        sina = fetch_sina()
-        seen = set()
-        merged = []
-        for s in eastmoney + sina:
-            if s['code'] not in seen:
-                seen.add(s['code'])
-                merged.append(s)
-        stocks = merged
-        source_name = "东方财富+新浪"
+
+    print(f"数据源: {source_name}, 东方财富: {len(em_stocks)}, 新浪: {len(sina_up)}+{len(sina_down)}={len(sina_stocks)}去重后")
     return stocks, source_name
 
 
