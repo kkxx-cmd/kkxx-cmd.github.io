@@ -63,7 +63,7 @@ def make_cards(news_list):
         title = item.get("title", "")
         url = item.get("url", "")
         source = item.get("source", "")
-        summary = item.get("summary", "")  # 新增：摘要字段
+        summary = item.get("summary", "")
         heat = item.get("heat", "")
         time_str = item.get("time", "")
         if not title:
@@ -71,12 +71,13 @@ def make_cards(news_list):
         heat_text = f" · 🔥{heat}" if heat else ""
         time_text = f" · {time_str}" if time_str else ""
         source_text = f"{source}{heat_text}{time_text}"
-        html += f"""<div class="card">
-    <div class="card-title">{i}. {title}</div>
-    <div class="source">🔗 <a href="{url}" target="_blank">{source_text}</a></div>"""
+        card = '<div class="card">\n'
+        card += f'    <div class="card-title">{i}. {title}</div>\n'
+        card += f'    <div class="source">🔗 <a href="{url}" target="_blank">{source_text}</a></div>'
         if summary:
-            html += f"\n    <div class="card-summary">{summary[:120]}</div>"
-        html += "\n  </div>\n"
+            card += f'\n    <div class="card-summary">{summary[:120]}</div>'
+        card += '\n  </div>\n'
+        html += card
     return html
 
 
