@@ -30,6 +30,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .card{{ background: #12121a; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid #1e1e2e; }}
     .card-title{{ font-size: 15px; color: #e0e0e0; line-height: 1.6; }}
     .source{{ color: #667eea; font-size: 12px; margin-top: 6px; }}
+    .card-summary{{ font-size: 13px; color: #888; margin-top: 8px; line-height: 1.5; }}
     a{{ color: #667eea; text-decoration: none; }}
   </style>
 </head>
@@ -62,6 +63,7 @@ def make_cards(news_list):
         title = item.get("title", "")
         url = item.get("url", "")
         source = item.get("source", "")
+        summary = item.get("summary", "")  # 新增：摘要字段
         heat = item.get("heat", "")
         time_str = item.get("time", "")
         if not title:
@@ -71,8 +73,10 @@ def make_cards(news_list):
         source_text = f"{source}{heat_text}{time_text}"
         html += f"""<div class="card">
     <div class="card-title">{i}. {title}</div>
-    <div class="source">🔗 <a href="{url}" target="_blank">{source_text}</a></div>
-  </div>\n"""
+    <div class="source">🔗 <a href="{url}" target="_blank">{source_text}</a></div>"""
+        if summary:
+            html += f"\n    <div class="card-summary">{summary[:120]}</div>"
+        html += "\n  </div>\n"
     return html
 
 
