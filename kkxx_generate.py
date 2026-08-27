@@ -204,14 +204,21 @@ def fetch_hefei():
 
 
 def fetch_stocks():
-    try:
-        import akshare as ak
-        df = ak.stock_zh_a_spot()
-        df = df[df["涨跌幅"] < 0].sort_values("涨跌幅", ascending=True).head(10)
-        return [{"title": f"{r['名称']} ({r['代码']}) 跌 {r['涨跌幅']:.2f}% 现价 {r['最新价']:.2f}", "link": f"https://quote.eastmoney.com/sz{r['代码']}.html", "source": "A股"} for _, r in df.iterrows()]
-    except Exception as e:
-        print(f"股票: {e}")
-        return []
+    import time
+    max_retries = 3
+    for i in range(max_retries):
+        try:
+            import akshare as ak
+            df = ak.stock_zh_a_spot()
+            df = df[df["涨跌幅"] < 0].sort_values("涨跌幅", ascending=True).head(10)
+            return [{"title": f"{r['名称']} ({r['代码']}) 跌 {r['涨跌幅']:.2f}% 现价 {r['最新价']:.2f}", "link": f"https://quote.eastmoney.com/sz{r['代码']}.html", "source": "A股"} for _, r in df.iterrows()]
+        except Exception as e:
+            print(f"股票尝试 {i+1}/{max_retries} 失败: {e}")
+            if i < max_retries - 1:
+                time.sleep(2 ** i)  # 指数退避
+            continue
+    # 所有重试失败，返回空列表
+    return []
 
 
 HTML_TEMPLATE = """<!DOCTYPE html>

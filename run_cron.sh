@@ -9,8 +9,8 @@ RETRY_DELAY="${3:-300}"
 
 [ -z "$TASK" ] || [ -z "$SCRIPT" ] && { echo "usage: $0 <task> <script> [delay]" >&2; exit 2; }
 
-REPO="/home/qgg/.openclaw/workspace/repo"
-cd "$REPO" || exit 1
+# REPO is the current directory (set by crontab)
+# cd "$REPO" || exit 1
 
 # Token discovery: env first, then grep openclaw config
 if [ -z "${TG_TOKEN:-}" ]; then
