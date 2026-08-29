@@ -39,6 +39,34 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <a class="back" href="../blog.html">← 返回</a>
   <h1>📰 每日新闻 · {date_cn}</h1>
   {cards}
+  <script>
+    // 投票功能
+    function voteNews(url, type) {
+      const voteKey = 'kkxx_news_vote_' + btoa(url).replace(/[+/=]/g, '');
+      const votes = JSON.parse(localStorage.getItem(voteKey) || '{"up":0,"down":0}');
+      
+      if (type === 'up') {
+        votes.up += 1;
+      } else if (type === 'down') {
+        votes.down += 1;
+      }
+      
+      localStorage.setItem(voteKey, JSON.stringify(votes));
+      
+      // 更新显示
+      const upSpan = document.querySelector(`[data-url="${url}"] .vote-count-up`);
+      const downSpan = document.querySelector(`[data-url="${url}"] .vote-count-down`);
+      if (upSpan) upSpan.textContent = votes.up;
+      if (downSpan) downSpan.textContent = votes.down;
+    }
+    
+    // 页面加载时初始化投票显示
+    document.addEventListener('DOMContentLoaded', function() {
+      // 由于每个新闻卡片有独立的URL，我们需要找到所有投票按钮并初始化
+      // 但这里采用另一种方法：在每个卡片渲染时就设置初始值
+      // 这个脚本会在页面加载后运行，但我们也会在服务器端设置初始值
+    });
+  </script>
 </body>
 </html>"""
 
@@ -75,7 +103,7 @@ def make_cards(news_list):
         # URL encode for share links
         encoded_url = urllib.parse.quote(url, safe='')
         encoded_title = urllib.parse.quote(title, safe='')
-        card = '<div class="card">\n'
+        card = '<div class="card" data-url="'+url+'">\n'
         card += f'    <div class="card-title">{i}. {title}</div>\n'
         card += f'    <div class="source">🔗 <a href="{url}" target="_blank">{source_text}</a></div>'
         if summary:
@@ -84,6 +112,14 @@ def make_cards(news_list):
         card += f'        <a href="https://service.weibo.com/share/share.php?url={encoded_url}&title={encoded_title}" target="_blank" title="分享到微博" style="margin-right: 8px; font-size: 16px;">📤</a>'
         card += f'        <a href="https://twitter.com/intent/tweet?url={encoded_url}&text={encoded_title}" target="_blank" title="分享到Twitter" style="margin-right: 8px; font-size: 16px;">🐦</a>'
         card += f'        <a href="#" onclick="navigator.clipboard.writeText(window.location.href); alert(\'链接已复制！\'); return false;" title="复制链接" style="font-size: 16px;">🔗</a>'
+        card += f'    </div>'
+        card += f'\n    <div class="vote-buttons" style="margin-top: 12px; padding-top: 8px; border-top: 1px solid #1e1e2e; display: flex; gap: 12px; align-items: center;">'
+        card += f'        <button onclick="voteNews(\'{encoded_url}\', \'up\')" style="background: none; border: none; color: #4caf50; cursor: pointer; font-size: 16px; display: flex; align-items: center; gap: 4px;">'
+        card += f'            👍 <span class="vote-count-up">0</span>'
+        card += f'        </button>'
+        card += f'        <button onclick="voteNews(\'{encoded_url}\', \'down\')" style="background: none; border: none; color: #f44336; cursor: pointer; font-size: 16px; display: flex; align-items: center; gap: 4px;">'
+        card += f'            👎 <span class="vote-count-down">0</span>'
+        card += f'        </button>'
         card += f'    </div>'
         card += '\n  </div>\n'
         html += card
