@@ -10,9 +10,8 @@ import json
 import subprocess
 import traceback
 from datetime import datetime
-import urllib.parse
 
-SITE_PATH = "."
+SITE_PATH = "/home/qgg/.openclaw/workspace/repo"
 NEWS_SCRIPT = os.path.expanduser("~/.agents/skills/news-aggregator-skill/scripts/fetch_news.py")
 
 TG_TOKEN = "867692…GtQ4"
@@ -72,19 +71,11 @@ def make_cards(news_list):
         heat_text = f" · 🔥{heat}" if heat else ""
         time_text = f" · {time_str}" if time_str else ""
         source_text = f"{source}{heat_text}{time_text}"
-        # URL encode for share links
-        encoded_url = urllib.parse.quote(url, safe='')
-        encoded_title = urllib.parse.quote(title, safe='')
         card = '<div class="card">\n'
         card += f'    <div class="card-title">{i}. {title}</div>\n'
         card += f'    <div class="source">🔗 <a href="{url}" target="_blank">{source_text}</a></div>'
         if summary:
             card += f'\n    <div class="card-summary">{summary[:120]}</div>'
-        card += f'\n    <div class="share-buttons" style="margin-top: 12px; padding-top: 8px; border-top: 1px solid #1e1e2e;">'
-        card += f'        <a href="https://service.weibo.com/share/share.php?url={encoded_url}&title={encoded_title}" target="_blank" title="分享到微博" style="margin-right: 8px; font-size: 16px;">📤</a>'
-        card += f'        <a href="https://twitter.com/intent/tweet?url={encoded_url}&text={encoded_title}" target="_blank" title="分享到Twitter" style="margin-right: 8px; font-size: 16px;">🐦</a>'
-        card += f'        <a href="#" onclick="navigator.clipboard.writeText(window.location.href); alert(\'链接已复制！\'); return false;" title="复制链接" style="font-size: 16px;">🔗</a>'
-        card += f'    </div>'
         card += '\n  </div>\n'
         html += card
     return html
