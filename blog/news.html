@@ -158,113 +158,52 @@
 <a class="post" href="blog/news-2026-05-27.html"><h3>📰 每日新闻 · 2026年05月27日</h3><div class="meta">全球热点 · 0条</div></a>
 <a class="post" href="blog/news-2026-05-26.html"><h3>📰 每日新闻 · 2026年05月26日</h3><div class="meta">全球热点 · 0条</div></a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script>
+    // 阅读历史功能
+    const READ_KEY = 'kkxx_read_news';
+    function getReadSet() {
+      try {
+        const json = localStorage.getItem(READ_KEY);
+        return json ? new Set(JSON.parse(json)) : new Set();
+      } catch (e) {
+        return new Set();
+      }
+    }
+    function saveReadSet(set) {
+      try {
+        localStorage.setItem(READ_KEY, JSON.stringify(Array.from(set)));
+      } catch (e) {
+        console.warn('Failed to save read history', e);
+      }
+    }
+    const readSet = getReadSet();
+    const posts = document.querySelectorAll('a.post');
+    posts.forEach(post => {
+      const href = post.getAttribute('href');
+      if (href && readSet.has(href)) {
+        post.classList.add('read');
+        // 添加已读标志
+        const label = document.createElement('span');
+        label.className = 'read-label';
+        label.textContent = '已读';
+        label.style.marginLeft = '8px';
+        label.style.fontSize = '12px';
+        label.style.color = '#667eea';
+        post.querySelector('.meta')?.appendChild(label);
+      }
+      post.addEventListener('click', function(e) {
+        // 只有在链接是新闻时才记录
+        if (this.href && this.href.includes('news-')) {
+          readSet.add(this.href);
+          saveReadSet(readSet);
+          // 添加已读样式（不会影响本次跳转，因为跳转是同步的？）
+          // 为了让用户在返回时看到变化，我们依赖下次加载时读取localStorage
+          // 但我们可以立即添加样式，因为页面不会立卸载（除非目标是同一页，但这里是跳转到news页面）
+          // 实际跳转后当前页面会被销毁，所以这里的DOM修改不会看到。
+          // 因此我们依赖下次加载时读取localStorage。
+        }
+      });
+    });
+  </script>
 </body>
 </html>

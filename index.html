@@ -224,6 +224,108 @@
     body.light footer { color: #aaa; }
     body.light footer a { color: #888; }
 
+    /* 天气小件样式 */
+    .weather-box {
+      margin: 20px 0;
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+    }
+    .weather-loading,
+    .weather-error {
+      color: #888;
+      font-style: italic;
+      margin: 10px 0;
+    }
+    body.light .weather-loading,
+    body.light .weather-error {
+      color: #666;
+    }
+    .weather-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+    .weather-temp {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .weather-desc {
+      font-size: 16px;
+      text-transform: capitalize;
+    }
+    .weather-more {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .weather-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .weather-label {
+      font-size: 12px;
+      color: #666;
+    }
+    body.light .weather-label {
+      color: #888;
+    }
+    .weather-value {
+      font-weight: 500;
+    }
+    .weather-icon {
+      font-size: 32px;
+    }
+
+    /* 每日一句样式 */
+    .quote-box {
+      margin: 20px 0;
+      padding: 16px;
+      background: #1a1a2e;
+      border-radius: 12px;
+      border: 1px solid #2a2a3e;
+      max-width: 500px;
+    }
+    body.light .quote-box {
+      background: #f0f0ff;
+      border-color: #e0e0e0;
+    }
+    .quote-loading,
+    .quote-error {
+      color: #888;
+      font-style: italic;
+      text-align: center;
+    }
+    body.light .quote-loading,
+    body.light .quote-error {
+      color: #666;
+    }
+    .quote-content {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #e0e0e0;
+      text-align: center;
+      margin-top: 12px;
+      padding: 0 16px;
+    }
+    body.light .quote-content {
+      color: #1d1d1f;
+    }
+    .quote-author {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #667eea;
+      text-align: right;
+    }
+    body.light .quote-author {
+      color: #764ba2;
+    }
+
     footer {
       margin-top: 60px;
       color: #333;
@@ -247,6 +349,16 @@
   </div>
 
   <p class="tagline">KKXX 的数字基地 · 效率工具 · 城市观察 · 技术笔记</p>
+  <div class="weather-box" id="weatherBox">
+    <div class="weather-loading">加载天气中...</div>
+    <div class="weather-content" id="weatherContent"></div>
+    <div class="weather-error" id="weatherError"></div>
+  </div>
+  <div class="quote-box" id="quoteBox">
+    <div class="quote-loading">加载今日金句...</div>
+    <div class="quote-content" id="quoteContent"></div>
+    <div class="quote-error" id="quoteError"></div>
+  </div>
 
   <div class="sections">
 
@@ -368,14 +480,48 @@
   <script>
     const btn = document.getElementById('themeToggle');
     const saved = localStorage.getItem('theme');
-    if (saved === 'light') {
+    const getSystemPreference = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    
+    // Determine initial theme
+    let initialTheme = saved;
+    if (!initialTheme) {
+      initialTheme = getSystemPreference();
+    }
+    
+    // Apply theme
+    if (initialTheme === 'light') {
       document.body.classList.add('light');
       btn.textContent = '☀️ 白天';
+    } else {
+      btn.textContent = '🌙 夜间';
     }
+    
+    // Toggle theme
     btn.addEventListener('click', () => {
       const isLight = document.body.classList.toggle('light');
-      btn.textContent = isLight ? '☀️ 白天' : '🌙 夜间';
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      if (isLight) {
+        btn.textContent = '☀️ 白天';
+        localStorage.setItem('theme', 'light');
+      } else {
+        btn.textContent = '🌙 夜间';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+    
+    // Listen for system theme changes (optional, but good for real-time switch if user changes OS theme while page is open)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        // Only switch automatically if user hasn't manually set a preference
+        if (e.matches) {
+          document.body.classList.remove('light');
+          btn.textContent = '🌙 夜间';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.body.classList.add('light');
+          btn.textContent = '☀️ 白天';
+          localStorage.setItem('theme', 'light');
+        }
+      }
     });
 
     // 搜索功能
@@ -419,6 +565,140 @@
     });
     input.addEventListener('blur', () => setTimeout(()=> results.classList.remove('show'), 150));
     input.addEventListener('focus', () => { if (input.value.trim()) results.classList.add('show'); });
+
+    // 天气小件
+    const weatherBox = document.getElementById('weatherBox');
+    const weatherLoading = document.getElementById('weatherLoading');
+    const weatherContent = document.getElementById('weatherContent');
+    const weatherError = document.getElementById('weatherError');
+
+    async function fetchWeather() {
+      try {
+        weatherLoading.style.display = 'block';
+        weatherContent.style.display = 'none';
+        weatherError.style.display = 'none';
+        weatherError.textContent = '';
+
+        const response = await fetch('https://wttr.in/合肥?format=j1');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+
+        const current = data.current_condition[0];
+        const tempC = current.temp_C;
+        const weatherDesc = current.weatherDesc[0].value;
+        const windspeedKmph = current.windspeedKmph;
+        const winddir16Point = current.winddir16Point;
+        const humidity = current.humidity;
+        const feelsLikeC = current.FeelsLikeC;
+
+        // 天气图标映射
+        const weatherIconMap = {
+          'Sunny': '☀️',
+          'Clear': '☀️',
+          'Partly cloudy': '⛅',
+          'Cloudy': '☁️',
+          'Overcast': '☁️',
+          'Mist': '🌫️',
+          'Fog': '🌫️',
+          'Light rain': '🌦️',
+          'Patchy rain possible': '🌦️',
+          'Light rain shower': '🌦️',
+          'Drizzle': '🌧️',
+          'Heavy rain': '🌧️',
+          'Snow': '❄️',
+          'Thunderstorm': '⛈️',
+        };
+        const icon = weatherIconMap[weatherDesc] || '🌡️';
+
+        weatherContent.innerHTML = `
+          <div class="weather-icon">${icon}</div>
+          <div>
+            <div class="weather-temp">${tempC}°C</div>
+            <div class="weather-desc">${weatherDesc}</div>
+          </div>
+        `;
+
+        const feelsLike = feelsLikeC ? `体感 ${feelsLikeC}°C` : '';
+        const moreHTML = `
+          <div class="weather-item">
+            <div class="weather-label">风速</div>
+            <div class="weather-value">${windspeedKmph} km/h ${winddir16Point}</div>
+          </div>
+          <div class="weather-item">
+            <div class="weather-label">湿度</div>
+            <div class="weather-value">${humidity}%</div>
+          </div>
+          ${feelsLike ? `<div class="weather-item">
+            <div class="weather-label">体感</div>
+            <div class="weather-value">${feelsLikeC}°C</div>
+          </div>` : ''}
+        `;
+        document.querySelector('.weather-more')?.remove();
+        const moreDiv = document.createElement('div');
+        moreDiv.className = 'weather-more';
+        moreDiv.innerHTML = moreHTML;
+        weatherContent.appendChild(moreDiv);
+
+        weatherLoading.style.display = 'none';
+        weatherContent.style.display = 'flex';
+      } catch (err) {
+        console.error('Weather fetch error:', err);
+        weatherLoading.style.display = 'none';
+        weatherError.style.display = 'block';
+        weatherError.textContent = '天气获取失败，请稍后重试';
+      }
+    }
+
+    // 初始获取并在每10分钟更新一次
+    fetchWeather();
+    setInterval(fetchWeather, 10 * 60 * 1000);
+
+    // 每日一句功能
+    const quoteBox = document.getElementById('quoteBox');
+    const quoteLoading = document.getElementById('quoteLoading');
+    const quoteContent = document.getElementById('quoteContent');
+    const quoteError = document.getElementById('quoteError');
+
+    // 一句话数据（可以扩展为从API获取）
+    const quotes = [
+      { text: "人生不是为了完成任务而存在的，而是为了享受生活。", author: "佚名" },
+      { text: "活在当下，珍惜每一刻。", author: "埃克哈特·托利" },
+      { text: "简单的生活才是最幸福的生活。", author: "佚名" },
+      { text: "不积跬步无以至千里。", author: "荀子" },
+      { text: "慢下来，才能看见更多。", author: "佚名" },
+      { text: "心若止水，波澜不惊。", author: "佚名" },
+      { text: "时间是最好的老师，但遗憾的是它把所有的学生都送走了。", author: "卢梭" },
+      { text: "生活不是等待风暴过去，而是学会在雨中跳舞。", author: "维维安·格林" },
+      { text: "珍惜当下，就是对时间的最大尊重。", author: "佚名" },
+      { text: "少欲则安，知足者乐。", author: "佚名" }
+    ];
+
+    function fetchQuote() {
+      quoteLoading.style.display = 'block';
+      quoteContent.style.display = 'none';
+      quoteError.style.display = 'none';
+      quoteError.textContent = '';
+
+      try {
+        // 简单随机选择一句
+        const quote = quotes[Math.floor(Math.random() * quotes.length)];
+        quoteContent.innerHTML = `
+          <p>${quote.text}</p>
+          <p class="quote-author">— ${quote.author}</p>
+        `;
+        quoteLoading.style.display = 'none';
+        quoteContent.style.display = 'block';
+      } catch (err) {
+        console.error('Quote error:', err);
+        quoteLoading.style.display = 'none';
+        quoteError.style.display = 'block';
+        quoteError.textContent = '加载金句失败';
+      }
+    }
+
+    // 初始获取并在每12小时更新一次（避免频繁变化）
+    fetchQuote();
+    setInterval(fetchQuote, 12 * 60 * 60 * 1000);
   </script>
 
 </body>
