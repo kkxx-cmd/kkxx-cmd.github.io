@@ -1,0 +1,758 @@
+[
+  {
+    "name": "KKXX · 导航",
+    "url": "index.html",
+    "icon": "🏠",
+    "desc": "KKXX 数字花园，汇集合肥本地资讯、全球每日新闻、A股量化分析。技术成长记录，AI助手实践。"
+  },
+  {
+    "name": "博客文章 · KKXX",
+    "url": "blog.html",
+    "icon": "📝",
+    "desc": "经验记录与踩坑总结"
+  },
+  {
+    "name": "🌿 数字花园 · KKXX",
+    "url": "garden.html",
+    "icon": "🌿",
+    "desc": "合肥城市新闻"
+  },
+  {
+    "name": "股票专区 · KKXX",
+    "url": "stock.html",
+    "icon": "📉",
+    "desc": "A股超卖精选，每日三更"
+  },
+  {
+    "name": "2026年06月12日新闻",
+    "url": "blog/news-2026-06-12.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月30日新闻",
+    "url": "blog/news-2026-07-30.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "daily-summary-2026-06-21",
+    "url": "blog/daily-summary-2026-06-21.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月05日新闻",
+    "url": "blog/news-2026-07-05.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月20日新闻",
+    "url": "blog/news-2026-07-20.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月13日新闻",
+    "url": "blog/news-2026-08-13.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年05月30日新闻",
+    "url": "blog/news-2026-05-30.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月10日新闻",
+    "url": "blog/news-2026-07-10.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月11日新闻",
+    "url": "blog/news-2026-07-11.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "daily-summary-2026-06-22",
+    "url": "blog/daily-summary-2026-06-22.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月06日新闻",
+    "url": "blog/news-2026-07-06.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月19日新闻",
+    "url": "blog/news-2026-07-19.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月17日新闻",
+    "url": "blog/news-2026-06-17.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "OpenClaw 使用教程 · KKXX",
+    "url": "blog/openclaw-tutorial.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年06月19日新闻",
+    "url": "blog/news-2026-06-19.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月21日新闻",
+    "url": "blog/news-2026-08-21.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "OpenClaw 生态全景：社区项目展示 · KKXX",
+    "url": "blog/openclaw-showcase.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "daily-summary-2026-06-24",
+    "url": "blog/daily-summary-2026-06-24.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "OpenClaw 凌晨自动整理 · KKXX",
+    "url": "blog/dreaming-summary.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年06月25日新闻",
+    "url": "blog/news-2026-06-25.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月2日 · KKXX",
+    "url": "blog/daily-summary-2026-06-01.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "每日总结 · 2026年5月29日 · KKXX",
+    "url": "blog/daily-summary-2026-05-28.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年08月04日新闻",
+    "url": "blog/news-2026-08-04.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月14日新闻",
+    "url": "blog/news-2026-08-14.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年5月27日 · KKXX",
+    "url": "blog/daily-summary-2026-05-26.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年08月30日新闻",
+    "url": "blog/news-2026-08-30.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月29日新闻",
+    "url": "blog/news-2026-06-29.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月7日 · KKXX",
+    "url": "blog/daily-summary-2026-06-06.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "OpenClaw 配置避坑 · KKXX",
+    "url": "blog/tools-profile-fix.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年06月10日新闻",
+    "url": "blog/news-2026-06-10.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月27日新闻",
+    "url": "blog/news-2026-07-27.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月01日新闻",
+    "url": "blog/news-2026-06-01.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月14日新闻",
+    "url": "blog/news-2026-06-14.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月17日新闻",
+    "url": "blog/news-2026-08-17.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月04日新闻",
+    "url": "blog/news-2026-06-04.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月22日新闻",
+    "url": "blog/news-2026-07-22.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月26日新闻",
+    "url": "blog/news-2026-07-26.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月3日 · KKXX",
+    "url": "blog/daily-summary-2026-06-02.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年06月02日新闻",
+    "url": "blog/news-2026-06-02.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月09日新闻",
+    "url": "blog/news-2026-07-09.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月4日 · KKXX",
+    "url": "blog/daily-summary-2026-06-03.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "每日总结 · 2026年6月10日 · KKXX",
+    "url": "blog/daily-summary-2026-06-09.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "删除闲置模型 · KKXX",
+    "url": "blog/delete-gemma-model.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月24日新闻",
+    "url": "blog/news-2026-07-24.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月16日新闻",
+    "url": "blog/news-2026-07-16.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月08日新闻",
+    "url": "blog/news-2026-08-08.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月15日新闻",
+    "url": "blog/news-2026-07-15.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "OpenClaw 核心概念 · KKXX",
+    "url": "blog/openclaw-core-concepts.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月29日新闻",
+    "url": "blog/news-2026-07-29.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月07日新闻",
+    "url": "blog/news-2026-06-07.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月13日新闻",
+    "url": "blog/news-2026-07-13.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月9日 · KKXX",
+    "url": "blog/daily-summary-2026-06-08.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "每日新闻 · KKXX",
+    "url": "blog/news.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月12日新闻",
+    "url": "blog/news-2026-07-12.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月06日新闻",
+    "url": "blog/news-2026-06-06.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年05月27日新闻",
+    "url": "blog/news-2026-05-27.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月20日新闻",
+    "url": "blog/news-2026-06-20.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月28日新闻",
+    "url": "blog/news-2026-06-28.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月23日新闻",
+    "url": "blog/news-2026-06-23.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月09日新闻",
+    "url": "blog/news-2026-06-09.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月10日新闻",
+    "url": "blog/news-2026-08-10.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月03日新闻",
+    "url": "blog/news-2026-07-03.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日问题记录 · 2026年6月23日 · KKXX",
+    "url": "blog/daily-problems-2026-06-23.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "每日总结 · 2026年6月5日 · KKXX",
+    "url": "blog/daily-summary-2026-06-04.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "OpenClaw 上下文超限问题修复 · KKXX",
+    "url": "blog/openclaw-context-fix.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年08月11日新闻",
+    "url": "blog/news-2026-08-11.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月6日 · KKXX",
+    "url": "blog/daily-summary-2026-06-05.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "每日总结 · 2026年5月30日 · KKXX",
+    "url": "blog/daily-summary-2026-05-29.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年05月31日新闻",
+    "url": "blog/news-2026-05-31.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "OpenClaw 系统知识库 · KKXX",
+    "url": "blog/openclaw-system-knowledge.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年08月05日新闻",
+    "url": "blog/news-2026-08-05.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "记一次 INSERT_MARKER 置换失败 Bug · KKXX",
+    "url": "blog/bug-insert-marker-fix.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月07日新闻",
+    "url": "blog/news-2026-07-07.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年05月28日新闻",
+    "url": "blog/news-2026-05-28.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月19日 · KKXX",
+    "url": "blog/daily-summary-2026-06-18.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月04日新闻",
+    "url": "blog/news-2026-07-04.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月18日新闻",
+    "url": "blog/news-2026-06-18.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月26日新闻",
+    "url": "blog/news-2026-06-26.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月15日新闻",
+    "url": "blog/news-2026-08-15.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月24日新闻",
+    "url": "blog/news-2026-06-24.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月09日新闻",
+    "url": "blog/news-2026-08-09.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月12日 · KKXX",
+    "url": "blog/daily-summary-2026-06-11.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "每日总结 · 2026年6月20日 · KKXX",
+    "url": "blog/daily-summary-2026-06-19.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月17日新闻",
+    "url": "blog/news-2026-07-17.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年5月26日 · KKXX",
+    "url": "blog/daily-summary-2026-05-25.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月01日新闻",
+    "url": "blog/news-2026-07-01.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月1日 · KKXX",
+    "url": "blog/daily-summary-2026-05-31.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年06月15日新闻",
+    "url": "blog/news-2026-06-15.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月18日新闻",
+    "url": "blog/news-2026-07-18.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月12日新闻",
+    "url": "blog/news-2026-08-12.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月03日新闻",
+    "url": "blog/news-2026-08-03.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月13日新闻",
+    "url": "blog/news-2026-06-13.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月08日新闻",
+    "url": "blog/news-2026-07-08.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年5月31日 · KKXX",
+    "url": "blog/daily-summary-2026-05-30.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月14日新闻",
+    "url": "blog/news-2026-07-14.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月18日新闻",
+    "url": "blog/news-2026-08-18.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年6月13日 · KKXX",
+    "url": "blog/daily-summary-2026-06-12.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年06月11日新闻",
+    "url": "blog/news-2026-06-11.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月22日新闻",
+    "url": "blog/news-2026-06-22.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年5月28日 · KKXX",
+    "url": "blog/daily-summary-2026-05-27.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年06月30日新闻",
+    "url": "blog/news-2026-06-30.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月21日新闻",
+    "url": "blog/news-2026-07-21.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月28日新闻",
+    "url": "blog/news-2026-07-28.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "每日总结 · 2026年5月25日 · KKXX",
+    "url": "blog/daily-summary-2026-05-24.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "每日问题记录 · 2026年6月5日 · KKXX",
+    "url": "blog/daily-problems-2026-06-05.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年07月25日新闻",
+    "url": "blog/news-2026-07-25.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月07日新闻",
+    "url": "blog/news-2026-08-07.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月06日新闻",
+    "url": "blog/news-2026-08-06.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月02日新闻",
+    "url": "blog/news-2026-07-02.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月27日新闻",
+    "url": "blog/news-2026-06-27.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月08日新闻",
+    "url": "blog/news-2026-06-08.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月21日新闻",
+    "url": "blog/news-2026-06-21.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "daily-summary-2026-06-23",
+    "url": "blog/daily-summary-2026-06-23.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "每日总结 · 2026年6月8日 · KKXX",
+    "url": "blog/daily-summary-2026-06-07.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "OpenClaw Dreaming 睡眠记忆系统 · KKXX",
+    "url": "blog/2026-06-11-dreaming.html",
+    "icon": "📝",
+    "desc": "博客文章"
+  },
+  {
+    "name": "2026年06月16日新闻",
+    "url": "blog/news-2026-06-16.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年08月19日新闻",
+    "url": "blog/news-2026-08-19.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年05月29日新闻",
+    "url": "blog/news-2026-05-29.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年07月23日新闻",
+    "url": "blog/news-2026-07-23.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年05月26日新闻",
+    "url": "blog/news-2026-05-26.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月03日新闻",
+    "url": "blog/news-2026-06-03.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  },
+  {
+    "name": "2026年06月05日新闻",
+    "url": "blog/news-2026-06-05.html",
+    "icon": "📰",
+    "desc": "每日新闻"
+  }
+]

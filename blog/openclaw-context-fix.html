@@ -1,40 +1,40 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenClaw 上下文超限问题修复 · KKXX</title>
-  <meta name="description" content="KKXX 技术博客：OpenClaw 上下文超限问题修复">
-  <meta name="robots" content="index, follow">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; line-height: 1.8; }
-    .back { display: inline-block; color: #667eea; font-size: 13px; margin-bottom: 30px; }
-    .back:hover { text-decoration: underline; }
-    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
-    h1 { font-size: 22px; font-weight: 600; margin-bottom: 30px; }
-    h2 { font-size: 18px; font-weight: 600; margin: 30px 0 12px; color: #e0e0e0; }
-    h3 { font-size: 16px; font-weight: 600; margin: 24px 0 10px; color: #c0c0c0; }
-    h4 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: #aaa; }
-    p { margin-bottom: 14px; color: #aaa; }
-    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-    th, td { border: 1px solid #1e1e2e; padding: 10px 14px; text-align: left; font-size: 14px; }
-    th { background: #1a1a2e; color: #e0e0e0; }
-    td { color: #aaa; }
-    ul { margin: 12px 0 12px 24px; color: #aaa; }
-    li { margin-bottom: 6px; }
-    blockquote { border-left: 3px solid #667eea; padding: 8px 16px; margin: 16px 0; background: #12121a; color: #888; font-size: 14px; }
-    code { background: #1a1a2e; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #a8c8ff; }
-    pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 16px; overflow-x: auto; margin: 16px 0; }
-    pre code { background: none; padding: 0; color: #e0e0e0; }
-    hr { border: none; border-top: 1px solid #1e1e2e; margin: 30px 0; }
-    .footer { font-size: 11px; color: #555; margin-top: 50px; text-align: center; }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenClaw 上下文超限问题修复 · KKXX</title>
+<meta content="KKXX 技术博客：OpenClaw 上下文超限问题修复" name="description"/>
+<meta content="index, follow" name="robots"/>
+
+<link href="styles.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OpenClaw 上下文超限问题修复 · KKXX",
+  "description": "KKXX 技术博客：OpenClaw 上下文超限问题修复",
+  "author": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kkxx-cmd.github.io/blog/openclaw-context-fix.html"
+  }
+}
+  </script>
 </head>
 <body>
-  <a class="back" href="../blog.html">← 返回博客</a>
-  <div class="date">2026-05-24</div>
-  <h1>OpenClaw 上下文超限问题修复</h1>
-  <div class="article-body">
+<a class="back" href="../blog.html">← 返回博客</a>
+<div class="date">2026-05-24</div>
+<h1>OpenClaw 上下文超限问题修复</h1>
+<div class="article-body">
 <p>layout: news</p>
 <p>title: OpenClaw 上下文超限问题修复</p>
 <p>date: 2026-05-24</p>
@@ -55,11 +55,11 @@
 <tr><th>------</th><th>------</th><th>---------</th><th>---------</th></tr>
 <tr><td>contextWindow</td><td>模型支持的最大上下文长度</td><td>16000（默认值）</td><td>128000（实际值）</td></tr>
 <tr><td>reserveTokensFloor</td><td>压缩时预留的新内容空间</td><td>20000</td><td>40000</td></tr>
-</tbody></table>
+</table>
 <h4>错误链条</h4>
 <p>错误的 contextWindow (16000)</p>
 <p> ↓</p>
-<p>reserveTokensFloor (20000) > contextWindow (16000)</p>
+<p>reserveTokensFloor (20000) &gt; contextWindow (16000)</p>
 <p> ↓</p>
 <p>压缩功能无法触发（预留空间超过总容量）</p>
 <p> ↓</p>
@@ -100,7 +100,7 @@
 <p>  }</p>
 <p>}</p>
 <h4>步骤 4：验证配置关系</h4>
-<p>确保：<code>reserveTokensFloor (40000) < contextWindow (128000)</code> ✅</p>
+<p>确保：<code>reserveTokensFloor (40000) &lt; contextWindow (128000)</code> ✅</p>
 <h4>步骤 5：重启生效</h4>
 <p>openclaw gateway restart</p>
 <h3>📊 修复效果对比</h3>
@@ -110,7 +110,7 @@
 <tr><td>最大对话轮数</td><td>~50 轮</td><td>~800 轮</td></tr>
 <tr><td>压缩功能</td><td>❌ 失效</td><td>✅ 正常</td></tr>
 <tr><td>会话重置</td><td>频繁触发</td><td>不再出现</td></tr>
-</tbody></table>
+</table>
 <h3>💡 配置原则</h3>
 <ul>
 <li>**contextWindow 必须填写真实值** — 主流大模型通常支持 128000</li>
@@ -118,7 +118,8 @@
 <li>**更换模型时同步更新** — 不同模型的上下文长度可能不同</li>
 </ul>
 <p>⏰ 于 2026-05-24 同步 | 来源：博客园 yih</p>
-  </div>
-  <div class="footer">⏰ 2026-05-24 | by KKXX</div>
+</div>
+<div class="footer">⏰ 2026-05-24 | by KKXX</div>
+<script src="main.js"></script>
 </body>
 </html>

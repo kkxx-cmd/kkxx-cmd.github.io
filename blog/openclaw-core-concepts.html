@@ -1,95 +1,94 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenClaw 核心概念 · KKXX</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenClaw 核心概念 · KKXX</title>
+<!-- SEO -->
+<meta content="KKXX blog openclaw-core-concepts" name="description"/>
+<meta content="index, follow" name="robots"/>
+<!-- Open Graph -->
+<meta content="article" property="og:type"/>
+<meta content="OpenClaw 核心概念 · KKXX" property="og:title"/>
+<meta content="KKXX blog openclaw-core-concepts" property="og:description"/>
+<meta content="https://kkxx-cmd.github.io/blog/openclaw-core-concepts.html" property="og:url"/>
+<meta content="KKXX" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="OpenClaw 核心概念 · KKXX" name="twitter:title"/>
+<meta content="KKXX blog openclaw-core-concepts" name="twitter:description"/>
 
-  <!-- SEO -->
-  <meta name="description" content="KKXX blog openclaw-core-concepts">
-  <meta name="robots" content="index, follow">
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="OpenClaw 核心概念 · KKXX">
-  <meta property="og:description" content="KKXX blog openclaw-core-concepts">
-  <meta property="og:url" content="https://kkxx-cmd.github.io/blog/openclaw-core-concepts.html">
-  <meta property="og:site_name" content="KKXX">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OpenClaw 核心概念 · KKXX">
-  <meta name="twitter:description" content="KKXX blog openclaw-core-concepts">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
-    .back:hover { text-decoration: underline; }
-    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
-    .meta { font-size: 12px; color: #555; margin-bottom: 28px; }
-    .content { font-size: 14px; color: #aaa; line-height: 1.8; max-width: 680px; }
-    .content h2 { font-size: 16px; color: #e0e0e0; margin: 24px 0 10px; border-left: 3px solid #667eea; padding-left: 10px; }
-    .content p { margin-bottom: 12px; }
-    .content code { background: #1e1e2e; padding: 2px 8px; border-radius: 4px; font-size: 12px; color: #667eea; }
-    .content pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; font-size: 12px; line-height: 1.6; }
-    .tag { display: inline-block; background: #1e1e2e; color: #667eea; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-right: 6px; }
-    .principle { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 14px 0; }
-  </style>
+<link href="styles.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OpenClaw 核心概念 · KKXX",
+  "description": "KKXX blog openclaw-core-concepts",
+  "author": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kkxx-cmd.github.io/blog/openclaw-core-concepts.html"
+  }
+}
+  </script>
 </head>
 <body>
-  <a class="back" href="../blog.html">← 返回博客列表</a>
-  
-  <div class="date">2026年5月12日</div>
-  <h1>OpenClaw 核心概念</h1>
-  <div class="meta">2026-05-12 · 8 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">概念</span></div>
-  <div class="content">
-    <h2>Agent 与工作区</h2>
-    <p>Agent 是持有身份、工具和会话的会话实体，不是进程或线程。通过模型推理响应消息，使用工具执行操作，通过 channel 发送回复。</p>
-    <p>工作区默认路径：<code>~/.openclaw/workspace/</code>，与 <code>~/.openclaw/</code> 配置目录分离。</p>
-    <p>启动文件（按加载顺序）：AGENTS.md → SOUL.md → USER.md → MEMORY.md → TOOLS.md → HEARTBEAT.md</p>
-
-    <h2>Agent Loop 完整生命周期</h2>
-    <pre>intake → context assembly → model inference → tool execution → streaming → persistence</pre>
-    <p>1. <strong>intake</strong>：接收 inbound message，进行 dedupe、debounce</p>
-    <p>2. <strong>context assembly</strong>：组装 system prompt + SOUL.md + AGENTS.md + workspace 文件 + session 历史 + memory + tool results</p>
-    <p>3. <strong>model inference</strong>：调用 LLM，返回 text_delta/events</p>
-    <p>4. <strong>tool execution</strong>：解析 tool call，执行工具</p>
-    <p>5. <strong>streaming</strong>：分块发送 reply</p>
-    <p>6. <strong>persistence</strong>：保存 session transcript，触发 compaction 检查</p>
-
-    <h2>Session 管理</h2>
-    <p><strong>DM scope</strong>：控制多设备消息是否共享同一 session</p>
-    <p><code>"main"</code>：所有 DM 共享一个 session（默认）</p>
-    <p><code>"per-channel-peer"</code>：每个 channel+peer 独立 session（推荐）</p>
-    <p><strong>Session Pruning</strong>：仅修剪 old tool results，不修改磁盘 session transcript。全量历史始终保留。</p>
-    <p><strong>Compaction</strong>：当对话接近 context 限制时，将旧消息压缩为摘要。pruning 裁 tool results（内存级），compaction 摘要整段对话（落盘）。</p>
-
-    <h2>Memory 系统</h2>
-    <p><code>MEMORY.md</code>：长期记忆，curated distilled notes，仅主会话加载</p>
-    <p><code>memory/YYYY-MM-DD.md</code>：每日原始日志，自动创建，按需读取</p>
-    <p>基于 SQLite FTS5（全文搜索）+ 向量搜索，支持 hybrid search</p>
-
-    <h2>Commitments（推断承诺）</h2>
-    <p>介于 memory 和 automation 之间。在 agent reply 后运行 hidden extraction pass，识别隐式 future check-in。通过 heartbeat 投递，<code>commitments.maxPerDay</code> 限制每天投递数（默认 3）。</p>
-    <p><strong>不等同于 Reminders</strong>：exact reminders 走 cron jobs，隐式 follow-up 走 commitments。</p>
-
-    <h2>多 Agent 系统</h2>
-    <p>每个 agent 是隔离的（isolated sessions）。通过 bindings 将 channel message 路由到特定 agent，每个 agent 有自己独立的 agentDir（独立 workspace）。</p>
-
-    <h2>命令队列与调度</h2>
-    <pre>steer   → 尝试合并到当前运行，超时入队（默认 500ms debounce）
+<a class="back" href="../blog.html">← 返回博客列表</a>
+<div class="date">2026年5月12日</div>
+<h1>OpenClaw 核心概念</h1>
+<div class="meta">2026-05-12 · 8 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">概念</span></div>
+<div class="content">
+<h2>Agent 与工作区</h2>
+<p>Agent 是持有身份、工具和会话的会话实体，不是进程或线程。通过模型推理响应消息，使用工具执行操作，通过 channel 发送回复。</p>
+<p>工作区默认路径：<code>~/.openclaw/workspace/</code>，与 <code>~/.openclaw/</code> 配置目录分离。</p>
+<p>启动文件（按加载顺序）：AGENTS.md → SOUL.md → USER.md → MEMORY.md → TOOLS.md → HEARTBEAT.md</p>
+<h2>Agent Loop 完整生命周期</h2>
+<pre>intake → context assembly → model inference → tool execution → streaming → persistence</pre>
+<p>1. <strong>intake</strong>：接收 inbound message，进行 dedupe、debounce</p>
+<p>2. <strong>context assembly</strong>：组装 system prompt + SOUL.md + AGENTS.md + workspace 文件 + session 历史 + memory + tool results</p>
+<p>3. <strong>model inference</strong>：调用 LLM，返回 text_delta/events</p>
+<p>4. <strong>tool execution</strong>：解析 tool call，执行工具</p>
+<p>5. <strong>streaming</strong>：分块发送 reply</p>
+<p>6. <strong>persistence</strong>：保存 session transcript，触发 compaction 检查</p>
+<h2>Session 管理</h2>
+<p><strong>DM scope</strong>：控制多设备消息是否共享同一 session</p>
+<p><code>"main"</code>：所有 DM 共享一个 session（默认）</p>
+<p><code>"per-channel-peer"</code>：每个 channel+peer 独立 session（推荐）</p>
+<p><strong>Session Pruning</strong>：仅修剪 old tool results，不修改磁盘 session transcript。全量历史始终保留。</p>
+<p><strong>Compaction</strong>：当对话接近 context 限制时，将旧消息压缩为摘要。pruning 裁 tool results（内存级），compaction 摘要整段对话（落盘）。</p>
+<h2>Memory 系统</h2>
+<p><code>MEMORY.md</code>：长期记忆，curated distilled notes，仅主会话加载</p>
+<p><code>memory/YYYY-MM-DD.md</code>：每日原始日志，自动创建，按需读取</p>
+<p>基于 SQLite FTS5（全文搜索）+ 向量搜索，支持 hybrid search</p>
+<h2>Commitments（推断承诺）</h2>
+<p>介于 memory 和 automation 之间。在 agent reply 后运行 hidden extraction pass，识别隐式 future check-in。通过 heartbeat 投递，<code>commitments.maxPerDay</code> 限制每天投递数（默认 3）。</p>
+<p><strong>不等同于 Reminders</strong>：exact reminders 走 cron jobs，隐式 follow-up 走 commitments。</p>
+<h2>多 Agent 系统</h2>
+<p>每个 agent 是隔离的（isolated sessions）。通过 bindings 将 channel message 路由到特定 agent，每个 agent 有自己独立的 agentDir（独立 workspace）。</p>
+<h2>命令队列与调度</h2>
+<pre>steer   → 尝试合并到当前运行，超时入队（默认 500ms debounce）
 followup → 直接作为 follow-up turn 加入当前运行
 collect  → 批量收集多个消息后一次性处理
 interrupt → 中断当前运行，立即处理</pre>
-
-    <h2>Streaming 与分块</h2>
-    <p><strong>Preview Streaming</strong>（消息编辑更新）：适用于 Telegram/Discord/Slack</p>
-    <p><code>partial</code>：单次 preview，实时替换（推荐 Telegram）</p>
-    <p><code>block</code>：分块/追加更新</p>
-    <p><code>progress</code>：进度状态，结束时发最终答案</p>
-
-    <h2>重要设计原则</h2>
-    <div class="principle">Memory is files：session 结束后靠文件续命，不靠"心理记住"</div>
-    <div class="principle">Pruning + Compaction 互补：pruning 管 tool results（内存级），compaction 管 conversation summary（落盘）</div>
-    <div class="principle">Commitments ≠ Reminders：exact reminders 走 cron jobs，隐式 follow-up 走 commitments</div>
-    <div class="principle">SOUL.md > AGENTS.md for voice：人格定义在 SOUL.md，规则写在 AGENTS.md</div>
-  </div>
+<h2>Streaming 与分块</h2>
+<p><strong>Preview Streaming</strong>（消息编辑更新）：适用于 Telegram/Discord/Slack</p>
+<p><code>partial</code>：单次 preview，实时替换（推荐 Telegram）</p>
+<p><code>block</code>：分块/追加更新</p>
+<p><code>progress</code>：进度状态，结束时发最终答案</p>
+<h2>重要设计原则</h2>
+<div class="principle">Memory is files：session 结束后靠文件续命，不靠"心理记住"</div>
+<div class="principle">Pruning + Compaction 互补：pruning 管 tool results（内存级），compaction 管 conversation summary（落盘）</div>
+<div class="principle">Commitments ≠ Reminders：exact reminders 走 cron jobs，隐式 follow-up 走 commitments</div>
+<div class="principle">SOUL.md &gt; AGENTS.md for voice：人格定义在 SOUL.md，规则写在 AGENTS.md</div>
+</div>
+<script src="main.js"></script>
 </body>
 </html>

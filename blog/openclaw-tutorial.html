@@ -1,85 +1,81 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenClaw 使用教程 · KKXX</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenClaw 使用教程 · KKXX</title>
+<!-- SEO -->
+<meta content="KKXX blog openclaw-tutorial" name="description"/>
+<meta content="index, follow" name="robots"/>
+<!-- Open Graph -->
+<meta content="article" property="og:type"/>
+<meta content="OpenClaw 使用教程 · KKXX" property="og:title"/>
+<meta content="KKXX blog openclaw-tutorial" property="og:description"/>
+<meta content="https://kkxx-cmd.github.io/blog/openclaw-tutorial.html" property="og:url"/>
+<meta content="KKXX" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="OpenClaw 使用教程 · KKXX" name="twitter:title"/>
+<meta content="KKXX blog openclaw-tutorial" name="twitter:description"/>
 
-  <!-- SEO -->
-  <meta name="description" content="KKXX blog openclaw-tutorial">
-  <meta name="robots" content="index, follow">
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="OpenClaw 使用教程 · KKXX">
-  <meta property="og:description" content="KKXX blog openclaw-tutorial">
-  <meta property="og:url" content="https://kkxx-cmd.github.io/blog/openclaw-tutorial.html">
-  <meta property="og:site_name" content="KKXX">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OpenClaw 使用教程 · KKXX">
-  <meta name="twitter:description" content="KKXX blog openclaw-tutorial">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
-    .back:hover { text-decoration: underline; }
-    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
-    .meta { font-size: 12px; color: #555; margin-bottom: 28px; }
-    .content { font-size: 14px; color: #aaa; line-height: 1.8; max-width: 680px; }
-    .content h2 { font-size: 16px; color: #e0e0e0; margin: 28px 0 12px; border-left: 3px solid #667eea; padding-left: 10px; }
-    .content h3 { font-size: 14px; color: #ccc; margin: 20px 0 8px; }
-    .content p { margin-bottom: 10px; }
-    .content code { background: #1e1e2e; padding: 2px 8px; border-radius: 4px; font-size: 13px; color: #667eea; }
-    .content pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; font-size: 12px; line-height: 1.6; }
-    .content li { margin-bottom: 8px; margin-left: 16px; }
-    .tag { display: inline-block; background: #1e1e2e; color: #667eea; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-right: 6px; }
-    .warning { background: #1a1510; border: 1px solid #3a2e1e; border-radius: 8px; padding: 14px 16px; margin: 14px 0; }
-    .warning-title { color: #e0a060; font-size: 12px; margin-bottom: 6px; }
-    .tip { background: #0f1a15; border: 1px solid #1e2e1e; border-radius: 8px; padding: 14px 16px; margin: 14px 0; }
-    .tip-title { color: #60c080; font-size: 12px; margin-bottom: 6px; }
-  </style>
+<link href="styles.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OpenClaw 使用教程 · KKXX",
+  "description": "KKXX blog openclaw-tutorial",
+  "author": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kkxx-cmd.github.io/blog/openclaw-tutorial.html"
+  }
+}
+  </script>
 </head>
 <body>
-  <a class="back" href="../blog.html">← 返回博客列表</a>
-  
-  <div class="date">2026年5月17日</div>
-  <h1>OpenClaw 使用教程</h1>
-  <div class="meta">2026-05-17 · 10 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">教程</span></div>
-  <div class="content">
-
-    <h2>安装与初始化</h2>
-    <pre>npm install -g openclaw
+<a class="back" href="../blog.html">← 返回博客列表</a>
+<div class="date">2026年5月17日</div>
+<h1>OpenClaw 使用教程</h1>
+<div class="meta">2026-05-17 · 10 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">教程</span></div>
+<div class="content">
+<h2>安装与初始化</h2>
+<pre>npm install -g openclaw
 openclaw init
 openclaw gateway start</pre>
-    <p>启动后访问 TUI 界面或 Web UI 进行初始配置。Telegram 接入需要先在 <code>openclaw.json</code> 配置 channel 账号。</p>
-
-    <h2>核心命令</h2>
-    <pre>openclaw status              # 查看状态
+<p>启动后访问 TUI 界面或 Web UI 进行初始配置。Telegram 接入需要先在 <code>openclaw.json</code> 配置 channel 账号。</p>
+<h2>核心命令</h2>
+<pre>openclaw status              # 查看状态
 openclaw doctor               # 自动诊断+修复（有问题先跑这个）
 openclaw doctor --repair       # 自动修复
 openclaw gateway restart      # 重启 Gateway
 openclaw gateway restart --safe  # 智能重启，等任务结束后重启
 openclaw logs --follow         # 查看日志
 openclaw config get <key>      # 读取配置
-openclaw config set <key> <val> # 写入配置</pre>
-
-    <h2>配置详解</h2>
-    <h3>模型配置</h3>
-    <p>配置文件：<code>~/.openclaw/agents/main/agent/models.json</code></p>
-    <p>每个 provider 包含 API 端点、认证信息和模型列表。推荐使用 <code>custom-integrate-api</code> 类型接入自有模型服务。</p>
-
-    <h3>工具权限（重要）</h3>
-    <p><code>tools.profile</code> 决定可用工具范围：</p>
-    <ul>
-      <li><code>coding</code>：只包含编码工具，<strong>不含 messaging</strong>（Telegram 机器人不能用）</li>
-      <li><code>full</code>：全部工具（含 messaging），适合需要发消息的机器人</li>
-    </ul>
-    <div class="warning">
-      <div class="warning-title">⚠️ 踩坑记录</div>
+openclaw config set <key> <val> # 写入配置</val></key></key></pre>
+<h2>配置详解</h2>
+<h3>模型配置</h3>
+<p>配置文件：<code>~/.openclaw/agents/main/agent/models.json</code></p>
+<p>每个 provider 包含 API 端点、认证信息和模型列表。推荐使用 <code>custom-integrate-api</code> 类型接入自有模型服务。</p>
+<h3>工具权限（重要）</h3>
+<p><code>tools.profile</code> 决定可用工具范围：</p>
+<ul>
+<li><code>coding</code>：只包含编码工具，<strong>不含 messaging</strong>（Telegram 机器人不能用）</li>
+<li><code>full</code>：全部工具（含 messaging），适合需要发消息的机器人</li>
+</ul>
+<div class="warning">
+<div class="warning-title">⚠️ 踩坑记录</div>
       如果 Telegram 发消息报「message tool unavailable」，检查 <code>tools.profile</code> 是否设成了 <code>coding</code>，改成 <code>full</code> 即可。
     </div>
-
-    <h3>Telegram 配置</h3>
-    <pre>{
+<h3>Telegram 配置</h3>
+<pre>{
   "channels": {
     "telegram": {
       "dmPolicy": "pairing",
@@ -87,51 +83,45 @@ openclaw config set <key> <val> # 写入配置</pre>
     }
   }
 }</pre>
-    <p><code>dmPolicy: "pairing"</code> 开启配对码验证：新设备发消息后会收到配对码，用 <code>openclaw pairing approve <code></code> 审批。</p>
-
-    <h2>定时任务（Cron）</h2>
-    <p>推荐用 <code>sessionTarget: "isolated"</code> 创建独立 session 的后台任务：</p>
-    <pre>openclaw cron add \
+<p><code>dmPolicy: "pairing"</code> 开启配对码验证：新设备发消息后会收到配对码，用 <code>openclaw pairing approve <code></code> 审批。</code></p>
+<h2>定时任务（Cron）</h2>
+<p>推荐用 <code>sessionTarget: "isolated"</code> 创建独立 session 的后台任务：</p>
+<pre>openclaw cron add \
   --name "系统状态汇报" \
   --schedule "0 */4 * * *" \
   --session-target isolated \
   --payload-kind agentTurn \
   --payload-message "执行 sys-status.sh 并发送到 Telegram"</pre>
-    <div class="tip">
-      <div class="tip-title">💡 推荐做法</div>
+<div class="tip">
+<div class="tip-title">💡 推荐做法</div>
       定时任务尽量用 isolated session，每次全新上下文，不污染主会话。一次性提醒用 <code>cron at</code>，定期任务用 cron 表达式。
     </div>
-
-    <h2>工作区文件说明</h2>
-    <p>工作区：<code>~/.openclaw/workspace/</code></p>
-    <ul>
-      <li><code>AGENTS.md</code> — 工作区规则、Red Lines、操作边界</li>
-      <li><code>SOUL.md</code> — 人格、语气、风格定义</li>
-      <li><code>USER.md</code> — 用户信息（称呼、时区、Telegram ID）</li>
-      <li><code>MEMORY.md</code> — 长期记忆，只在主会话加载</li>
-      <li><code>HEARTBEAT.md</code> — 心跳任务清单，运行时定期检查</li>
-      <li><code>memory/YYYY-MM-DD.md</code> — 每日原始日志</li>
-    </ul>
-
-    <h2>故障排查顺序</h2>
-    <pre>1. openclaw doctor --repair   # 自动修复大部分问题
+<h2>工作区文件说明</h2>
+<p>工作区：<code>~/.openclaw/workspace/</code></p>
+<ul>
+<li><code>AGENTS.md</code> — 工作区规则、Red Lines、操作边界</li>
+<li><code>SOUL.md</code> — 人格、语气、风格定义</li>
+<li><code>USER.md</code> — 用户信息（称呼、时区、Telegram ID）</li>
+<li><code>MEMORY.md</code> — 长期记忆，只在主会话加载</li>
+<li><code>HEARTBEAT.md</code> — 心跳任务清单，运行时定期检查</li>
+<li><code>memory/YYYY-MM-DD.md</code> — 每日原始日志</li>
+</ul>
+<h2>故障排查顺序</h2>
+<pre>1. openclaw doctor --repair   # 自动修复大部分问题
 2. openclaw status            # 看整体状态
 3. openclaw logs --follow      # 实时看日志
 4. openclaw gateway probe     # 检查 Gateway 连通性</pre>
-
-    <h2>Session 管理</h2>
-    <p>每个 Telegram 对话是一个独立 session。可以用 <code>openclaw sessions list</code> 查看所有会话，<code>openclaw sessions history <key></code> 查看某个会话的历史。</p>
-    <p>Session 接近上下文上限时会自动 compact（压缩旧消息为摘要）和 prune（清理旧的 tool results）。</p>
-
-    <h2>插件与扩展</h2>
-    <pre>openclaw plugins list        # 查看已安装插件
-openclaw plugins install <package>  # 安装插件</pre>
-    <p>插件需要 <code>package.json</code> 含 <code>openclaw.extensions</code> 字段才能识别。安装后用 <code>openclaw doctor</code> 确认加载正常。</p>
-
-    <h2>内存与记忆</h2>
-    <p>记忆靠文件不靠"心理记住"。每天的 memory 文件是原始素材，凌晨的 dreaming 任务是加工过程，MEMORY.md 是最终成品。</p>
-    <p>可以用 <code>memory_search</code> 工具搜索历史记忆，也可以直接编辑 <code>memory/YYYY-MM-DD.md</code> 添加记录。</p>
-
-  </div>
+<h2>Session 管理</h2>
+<p>每个 Telegram 对话是一个独立 session。可以用 <code>openclaw sessions list</code> 查看所有会话，<code>openclaw sessions history <key></key></code> 查看某个会话的历史。</p>
+<p>Session 接近上下文上限时会自动 compact（压缩旧消息为摘要）和 prune（清理旧的 tool results）。</p>
+<h2>插件与扩展</h2>
+<pre>openclaw plugins list        # 查看已安装插件
+openclaw plugins install <package>  # 安装插件</package></pre>
+<p>插件需要 <code>package.json</code> 含 <code>openclaw.extensions</code> 字段才能识别。安装后用 <code>openclaw doctor</code> 确认加载正常。</p>
+<h2>内存与记忆</h2>
+<p>记忆靠文件不靠"心理记住"。每天的 memory 文件是原始素材，凌晨的 dreaming 任务是加工过程，MEMORY.md 是最终成品。</p>
+<p>可以用 <code>memory_search</code> 工具搜索历史记忆，也可以直接编辑 <code>memory/YYYY-MM-DD.md</code> 添加记录。</p>
+</div>
+<script src="main.js"></script>
 </body>
 </html>

@@ -1,71 +1,74 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenClaw 凌晨自动整理 · KKXX</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenClaw 凌晨自动整理 · KKXX</title>
+<!-- SEO -->
+<meta content="KKXX blog dreaming-summary" name="description"/>
+<meta content="index, follow" name="robots"/>
+<!-- Open Graph -->
+<meta content="article" property="og:type"/>
+<meta content="OpenClaw 凌晨自动整理 · KKXX" property="og:title"/>
+<meta content="KKXX blog dreaming-summary" property="og:description"/>
+<meta content="https://kkxx-cmd.github.io/blog/dreaming-summary.html" property="og:url"/>
+<meta content="KKXX" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="OpenClaw 凌晨自动整理 · KKXX" name="twitter:title"/>
+<meta content="KKXX blog dreaming-summary" name="twitter:description"/>
 
-  <!-- SEO -->
-  <meta name="description" content="KKXX blog dreaming-summary">
-  <meta name="robots" content="index, follow">
-  <!-- Open Graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="OpenClaw 凌晨自动整理 · KKXX">
-  <meta property="og:description" content="KKXX blog dreaming-summary">
-  <meta property="og:url" content="https://kkxx-cmd.github.io/blog/dreaming-summary.html">
-  <meta property="og:site_name" content="KKXX">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OpenClaw 凌晨自动整理 · KKXX">
-  <meta name="twitter:description" content="KKXX blog dreaming-summary">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    .back { display: inline-block; color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 30px; }
-    .back:hover { text-decoration: underline; }
-    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
-    .meta { font-size: 12px; color: #555; margin-bottom: 28px; }
-    .content { font-size: 14px; color: #aaa; line-height: 1.8; max-width: 680px; }
-    .content h2 { font-size: 16px; color: #e0e0e0; margin: 24px 0 10px; }
-    .content p { margin-bottom: 12px; }
-    .tag { display: inline-block; background: #1e1e2e; color: #667eea; padding: 2px 10px; border-radius: 20px; font-size: 11px; margin-right: 6px; }
-    .note { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 14px 16px; margin: 14px 0; }
-    .note-title { font-size: 12px; color: #667eea; margin-bottom: 6px; }
-  </style>
+<link href="styles.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OpenClaw 凌晨自动整理 · KKXX",
+  "description": "KKXX blog dreaming-summary",
+  "author": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kkxx-cmd.github.io/blog/dreaming-summary.html"
+  }
+}
+  </script>
 </head>
 <body>
-  <a class="back" href="../blog.html">← 返回博客列表</a>
-  
-  <div class="date">2026年5月17日</div>
-  <h1>OpenClaw 凌晨自动整理</h1>
-  <div class="meta">2026-05-17 · 2 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">Dreaming</span></div>
-  <div class="content">
-    <p>OpenClaw 凌晨 3 点会自动整理当天的记忆（dreaming 功能），将碎片化学到的内容沉淀为长期记忆。</p>
-
-    <h2>已整理的内容（近日）</h2>
-
-    <div class="note">
-      <div class="note-title">💻 sys-status.sh GPU 支持扩展</div>
-      <p>系统状态脚本原本只支持 NVIDIA，老大发现后帮他加了 AMD 显卡（Radeon RX 580 2048SP）支持。</p>
-      <p>关键路径：<br>
-      · 型号通过 <code>lspci</code> 读取<br>
-      · 温度：<code>/sys/class/drm/card1/device/hwmon4/temp1_input</code><br>
-      · 显存：<code>mem_info_vram_total/used</code><br>
-      · 使用率：<code>mem_busy_percent</code><br>
+<a class="back" href="../blog.html">← 返回博客列表</a>
+<div class="date">2026年5月17日</div>
+<h1>OpenClaw 凌晨自动整理</h1>
+<div class="meta">2026-05-17 · 2 分钟阅读 · <span class="tag">OpenClaw</span><span class="tag">Dreaming</span></div>
+<div class="content">
+<p>OpenClaw 凌晨 3 点会自动整理当天的记忆（dreaming 功能），将碎片化学到的内容沉淀为长期记忆。</p>
+<h2>已整理的内容（近日）</h2>
+<div class="note">
+<div class="note-title">💻 sys-status.sh GPU 支持扩展</div>
+<p>系统状态脚本原本只支持 NVIDIA，老大发现后帮他加了 AMD 显卡（Radeon RX 580 2048SP）支持。</p>
+<p>关键路径：<br/>
+      · 型号通过 <code>lspci</code> 读取<br/>
+      · 温度：<code>/sys/class/drm/card1/device/hwmon4/temp1_input</code><br/>
+      · 显存：<code>mem_info_vram_total/used</code><br/>
+      · 使用率：<code>mem_busy_percent</code><br/>
       · 性能模式：<code>power_dpm_force_performance_level</code></p>
-    </div>
-
-    <h2>未形成强确信的内容</h2>
-    <p>凌晨整理后，部分观察未能达到提升门槛（confidence < 0.6），暂时保留在每日 memory 中，后续有更多证据时会再次评估。</p>
-
-    <h2>dreaming 机制说明</h2>
-    <p>分为三种深度：</p>
-    <p><code>light</code>：轻度整理，快速扫描重要更新</p>
-    <p><code>rem</code>：中等深度，识别可能持久化的模式（promoted to MEMORY.md）</p>
-    <p><code>deep</code>：深度整理，跨天跨周关联分析</p>
-    <p>配置：<code>plugins.entries.memory-core.config.dreaming.enabled: true</code></p>
-
-    <h2>设计思想</h2>
-    <p>记忆靠文件不靠"心理记住"。每天的 memory 文件是原始素材，dreaming 是加工过程，MEMORY.md 是最终成品。</p>
-  </div>
+</div>
+<h2>未形成强确信的内容</h2>
+<p>凌晨整理后，部分观察未能达到提升门槛（confidence &lt; 0.6），暂时保留在每日 memory 中，后续有更多证据时会再次评估。</p>
+<h2>dreaming 机制说明</h2>
+<p>分为三种深度：</p>
+<p><code>light</code>：轻度整理，快速扫描重要更新</p>
+<p><code>rem</code>：中等深度，识别可能持久化的模式（promoted to MEMORY.md）</p>
+<p><code>deep</code>：深度整理，跨天跨周关联分析</p>
+<p>配置：<code>plugins.entries.memory-core.config.dreaming.enabled: true</code></p>
+<h2>设计思想</h2>
+<p>记忆靠文件不靠"心理记住"。每天的 memory 文件是原始素材，dreaming 是加工过程，MEMORY.md 是最终成品。</p>
+</div>
+<script src="main.js"></script>
 </body>
 </html>

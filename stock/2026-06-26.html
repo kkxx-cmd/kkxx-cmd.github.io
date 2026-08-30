@@ -1,148 +1,105 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>股票专区 · 2026年06月26日 · KKXX</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; }
-    body.light { background: #f5f5f7; color: #1d1d1f; }
-    body.light h1 { -webkit-text-fill-color: #1d1d1f; }
-    body.light .back { color: #764ba2; }
-    body.light .day-header h1 { color: #667eea; }
-    body.light .stock-table { background: #fff; border-color: #e0e0e0; }
-    body.light .stock-table th { background: #f0f0ff; color: #667eea; }
-    body.light .stock-table td { border-color: #f0f0f0; color: #1d1d1f; }
-    body.light .stock-table tr:hover { background: #fafafa; }
-    body.light .stock-table .up { color: #e53f3f; }
-    body.light .stock-table .down { color: #22c55e; }
-    body.light footer { color: #aaa; }
-    body.light footer a { color: #888; }
-    body.light .tag { background: #f0f0ff; color: #764ba2; }
-    body.light .note { border-color: #e0e0e0; color: #666; }
-    .back { color: #667eea; text-decoration: none; font-size: 14px; margin-bottom: 30px; display: inline-block; }
-    .back:hover { color: #8fa0fc; }
-    .day-header { max-width: 900px; margin-bottom: 32px; }
-    .day-header h1 { font-size: 24px; font-weight: 600; color: #667eea; margin-bottom: 8px; }
-    .day-header p { color: #555; font-size: 13px; }
-    .tag { display: inline-block; background: #1a1a2e; color: #667eea; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-bottom: 12px; }
-    .stock-table { width: 100%; max-width: 900px; border-collapse: collapse; background: #12121a; border: 1px solid #1e1e2e; border-radius: 16px; overflow: hidden; font-size: 13px; }
-    body.light .stock-table { background: #fff; }
-    .stock-table th { background: #1a1a2e; color: #667eea; font-weight: 600; text-align: left; padding: 12px 16px; font-size: 12px; }
-    body.light .stock-table th { background: #f0f0ff; color: #667eea; }
-    .stock-table td { padding: 10px 16px; border-top: 1px solid #1a1a2e; color: #e0e0e0; }
-    body.light .stock-table td { border-color: #f0f0f0; color: #1d1d1f; }
-    .stock-table tr:hover { background: #1a1a2e; }
-    body.light .stock-table tr:hover { background: #fafafa; }
-    .stock-table .symbol { color: #888; font-size: 12px; }
-    .stock-table .up { color: #ef4444; }
-    .stock-table .down { color: #22c55e; }
-    .rank-col { min-width: 40px; }
-    .price-col { min-width: 80px; }
-    .pct-col { min-width: 100px; text-align: right; }
-    .note { max-width: 900px; margin-top: 16px; font-size: 12px; color: #444; border-top: 1px solid #1e1e2e; padding-top: 12px; line-height: 1.7; }
-    footer { margin-top: 60px; color: #333; font-size: 12px; }
-    footer a { color: #555; text-decoration: none; }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>股票专区 · 2026年06月26日 · KKXX</title>
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="back" href="../stock.html">← 股票专区</a>
-
-  <div class="day-header">
-    <div class="tag">📉 A股跌幅榜 · 实时行情</div>
-    <h1>📊 2026年06月26日 · 股票专区</h1>
-    <p>数据更新时间：2026-06-24 19:06 · 数据来源：东方财富</p>
-  </div>
-
-  <table class="stock-table">
-    <thead>
-      <tr>
-        <th class="rank-col">#</th>
-        <th>股票</th>
-        <th class="price-col">最新价</th>
-        <th class="pct-col">涨跌幅</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td><strong>林州重机</strong><br><span class="symbol">sz002535</span></td>
-        <td class="price-col">¥2.220</td>
-        <td class="pct-col down">-10.12%</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td><strong>郑州煤电</strong><br><span class="symbol">sh600121</span></td>
-        <td class="price-col">¥3.820</td>
-        <td class="pct-col down">-8.61%</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td><strong>金盾股份</strong><br><span class="symbol">sz300411</span></td>
-        <td class="price-col">¥7.570</td>
-        <td class="pct-col down">-7.79%</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td><strong>中央商场</strong><br><span class="symbol">sh600280</span></td>
-        <td class="price-col">¥2.750</td>
-        <td class="pct-col down">-7.72%</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td><strong>北京文化</strong><br><span class="symbol">sz000802</span></td>
-        <td class="price-col">¥3.710</td>
-        <td class="pct-col down">-7.48%</td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td><strong>友好集团</strong><br><span class="symbol">sh600778</span></td>
-        <td class="price-col">¥5.130</td>
-        <td class="pct-col down">-7.23%</td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td><strong>安泰集团</strong><br><span class="symbol">sh600408</span></td>
-        <td class="price-col">¥2.440</td>
-        <td class="pct-col down">-7.22%</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td><strong>云维股份</strong><br><span class="symbol">sh600725</span></td>
-        <td class="price-col">¥3.170</td>
-        <td class="pct-col down">-7.04%</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td><strong>信达地产</strong><br><span class="symbol">sh600657</span></td>
-        <td class="price-col">¥2.440</td>
-        <td class="pct-col down">-6.87%</td>
-      </tr>
-      <tr>
-        <td>10</td>
-        <td><strong>欢瑞世纪</strong><br><span class="symbol">sz000892</span></td>
-        <td class="price-col">¥3.400</td>
-        <td class="pct-col down">-6.85%</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="note">
+<a class="back" href="../stock.html">← 股票专区</a>
+<div class="day-header">
+<div class="tag">📉 A股跌幅榜 · 实时行情</div>
+<h1>📊 2026年06月26日 · 股票专区</h1>
+<p>数据更新时间：2026-06-24 19:06 · 数据来源：东方财富</p>
+</div>
+<table class="stock-table">
+<thead>
+<tr>
+<th class="rank-col">#</th>
+<th>股票</th>
+<th class="price-col">最新价</th>
+<th class="pct-col">涨跌幅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>林州重机</strong><br/><span class="symbol">sz002535</span></td>
+<td class="price-col">¥2.220</td>
+<td class="pct-col down">-10.12%</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>郑州煤电</strong><br/><span class="symbol">sh600121</span></td>
+<td class="price-col">¥3.820</td>
+<td class="pct-col down">-8.61%</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>金盾股份</strong><br/><span class="symbol">sz300411</span></td>
+<td class="price-col">¥7.570</td>
+<td class="pct-col down">-7.79%</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>中央商场</strong><br/><span class="symbol">sh600280</span></td>
+<td class="price-col">¥2.750</td>
+<td class="pct-col down">-7.72%</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>北京文化</strong><br/><span class="symbol">sz000802</span></td>
+<td class="price-col">¥3.710</td>
+<td class="pct-col down">-7.48%</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>友好集团</strong><br/><span class="symbol">sh600778</span></td>
+<td class="price-col">¥5.130</td>
+<td class="pct-col down">-7.23%</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>安泰集团</strong><br/><span class="symbol">sh600408</span></td>
+<td class="price-col">¥2.440</td>
+<td class="pct-col down">-7.22%</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>云维股份</strong><br/><span class="symbol">sh600725</span></td>
+<td class="price-col">¥3.170</td>
+<td class="pct-col down">-7.04%</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>信达地产</strong><br/><span class="symbol">sh600657</span></td>
+<td class="price-col">¥2.440</td>
+<td class="pct-col down">-6.87%</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>欢瑞世纪</strong><br/><span class="symbol">sz000892</span></td>
+<td class="price-col">¥3.400</td>
+<td class="pct-col down">-6.85%</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
     ⚠️ 数据仅供参考，不构成投资建议。A股超卖不代表股价见底，需结合基本面和行业趋势综合判断。
   </div>
-
-  <footer>
-    <a href="../index.html">← KKXX 导航</a>
-  </footer>
-
-  <script>
+<footer>
+<a href="../index.html">← KKXX 导航</a>
+</footer>
+<script>
     // Follow parent day-header color scheme
     const params = new URLSearchParams(window.location.search);
     if (localStorage.getItem('theme') === 'light') {
       document.body.classList.add('light');
     }
   </script>
-
+  <script src="main.js"></script>
 </body>
 </html>

@@ -1,40 +1,41 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenClaw Dreaming 睡眠记忆系统 · KKXX</title>
-  <meta name="description" content="KKXX 技术博客：OpenClaw Dreaming 睡眠记忆系统">
-  <meta name="robots" content="index, follow">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; padding: 40px 20px; line-height: 1.8; }
-    .back { display: inline-block; color: #667eea; font-size: 13px; margin-bottom: 30px; }
-    .back:hover { text-decoration: underline; }
-    .date { font-size: 14px; color: #666; margin-bottom: 8px; }
-    h1 { font-size: 22px; font-weight: 600; margin-bottom: 30px; }
-    h2 { font-size: 18px; font-weight: 600; margin: 30px 0 12px; color: #e0e0e0; }
-    h3 { font-size: 16px; font-weight: 600; margin: 24px 0 10px; color: #c0c0c0; }
-    h4 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: #aaa; }
-    p { margin-bottom: 14px; color: #aaa; }
-    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-    th, td { border: 1px solid #1e1e2e; padding: 10px 14px; text-align: left; font-size: 14px; }
-    th { background: #1a1a2e; color: #e0e0e0; }
-    td { color: #aaa; }
-    ul { margin: 12px 0 12px 24px; color: #aaa; }
-    li { margin-bottom: 6px; }
-    blockquote { border-left: 3px solid #667eea; padding: 8px 16px; margin: 16px 0; background: #12121a; color: #888; font-size: 14px; }
-    code { background: #1a1a2e; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #a8c8ff; }
-    pre { background: #12121a; border: 1px solid #1e1e2e; border-radius: 8px; padding: 16px; overflow-x: auto; margin: 16px 0; }
-    pre code { background: none; padding: 0; color: #e0e0e0; }
-    hr { border: none; border-top: 1px solid #1e1e2e; margin: 30px 0; }
-    .footer { font-size: 11px; color: #555; margin-top: 50px; text-align: center; }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenClaw Dreaming 睡眠记忆系统 · KKXX</title>
+<meta content="KKXX 技术博客：OpenClaw Dreaming 睡眠记忆系统" name="description"/>
+<meta content="index, follow" name="robots"/>
+
+<link href="styles.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OpenClaw Dreaming 睡眠记忆系统 · KKXX",
+  "description": "KKXX 技术博客：OpenClaw Dreaming 睡眠记忆系统",
+  "author": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KKXX"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kkxx-cmd.github.io/blog/2026-06-11-dreaming.html"
+  },
+  "datePublished": "2026-06-11"
+}
+  </script>
 </head>
 <body>
-  <a class="back" href="../blog.html">← 返回博客</a>
-  <div class="date">2026-06-11</div>
-  <h1>OpenClaw Dreaming 睡眠记忆系统</h1>
-  <div class="article-body">
+<a class="back" href="../blog.html">← 返回博客</a>
+<div class="date">2026-06-11</div>
+<h1>OpenClaw Dreaming 睡眠记忆系统</h1>
+<div class="article-body">
 <p>title: OpenClaw Dreaming 睡眠记忆系统</p>
 <p>date: 2026-06-11</p>
 <p>tags:</p>
@@ -52,7 +53,7 @@
 <tr><td>Light（浅睡）</td><td>读取并去重短期记忆信号，为深度候选做准备</td><td>❌</td></tr>
 <tr><td>Deep（深睡）</td><td>评分候选内容，满足阈值后写入长期记忆</td><td>✅</td></tr>
 <tr><td>REM</td><td>提取主题和模式，识别重复出现的想法</td><td>❌</td></tr>
-</tbody></table>
+</table>
 <p><strong>关键原则</strong>：只有 Deep 阶段会将内容写入 <code>MEMORY.md</code>，其余阶段只做分析。</p>
 <h3>具体做什么</h3>
 <p><strong>Light 阶段</strong>：</p>
@@ -83,7 +84,7 @@
 <tr><td>Recency（时效性）</td><td>0.15</td><td>时间衰减后的新鲜度</td></tr>
 <tr><td>Consolidation（巩固度）</td><td>0.10</td><td>多日 recurrence 强度</td></tr>
 <tr><td>Conceptual richness（概念密度）</td><td>0.06</td><td>概念标签密度</td></tr>
-</tbody></table>
+</table>
 <h3>Dream Diary</h3>
 <p>Dreaming 还维护一份人类可读的 <strong>Dream Diary</strong>（梦境日记），记录在 <code>DREAMS.md</code> 中。每次完整运行后会追加一段简短的日记条目，供人工回顾。</p>
 <p>日记内容仅供审查，<strong>不会被自动提升为长期记忆</strong>。</p>
@@ -91,7 +92,7 @@
 <p>Dreaming 写入两类数据：</p>
 <ul>
 <li>**机器状态**：`memory/.dreams/` 目录（recall store、phase signals、ingestion 检查点）</li>
-<li>**人类可读**：`DREAMS.md`（梦境日记）+ 可选的 `memory/dreaming/<phase>/YYYY-MM-DD.md` 分阶段报告</li>
+<li>**人类可读**：`DREAMS.md`（梦境日记）+ 可选的 `memory/dreaming/<phase>/YYYY-MM-DD.md` 分阶段报告</phase></li>
 </ul>
 <h3>默认行为</h3>
 <table>
@@ -100,7 +101,7 @@
 <tr><td>启用状态</td><td>**默认关闭**（opt-in）</td></tr>
 <tr><td>运行时间</td><td>每天 03:00</td></tr>
 <tr><td>使用模型</td><td>默认 runtime 模型</td></tr>
-</tbody></table>
+</table>
 <h3>启用方式</h3>
 <p>在 <code>openclaw.json</code> 中添加：</p>
 <p>{</p>
@@ -150,7 +151,8 @@
 <h3>状态显示 blocked</h3>
 <p>如果 <code>openclaw memory status</code> 显示 <code>Dreaming status: blocked</code>，说明管理的 cron 存在但默认 agent 的心跳未触发。检查心跳是否启用，以及目标是否设置为 <code>none</code>。</p>
 <blockquote>📖 参考来源：[OpenClaw 官方文档 - Dreaming](https://docs.openclaw.ai/concepts/dreaming)</blockquote>
-  </div>
-  <div class="footer">⏰ 2026-06-11 | by KKXX</div>
+</div>
+<div class="footer">⏰ 2026-06-11 | by KKXX</div>
+<script src="main.js"></script>
 </body>
 </html>
