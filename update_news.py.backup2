@@ -25,14 +25,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <style>
-    body{ font-family: -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 20px; max-width: 800px; margin: 0 auto; }
-    h1{ background: linear-gradient(90deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; font-size: 22px; }
-    .back{ color: #667eea; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 16px; }
-    .card{ background: #12121a; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid #1e1e2e; }
-    .card-title{ font-size: 15px; color: #e0e0e0; line-height: 1.6; }
-    .source{ color: #667eea; font-size: 12px; margin-top: 6px; }
-    .card-summary{ font-size: 13px; color: #888; margin-top: 8px; line-height: 1.5; }
-    a{ color: #667eea; text-decoration: none; }
+    body{{ font-family: -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e0; padding: 20px; max-width: 800px; margin: 0 auto; }}
+    h1{{ background: linear-gradient(90deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; font-size: 22px; }}
+    .back{{ color: #667eea; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 16px; }}
+    .card{{ background: #12121a; border-radius: 12px; padding: 16px; margin: 12px 0; border: 1px solid #1e1e2e; }}
+    .card-title{{ font-size: 15px; color: #e0e0e0; line-height: 1.6; }}
+    .source{{ color: #667eea; font-size: 12px; margin-top: 6px; }}
+    .card-summary{{ font-size: 13px; color: #888; margin-top: 8px; line-height: 1.5; }}
+    a{{ color: #667eea; text-decoration: none; }}
   </style>
 </head>
 <body>
@@ -54,8 +54,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       localStorage.setItem(voteKey, JSON.stringify(votes));
       
       // 更新显示
-      const upSpan = document.querySelector();
-      const downSpan = document.querySelector();
+      const upSpan = document.querySelector(`[data-url="${url}"] .vote-count-up`);
+      const downSpan = document.querySelector(`[data-url="${url}"] .vote-count-down`);
       if (upSpan) upSpan.textContent = votes.up;
       if (downSpan) downSpan.textContent = votes.down;
     }
@@ -221,7 +221,7 @@ def main():
     news = fetch_news_with_skill()
     if news:
         cards = make_cards(news)
-        html = HTML_TEMPLATE.replace('{title}', "每日新闻 · " + date_cn).replace('{date_cn}', date_cn).replace('{cards}', cards)
+        html = HTML_TEMPLATE.format(title=f"每日新闻 · {date_cn}", date_cn=date_cn, cards=cards)
         with open(f"blog/news-{date_str}.html", "w", encoding="utf-8") as f:
             f.write(html)
         report += f"✅ 新闻: {len(news)}条\n"
@@ -233,17 +233,18 @@ def main():
             old_news = fallback_fetch()
             if old_news:
                 cards = make_cards([{"title": n["title"], "url": n["link"], "source": n["source"]} for n in old_news])
+                html = HTML_TEMPLATE.format(title=f"每日新闻 · {date_cn}", date_cn=date_cn, cards=cards)
+                with open(f"blog/news-{date_str}.html", "w", encoding="utf-8") as f:
+                    f.write(html)
+                report += f"✅ 降级模式: {len(old_news)}条\n"
+                update_list("blog/news.html", f'<a class="post" href="news-{date_str}.html"><h3>📰 每日新闻 · {date_cn}</h3><div class="meta">全球热点 · {len(old_news)}条</div></a>')
             else:
-                old_news = []
-                cards = ""
-            html = HTML_TEMPLATE.replace('{title}', "每日新闻 · " + date_cn).replace('{date_cn}', date_cn).replace('{cards}', cards)
-            with open(f"blog/news-{date_str}.html", "w", encoding="utf-8") as f:
-                f.write(html)
-            report += f"✅ 降级模式: {len(old_news)}条\n"
-            update_list("blog/news.html", f'<a class="post" href="news-{date_str}.html"><h3>📰 每日新闻 · {date_cn}</h3><div class="meta">全球热点 · {len(old_news)}条</div></a>')
+                report += "⚠️ 降级模式也失败\n"
+                send_alert("每日新闻", "Skill 和降级模式均无数据")
         except Exception as e:
             report += f"⚠️ 降级报错: {e}\n"
             send_alert("每日新闻", f"降级异常: {e}")
+
     ok, err = git_push(f"{date_str} {time_str}")
     if ok:
         report += "\n✅ Git push 成功"

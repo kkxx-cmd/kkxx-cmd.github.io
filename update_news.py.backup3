@@ -233,17 +233,18 @@ def main():
             old_news = fallback_fetch()
             if old_news:
                 cards = make_cards([{"title": n["title"], "url": n["link"], "source": n["source"]} for n in old_news])
+                html = HTML_TEMPLATE.format(title=f"每日新闻 · {date_cn}", date_cn=date_cn, cards=cards)
+                with open(f"blog/news-{date_str}.html", "w", encoding="utf-8") as f:
+                    f.write(html)
+                report += f"✅ 降级模式: {len(old_news)}条\n"
+                update_list("blog/news.html", f'<a class="post" href="news-{date_str}.html"><h3>📰 每日新闻 · {date_cn}</h3><div class="meta">全球热点 · {len(old_news)}条</div></a>')
             else:
-                old_news = []
-                cards = ""
-            html = HTML_TEMPLATE.replace('{title}', "每日新闻 · " + date_cn).replace('{date_cn}', date_cn).replace('{cards}', cards)
-            with open(f"blog/news-{date_str}.html", "w", encoding="utf-8") as f:
-                f.write(html)
-            report += f"✅ 降级模式: {len(old_news)}条\n"
-            update_list("blog/news.html", f'<a class="post" href="news-{date_str}.html"><h3>📰 每日新闻 · {date_cn}</h3><div class="meta">全球热点 · {len(old_news)}条</div></a>')
+                report += "⚠️ 降级模式也失败\n"
+                send_alert("每日新闻", "Skill 和降级模式均无数据")
         except Exception as e:
             report += f"⚠️ 降级报错: {e}\n"
             send_alert("每日新闻", f"降级异常: {e}")
+
     ok, err = git_push(f"{date_str} {time_str}")
     if ok:
         report += "\n✅ Git push 成功"
