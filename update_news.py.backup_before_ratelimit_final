@@ -153,77 +153,20 @@ def dedup_news(news_list, threshold=0.7):
 
 
 def fetch_news_with_skill():
-    """Fetch news with skill, with rate limit handling and retry logic"""
-    max_retries = 3
-    base_delay = 2  # seconds
-    
-    for attempt in range(max_retries):
-        try:
-            cmd = [sys.executable, NEWS_SCRIPT, "--source", "36kr,weibo,v2ex,wallstreetcn,tencent", "--limit", "8", "--no-save"]
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=SITE_PATH)
-            if result.returncode == 0:
-                output = result.stdout.strip()
-                json_start = output.find('[')
-                if json_start >= 0:
-                    data = json.loads(output[json_start:])
-                    if isinstance(data, list):
-                        news = dedup_news(data)
-                        if news:  # If we got news, return it
-                            return news
-                        # If we got empty list, it might be rate limiting or genuinely no news
-                        if attempt < max_retries - 1:
-                            delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
-                            print(f"⚠️ 技能获取返回空数据，{delay:.1f}秒后重试... (尝试 {attempt+1}/{max_retries})")
-                            time.sleep(delay)
-                            continue
-                        else:
-                            return []
-                    elif isinstance(data, dict) and "items" in data:
-                        news = dedup_news(data["items"])
-                        if news:
-                            return news
-                        if attempt < max_retries - 1:
-                            delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
-                            print(f"⚠️ 技能获取返回空数据，{delay:.1f}秒后重试... (尝试 {attempt+1}/{max_retries})")
-                            time.sleep(delay)
-                            continue
-                        else:
-                            return []
-            else:
-                # Non-zero return code might indicate an error
-                if attempt < max_retries - 1:
-                    delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
-                    print(f"⚠️ 技能执行失败 (返回码: {result.returncode})，{delay:.1f}秒后重试... (尝试 {attempt+1}/{max_retries})")
-                    time.sleep(delay)
-                    continue
-                else:
-                    print(f"❌ 技能执行失败: {result.stderr}")
-                    return []
-        except subprocess.TimeoutExpired:
-            if attempt < max_retries - 1:
-                delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
-                print(f"⚠️ 技能执行超时，{delay:.1f}秒后重试... (尝试 {attempt+1}/{max_retries})")
-                time.sleep(delay)
-                continue
-            else:
-                print(f"❌ 技能执行超时")
-                return []
-        except Exception as e:
-            error_str = str(e).lower()
-            # Check for rate limit related errors
-            if any(keyword in error_str for keyword in ['429', 'rate limit', 'too many requests', 'quota exceeded']):
-                if attempt < max_retries - 1:
-                    delay = base_delay * (2 ** attempt) + random.uniform(0, 2)
-                    print(f"⚠️ 检测到API限流: {e}")
-                    print(f"   等待{delay:.1f}秒后重试... (尝试 {attempt+1}/{max_retries})")
-                    time.sleep(delay)
-                    continue
-            # For other errors or if we've exhausted retries
-            if attempt == max_retries - 1:
-                print(f"❌ 技能获取失败: {e}")
-                return []
-            time.sleep(base_delay)
-    
+    cmd = [sys.executable, NEWS_SCRIPT, "--source", "36kr,weibo,v2ex,wallstreetcn,tencent", "--limit", "8", "--no-save"]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, cwd=SITE_PATH)
+        if result.returncode == 0:
+            output = result.stdout.strip()
+            json_start = output.find('[')
+            if json_start >= 0:
+                data = json.loads(output[json_start:])
+                if isinstance(data, list):
+                    return dedup_news(data)
+                elif isinstance(data, dict) and "items" in data:
+                    return dedup_news(data["items"])
+    except Exception as e:
+        print(f"Skill error: {e}")
     return []
 
 
