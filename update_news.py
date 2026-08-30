@@ -154,9 +154,13 @@ def dedup_news(news_list, threshold=0.7):
 
 def fetch_news_with_skill():
     """Fetch news with skill, with rate limit handling and retry logic"""
+    # If the skill script is not available, return empty immediately
+    if not os.path.isfile(NEWS_SCRIPT):
+        return []
+
     max_retries = 3
     base_delay = 2  # seconds
-    
+
     for attempt in range(max_retries):
         try:
             cmd = [sys.executable, NEWS_SCRIPT, "--source", "36kr,weibo,v2ex,wallstreetcn,tencent", "--limit", "8", "--no-save"]
@@ -208,6 +212,9 @@ def fetch_news_with_skill():
             else:
                 print(f"❌ 技能执行超时")
                 return []
+        except FileNotFoundError:
+            # This should not happen because we checked the file exists, but just in case
+            return []
         except Exception as e:
             error_str = str(e).lower()
             # Check for rate limit related errors
@@ -223,10 +230,8 @@ def fetch_news_with_skill():
                 print(f"❌ 技能获取失败: {e}")
                 return []
             time.sleep(base_delay)
-    
+
     return []
-
-
 def extract_date_from_href(href):
     m = re.search(r'(\d{4})-(\d{2})-(\d{2})', href)
     return f"{m.group(1)}{m.group(2)}{m.group(3)}" if m else "19700101"
