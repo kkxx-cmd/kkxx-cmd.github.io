@@ -43,7 +43,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     // 投票功能
     function voteNews(url, type) {
       const voteKey = 'kkxx_news_vote_' + btoa(url).replace(/[+/=]/g, '');
-      const votes = JSON.parse(localStorage.getItem(voteKey) || '{"up":0,"down":0}');
+      const votes = JSON.parse(localStorage.getItem(voteKey) || '{{"up":0,"down":0}}');
       
       if (type === 'up') {
         votes.up += 1;
